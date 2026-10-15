@@ -30,4 +30,4 @@ if [ ! -x "$WLA/build/binaries/wla-gb.exe" ]; then
     cmake --build "$WLA/build" --target wla-gb wlalink -j8
 fi
 echo "Prêt : ./build.sh compile la VF. Pour régénérer la VF depuis les ROMs EU :"
-echo "  python fr/make_fr_text.py && python fr/import_fr_gfx.py && python fr/patch_newgame_menu.py && python fr/import_fr_font.py"
+echo "  python fr/make_fr_text.py && python fr/import_fr_gfx.py && python fr/patch_newgame_menu.py && python fr/import_fr_font.py && python fr/import_title.py"

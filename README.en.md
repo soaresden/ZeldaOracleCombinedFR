@@ -32,6 +32,10 @@ No ROM is included: bring your own dumps.
   asks "Aller chez Vasu? Oui / Non" and warps you there. Available once that
   map square has been visited.
 
+- **Combined title screen**: logo, AGES and SEASONS banners on a diagonal,
+  over a half orange (Ages) / half blue (Seasons) background; "PRESS / START"
+  below AGES. Source: `fr/title_combined.png` (see `fr/title_src/`).
+
 You still change games through the door of Vasu's shop: left one in Seasons,
 middle-right one in Ages.
 
@@ -60,7 +64,7 @@ From Git Bash:
 building:
 
 ```bash
-python fr/make_fr_text.py && python fr/import_fr_gfx.py && python fr/patch_newgame_menu.py && python fr/import_fr_font.py
+python fr/make_fr_text.py && python fr/import_fr_gfx.py && python fr/patch_newgame_menu.py && python fr/import_fr_font.py && python fr/import_title.py
 ```
 
 The ROM goes to `out/combined.gbc` (or the name given with `OUT_NAME=...`).
