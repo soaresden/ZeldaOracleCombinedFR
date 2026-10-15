@@ -36,6 +36,11 @@ No ROM is included: bring your own dumps.
   over a half orange (Ages) / half blue (Seasons) background; "PRESS / START"
   below AGES. Source: `fr/title_combined.png` (see `fr/title_src/`).
 
+- **Fix for the original hack**: letting the intro play to the end crashed
+  the game ("Game Boy Color only" screen).
+- The linked game gets the wooden sword and shield when its intro starts,
+  as in the original games.
+
 You still change games through the door of Vasu's shop: left one in Seasons,
 middle-right one in Ages.
 

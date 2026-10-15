@@ -36,6 +36,11 @@ Aucune ROM n'est incluse : il faut ses propres dumps.
   un fond moitié orange (Ages) moitié bleu (Seasons) ; « PRESS / START » sous
   AGES. Source : `fr/title_combined.png` (voir `fr/title_src/`).
 
+- **Correction du hack d'origine** : laisser l'intro aller jusqu'au bout
+  faisait planter le jeu (écran « Game Boy Color only »).
+- La partie liée reçoit l'épée en bois et le bouclier au début de son intro,
+  comme dans les jeux d'origine.
+
 Le jeu se change toujours par la porte de la boutique de Vasu : à gauche dans
 Seasons, au milieu-droite dans Ages.
 
