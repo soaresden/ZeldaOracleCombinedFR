@@ -20,6 +20,21 @@ directement dans les ROMs européennes (En, Fr, De, Es, It) :
 
 Aucune ROM n'est incluse : il faut ses propres dumps.
 
+## Ajouts de jouabilité
+
+- **Nouvelle partie : AGES ou SEASONS.** Le menu « Nouveau jeu » propose de
+  choisir le jeu par lequel on commence. Le second jeu est une **partie liée**
+  (comme avec le code de l'autre jeu) : on garde la vraie fin (Twinrova, Ganon).
+- **Intro du second jeu** : la première fois qu'on passe dans l'autre jeu (porte
+  de la boutique de Vasu), son intro se joue normalement (le hack d'origine la
+  sautait pour Seasons).
+- **Raccourci vers Vasu** : sur la carte (Select), appuyer sur A sur la case de
+  la boutique de Vasu propose « Aller chez Vasu? Oui / Non » et y téléporte.
+  Disponible dès que cette case de la carte a été visitée.
+
+Le jeu se change toujours par la porte de la boutique de Vasu : à gauche dans
+Seasons, au milieu-droite dans Ages.
+
 ## Fichiers nécessaires (à la racine)
 
 - `Legend of Zelda, The - Oracle of Ages (Europe) (En,Fr,De,Es,It).gbc`
@@ -44,7 +59,7 @@ Depuis Git Bash :
 `fr/crossworld1`). Pour régénérer la VF depuis les ROMs EU avant de compiler :
 
 ```bash
-python fr/make_fr_text.py && python fr/import_fr_gfx.py && python fr/import_fr_font.py
+python fr/make_fr_text.py && python fr/import_fr_gfx.py && python fr/patch_newgame_menu.py && python fr/import_fr_font.py
 ```
 
 La ROM sort dans `out/combined.gbc` (ou le nom donné par `OUT_NAME=...`).

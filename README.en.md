@@ -20,6 +20,21 @@ translation straight from the European ROMs (En, Fr, De, Es, It):
 
 No ROM is included: bring your own dumps.
 
+## Gameplay additions
+
+- **New game: AGES or SEASONS.** The "new game" menu lets you pick which game
+  to start with. The second game is a **linked game** (as if you had entered
+  the other game's secret): the real ending (Twinrova, Ganon) is kept.
+- **Second game's intro**: the first time you go to the other game (door of
+  Vasu's shop), its intro plays normally (the original hack skipped it for
+  Seasons).
+- **Shortcut to Vasu**: on the map (Select), pressing A on Vasu's shop square
+  asks "Aller chez Vasu? Oui / Non" and warps you there. Available once that
+  map square has been visited.
+
+You still change games through the door of Vasu's shop: left one in Seasons,
+middle-right one in Ages.
+
 ## Required files (at the root)
 
 - `Legend of Zelda, The - Oracle of Ages (Europe) (En,Fr,De,Es,It).gbc`
@@ -45,7 +60,7 @@ From Git Bash:
 building:
 
 ```bash
-python fr/make_fr_text.py && python fr/import_fr_gfx.py && python fr/import_fr_font.py
+python fr/make_fr_text.py && python fr/import_fr_gfx.py && python fr/patch_newgame_menu.py && python fr/import_fr_font.py
 ```
 
 The ROM goes to `out/combined.gbc` (or the name given with `OUT_NAME=...`).

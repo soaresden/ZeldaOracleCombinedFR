@@ -130,6 +130,12 @@ def main():
                 stats['manuel'] += 1
             else:
                 missing.append((names(e)[0], e['text']))
+
+        # Textes propres à la VF (raccourci vers Vasu…), à la fin de leur groupe
+        for extra in load(os.path.join(ROOT, 'fr', 'extra_text.yaml')).get(game, []):
+            group = next(g for g in us[game]['groups'] if g['group'] == extra['group'])
+            group['data'].append({'name': extra['name'], 'index': 'auto', 'text': extra['text']})
+            stats['ajouté'] = stats.get('ajouté', 0) + 1
         dump(us[game], us_path[game])
         print(game, stats)
         for n, t in missing:
