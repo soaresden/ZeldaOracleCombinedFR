@@ -51,7 +51,7 @@ de droite à Seasons (dans un des deux jeux, l'une des deux ramène en ville).
 | Récompenses sur la carte | Une fois la 1re aventure finie, un cercle clignote sur la carte là où un personnage attend pour donner un objet. Dans la partie liée : Farore, quand un code de retour est prêt. |
 | Suivi des codes | Menu Start, 3e page : A sur le sablier (Ages) ou l'emblème des saisons (Seasons). Liste les 10 échanges entre les jeux : code pas encore reçu, récompense à récupérer, Farore à voir, terminé. Dans l'aventure 1, disponible une fois celle-ci finie. |
 | Boutique Advance | Ouvre la boutique réservée à la Game Boy Advance (Lynna dans le passé, Horon dans Seasons), sans éclaircir les couleurs comme le vrai mode GBA. Idée reprise du patch [Force GBA Enhanced Mode](https://www.romhacking.net/hacks/3580/). |
-| Barre d'état en bas | Comme dans Link's Awakening (en haut par défaut) : en jeu et dans le menu Start, la barre passe en bas et le reste remonte. La carte, les autres menus et quelques effets (ondulations des voyages dans le temps…) la gardent en haut. |
+| Barre d'état en bas | Comme dans Link's Awakening (en haut par défaut) : la barre est en bas partout où elle s'affiche (jeu, menu Start, évaluation des bagues, ondulations des voyages dans le temps) et le reste remonte. |
 
 Les options sont des octets de la ROM (table à `$3FF0`, signature
 `ZOCFROPT` à `$3FE0`, voir `fr/options.json`) : la page les écrit selon les
@@ -110,4 +110,5 @@ Pour une seule langue (ici l'allemand), régénérer puis compiler :
 - Le hack crossworld lui-même reste une preuve de concept (voir
   `oracles-disasm/crossworld_todo.md`) : quelques bugs graphiques connus.
 - Barre d'état en bas : testée en extérieur, en intérieur, avec les boîtes de
-  texte et pendant les défilements d'écran, dans les deux jeux.
+  texte, pendant les défilements d'écran, dans le menu Start, l'évaluation des
+  bagues et un effet d'ondulation, dans les deux jeux.

@@ -50,7 +50,7 @@ one to Seasons (in each game, one of them leads back to town).
 | Rewards on the map | Once the first adventure is finished, a circle blinks on the map where a character waits to give an item. In the linked game: Farore, when a return secret is ready. |
 | Secrets tracker | Start menu, 3rd page: A on the hourglass (Ages) or the seasons emblem (Seasons). Lists the 10 exchanges between the games: no secret yet, reward to collect, see Farore, complete. In adventure 1, available once it is finished. |
 | Advance shop | Opens the shop reserved for the Game Boy Advance (Lynna in the past, Horon in Seasons), without brightening the colors like the real GBA mode. Idea taken from the [Force GBA Enhanced Mode](https://www.romhacking.net/hacks/3580/) patch. |
-| Status bar at the bottom | Like Link's Awakening (top by default): in game and in the Start menu, the bar moves to the bottom and the rest moves up. The map, the other menus and a few effects (time travel ripples…) keep it at the top. |
+| Status bar at the bottom | Like Link's Awakening (top by default): the bar is at the bottom wherever it shows (game, Start menu, ring appraisal, time travel ripples) and the rest moves up. |
 
 Options are ROM bytes (table at `$3FF0`, signature `ZOCFROPT` at `$3FE0`, see
 `fr/options.json`): the page writes them according to the checkboxes, the game
@@ -108,5 +108,6 @@ For a single language (here German), regenerate then build:
   secrets tracker, bottom status bar.
 - The crossworld hack itself is still a proof of concept (see
   `oracles-disasm/crossworld_todo.md`): a few known graphical bugs.
-- Status bar at the bottom: tested outdoors, indoors, with text boxes and
-  during screen scrolling, in both games.
+- Status bar at the bottom: tested outdoors, indoors, with text boxes, during
+  screen scrolling, in the Start menu, the ring appraisal and a wave effect, in
+  both games.
