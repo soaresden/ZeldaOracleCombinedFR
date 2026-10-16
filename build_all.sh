@@ -26,3 +26,4 @@ done
 gen fr
 
 "$PYTHON" fr/make_patches.py $LANGS
+"$PYTHON" fr/make_previews.py $LANGS

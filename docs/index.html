@@ -45,7 +45,20 @@
   .langs{display:flex;flex-wrap:wrap;gap:8px}
   .langs label{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:11px;padding:10px 14px;cursor:pointer;min-height:44px;background:#17131c}
   .langs input{accent-color:var(--seasons)}
-  .opt{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
+  .optgrid{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start}
+  .preview{position:sticky;top:16px;background:#0f0c13;border:1px solid var(--line);border-radius:14px;padding:12px}
+  .screen{position:relative;border-radius:8px;overflow:hidden;background:#000;aspect-ratio:160/144}
+  .screen img{display:block;width:100%;height:100%;image-rendering:pixelated}
+  #pv-note{position:absolute;inset:auto 0 0 0;background:rgba(18,14,22,.88);color:var(--ok);font-weight:700;padding:10px 12px;font-size:.92rem;display:none}
+  .screen.dim img{filter:grayscale(.6) brightness(.55)}
+  .pv-cap{margin-top:10px;font-size:.95rem}
+  .pv-cap b{display:block}
+  .badge{display:inline-block;margin-top:4px;border-radius:999px;padding:2px 10px;font-weight:800;font-size:.85rem}
+  .badge.on{background:rgba(95,211,141,.15);color:var(--ok)} .badge.off{background:rgba(255,107,107,.13);color:var(--bad)}
+  .opt{display:flex;gap:12px;align-items:flex-start;padding:12px 8px;border-top:1px solid var(--line);border-radius:10px;cursor:pointer}
+  .opt.cur{background:#241d2c}
+  .opt.na{opacity:.55;cursor:not-allowed}
+  .soon{display:inline-block;margin-left:6px;border:1px solid var(--line);border-radius:999px;padding:0 8px;font-size:.78rem;color:var(--mut);font-weight:700}
   .opt:first-of-type{border-top:0}
   .opt input{width:22px;height:22px;margin-top:2px;accent-color:var(--ages);flex:none}
   .opt b{display:block}
@@ -58,6 +71,7 @@
   footer a{color:var(--tx)}
   #lang{position:absolute;top:16px;right:16px;border:1px solid var(--line);background:#1d1724;color:var(--tx);border-radius:11px;padding:8px 12px;font:700 14px system-ui;cursor:pointer;min-height:40px}
   @media (max-width:560px){.roms{grid-template-columns:1fr}}
+  @media (max-width:760px){.optgrid{grid-template-columns:1fr}.preview{position:static;order:-1;max-width:340px;width:100%;margin:0 auto}}
 </style>
 </head>
 <body>
@@ -89,8 +103,14 @@
 
   <section>
     <h2><span class="num">3</span><span data-en="Options">Options</span></h2>
-    <p data-en="Untick what you don't want. Bug fixes are always included.">Décoche ce que tu ne veux pas. Les corrections de bugs sont toujours incluses.</p>
-    <div id="options"></div>
+    <p data-en="Untick what you don't want; the preview shows the result. Bug fixes are always included.">Décoche ce que tu ne veux pas ; l'aperçu montre le résultat. Les corrections de bugs sont toujours incluses.</p>
+    <div class="optgrid">
+      <div id="options"></div>
+      <aside class="preview" aria-live="polite">
+        <div class="screen" id="pv-screen"><img id="pv-img" alt=""><div id="pv-note"></div></div>
+        <div class="pv-cap"><b id="pv-title"></b><span class="badge" id="pv-state"></span></div>
+      </aside>
+    </div>
   </section>
 
   <button class="go" id="go" disabled data-en="Generate the ROM">Générer la ROM</button>
@@ -201,24 +221,52 @@
       if (!available) lab.title = SBT('Pas encore disponible', 'Not available yet');
       $('langs').appendChild(lab);
     });
-    $('langs').onchange = function (e) { store.set(LANG_KEY, e.target.value); };
+    $('langs').onchange = function (e) { store.set(LANG_KEY, e.target.value); if (currentPreview) showPreview(currentPreview); };
   }
   function buildOptions() {
     var saved = {};
     try { saved = JSON.parse(store.get(OPT_KEY) || '{}'); } catch (_) {}
     options.options.forEach(function (o) {
-      var on = o.id in saved ? saved[o.id] : o['default'];
+      var available = o.available !== false;
+      var on = available && (o.id in saved ? saved[o.id] : o['default']);
       var div = document.createElement('label');
-      div.className = 'opt';
-      div.innerHTML = '<input type="checkbox" data-id="' + o.id + '"' + (on ? ' checked' : '') + '>' +
-        '<div><b>' + SBT(o.fr, o.en) + '</b><span>' + SBT(o.frDesc, o.enDesc) + '</span></div>';
+      div.className = 'opt' + (available ? '' : ' na');
+      div.dataset.id = o.id;
+      div.innerHTML = '<input type="checkbox" data-id="' + o.id + '"' + (on ? ' checked' : '') + (available ? '' : ' disabled') + '>' +
+        '<div><b>' + SBT(o.fr, o.en) + (available ? '' : '<span class="soon">' + SBT('bientôt', 'soon') + '</span>') + '</b><span>' + SBT(o.frDesc, o.enDesc) + '</span></div>';
+      div.addEventListener('mouseenter', function () { showPreview(o.id); });
+      div.addEventListener('focusin', function () { showPreview(o.id); });
       $('options').appendChild(div);
     });
-    $('options').onchange = function () {
+    $('options').onchange = function (e) {
       var s = {};
       document.querySelectorAll('#options input').forEach(function (i) { s[i.dataset.id] = i.checked; });
       store.set(OPT_KEY, JSON.stringify(s));
+      if (e.target.dataset.id) showPreview(e.target.dataset.id);
     };
+    var first = options.options.filter(function (o) { return o.preview; })[0];
+    if (first) showPreview(first.id);
+  }
+
+  // ---- Aperçu : capture du jeu avec l'option activée ou non, dans la langue choisie
+  var currentPreview = null;
+  function showPreview(id) {
+    var o = options.options.filter(function (x) { return x.id === id; })[0];
+    if (!o || !o.preview) return;
+    currentPreview = id;
+    document.querySelectorAll('#options .opt').forEach(function (d) { d.classList.toggle('cur', d.dataset.id === id); });
+    var on = document.querySelector('#options input[data-id=' + id + ']').checked;
+    var lang = (document.querySelector('input[name=lang]:checked') || {}).value || 'fr';
+    var file = (on ? o.preview.on : o.preview.off) || o.preview.off;
+    $('pv-img').src = 'previews/' + file.replace('{lang}', lang);
+    $('pv-img').alt = SBT(o.fr, o.en);
+    var note = on && !o.preview.on ? SBT(o.preview.onNoteFr, o.preview.onNoteEn) : '';
+    $('pv-note').textContent = note;
+    $('pv-note').style.display = note ? 'block' : 'none';
+    $('pv-screen').classList.toggle('dim', !!note);
+    $('pv-title').textContent = SBT(o.fr, o.en);
+    $('pv-state').textContent = on ? SBT('✔ Activé', '✔ On') : SBT('✘ Désactivé', '✘ Off');
+    $('pv-state').className = 'badge ' + (on ? 'on' : 'off');
   }
 
   function generate() {
@@ -237,7 +285,7 @@
       if (String.fromCharCode.apply(null, rom.subarray(sig, sig + 8)) !== options.signature) throw new Error('signature');
       document.querySelectorAll('#options input').forEach(function (i) {
         var o = options.options.filter(function (x) { return x.id === i.dataset.id; })[0];
-        rom[parseInt(o.offset, 16)] = i.checked ? 1 : 0;
+        if (o.available !== false) rom[parseInt(o.offset, 16)] = i.checked ? 1 : 0;
       });
       // Somme de contrôle globale de l'en-tête Game Boy
       var sum = 0;

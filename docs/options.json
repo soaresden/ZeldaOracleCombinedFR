@@ -10,7 +10,11 @@
       "fr": "Écran titre combiné Ages + Seasons",
       "en": "Combined Ages + Seasons title screen",
       "frDesc": "Sinon, écran titre d'origine d'Oracle of Ages.",
-      "enDesc": "Otherwise, the original Oracle of Ages title screen."
+      "enDesc": "Otherwise, the original Oracle of Ages title screen.",
+      "preview": {
+        "on": "title_combined_on.png",
+        "off": "title_combined_off.png"
+      }
     },
     {
       "id": "vasu_shortcut",
@@ -19,7 +23,11 @@
       "fr": "Raccourci carte vers Vasu",
       "en": "Map shortcut to Vasu",
       "frDesc": "Sur la carte, A sur la case de Vasu propose d'aller dans sa boutique (porte vers l'autre jeu).",
-      "enDesc": "On the map, A on Vasu's square offers to warp to his shop (door to the other game)."
+      "enDesc": "On the map, A on Vasu's square offers to warp to his shop (door to the other game).",
+      "preview": {
+        "on": "vasu_shortcut_on_{lang}.png",
+        "off": "vasu_shortcut_off_{lang}.png"
+      }
     },
     {
       "id": "door_icons",
@@ -28,7 +36,11 @@
       "fr": "Icônes au-dessus des portes de Vasu",
       "en": "Icons above Vasu's doors",
       "frDesc": "Sablier (porte vers Ages) et soleil (porte vers Seasons) dans la boutique de Vasu.",
-      "enDesc": "Hourglass (door to Ages) and sun (door to Seasons) in Vasu's shop."
+      "enDesc": "Hourglass (door to Ages) and sun (door to Seasons) in Vasu's shop.",
+      "preview": {
+        "on": "door_icons_on.png",
+        "off": "door_icons_off.png"
+      }
     },
     {
       "id": "hud_game_icon",
@@ -37,7 +49,11 @@
       "fr": "Icône du jeu en cours dans la barre",
       "en": "Current game icon in the status bar",
       "frDesc": "Sablier dans Ages, soleil dans Seasons, à côté des rubis.",
-      "enDesc": "Hourglass in Ages, sun in Seasons, next to the rupees."
+      "enDesc": "Hourglass in Ages, sun in Seasons, next to the rupees.",
+      "preview": {
+        "on": "hud_game_icon_on.png",
+        "off": "hud_game_icon_off.png"
+      }
     },
     {
       "id": "linked_warning",
@@ -46,7 +62,11 @@
       "fr": "Avertissement avant la partie liée",
       "en": "Warning before the linked game",
       "frDesc": "La première fois qu'on passe dans l'autre jeu sans avoir fini l'aventure en cours, le jeu demande confirmation (Oui / Non).",
-      "enDesc": "The first time you go to the other game before finishing the current adventure, the game asks for confirmation (Yes / No)."
+      "enDesc": "The first time you go to the other game before finishing the current adventure, the game asks for confirmation (Yes / No).",
+      "preview": {
+        "on": "linked_warning_on_{lang}.png",
+        "off": "linked_warning_off.png"
+      }
     },
     {
       "id": "auto_secrets",
@@ -55,7 +75,23 @@
       "fr": "Codes entre les jeux automatiques",
       "en": "Automatic secrets between the games",
       "frDesc": "Plus besoin de recopier les codes : quand un personnage demande le code donné dans l'autre aventure, il est transmis tout seul (Farore aussi).",
-      "enDesc": "No more copying secrets: when a character asks for the secret given in the other adventure, it is passed on automatically (Farore too)."
+      "enDesc": "No more copying secrets: when a character asks for the secret given in the other adventure, it is passed on automatically (Farore too).",
+      "preview": {
+        "on": null,
+        "off": "auto_secrets_off_{lang}.png",
+        "onNoteFr": "✔ Le code est transmis tout seul : plus d'écran de saisie.",
+        "onNoteEn": "✔ The secret is passed on automatically: no more input screen."
+      }
+    },
+    {
+      "id": "hud_bottom",
+      "offset": "0x3ff6",
+      "default": false,
+      "available": false,
+      "fr": "Barre d'état en bas (comme Link's Awakening)",
+      "en": "Status bar at the bottom (like Link's Awakening)",
+      "frDesc": "En haut par défaut. Bientôt disponible.",
+      "enDesc": "At the top by default. Coming soon."
     }
   ]
 }
