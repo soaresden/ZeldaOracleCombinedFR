@@ -5,7 +5,8 @@ Les textes à coller sont en anglais (le site est anglophone). Fichiers prêts :
 
 - zip : `out/release/ZeldaOraclesCombined-v1.0.zip` (5 patchs BPS, `readme.txt`,
   `join_roms.bat`, `join_roms.sh`), refait par `python fr/make_release.py 1.0`
-- captures 160×144 : `romhacking/screenshots/`
+- captures 160×144 : `docs/screenshots/`, en ligne sur GitHub Pages (URLs ci-dessous,
+  à coller directement : la Scratchpad n'est pas nécessaire)
 
 ## General Information
 
@@ -22,19 +23,21 @@ Les textes à coller sont en anglais (le site est anglophone). Fichiers prêts :
 
 ## Media
 
-Envoyer d'abord les images dans la Scratchpad (https://www.romhacking.net/scratchpad/),
-puis coller les URLs obtenues.
+Le site n'accepte que la taille réelle (160×144 pour la Game Boy) : ne pas utiliser
+les aperçus de la page (`previews/`, agrandis en 320×288). Les captures de
+`docs/screenshots/` sont en ligne :
+`https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/<fichier>`
 
 | Champ | Fichier |
 | --- | --- |
 | YouTube Share URL | (vide) |
-| Title Image | `1-title.png` (titre combiné, différent de l'original) |
-| Image1 | `2-new-game-ages-or-seasons.png` |
-| Image2 | `5-secrets-tracker.png` |
-| Image3 | `4-vasu-doors-to-each-game.png` |
-| Image4 | `3-status-bar-at-the-bottom.png` |
+| Title Image | `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/1-title.png` (titre combiné, différent de l'original) |
+| Image1 | `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/2-new-game-ages-or-seasons.png` |
+| Image2 | `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/5-secrets-tracker.png` |
+| Image3 | `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/4-vasu-doors-to-each-game.png` |
+| Image4 | `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/3-status-bar-at-the-bottom.png` |
 
-Autres captures disponibles : `6-reward-markers-on-the-map.png`, `7-advance-shop.png`.
+Autres captures disponibles : `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/6-reward-markers-on-the-map.png`, `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/7-advance-shop.png`.
 
 ## Description
 

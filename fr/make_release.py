@@ -1,5 +1,5 @@
 """Paquet de publication (romhacking.net) : captures d'écran en taille réelle
-(romhacking/screenshots/) et zip avec les patchs BPS, le lisez-moi et les
+(docs/screenshots/, en ligne sur GitHub Pages) et zip avec les patchs BPS, le lisez-moi et les
 scripts qui collent les deux ROMs (out/release/).
 
 Les captures sont faites dans la version anglaise (out/zoc-en.gbc, compilée
@@ -16,7 +16,7 @@ from pyboy import PyBoy
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REL = os.path.join(ROOT, 'romhacking')
-SHOTS = os.path.join(REL, 'screenshots')
+SHOTS = os.path.join(ROOT, 'docs', 'screenshots')
 OUT = os.path.join(ROOT, 'out', 'release')
 VERSION = sys.argv[1] if len(sys.argv) > 1 else '1.0'
 OPTIONS = {o['id']: int(o['offset'], 16) for o in
