@@ -1,0 +1,41 @@
+{
+  "source": {
+    "ages": {
+      "size": 2097152,
+      "crc32": "5933e3fa",
+      "file": "Legend of Zelda, The - Oracle of Ages (Europe) (En,Fr,De,Es,It).gbc"
+    },
+    "seasons": {
+      "size": 2097152,
+      "crc32": "dbac1357",
+      "file": "Legend of Zelda, The - Oracle of Seasons (Europe) (En,Fr,De,Es,It).gbc"
+    }
+  },
+  "patches": {
+    "en": {
+      "file": "patches/en.bps",
+      "size": 344261,
+      "targetCrc32": "e95e1ef8"
+    },
+    "fr": {
+      "file": "patches/fr.bps",
+      "size": 386928,
+      "targetCrc32": "176476fa"
+    },
+    "de": {
+      "file": "patches/de.bps",
+      "size": 573314,
+      "targetCrc32": "8febfe3b"
+    },
+    "it": {
+      "file": "patches/it.bps",
+      "size": 528136,
+      "targetCrc32": "e9268c82"
+    },
+    "es": {
+      "file": "patches/es.bps",
+      "size": 425824,
+      "targetCrc32": "ce0e5fe8"
+    }
+  }
+}

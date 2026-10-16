@@ -1,0 +1,61 @@
+{
+  "signature": "ZOCFROPT",
+  "signatureOffset": "0x3fe0",
+  "version": 1,
+  "options": [
+    {
+      "id": "title_combined",
+      "offset": "0x3ff0",
+      "default": true,
+      "fr": "Écran titre combiné Ages + Seasons",
+      "en": "Combined Ages + Seasons title screen",
+      "frDesc": "Sinon, écran titre d'origine d'Oracle of Ages.",
+      "enDesc": "Otherwise, the original Oracle of Ages title screen."
+    },
+    {
+      "id": "vasu_shortcut",
+      "offset": "0x3ff1",
+      "default": true,
+      "fr": "Raccourci carte vers Vasu",
+      "en": "Map shortcut to Vasu",
+      "frDesc": "Sur la carte, A sur la case de Vasu propose d'aller dans sa boutique (porte vers l'autre jeu).",
+      "enDesc": "On the map, A on Vasu's square offers to warp to his shop (door to the other game)."
+    },
+    {
+      "id": "door_icons",
+      "offset": "0x3ff2",
+      "default": true,
+      "fr": "Icônes au-dessus des portes de Vasu",
+      "en": "Icons above Vasu's doors",
+      "frDesc": "Sablier (porte vers Ages) et soleil (porte vers Seasons) dans la boutique de Vasu.",
+      "enDesc": "Hourglass (door to Ages) and sun (door to Seasons) in Vasu's shop."
+    },
+    {
+      "id": "hud_game_icon",
+      "offset": "0x3ff3",
+      "default": true,
+      "fr": "Icône du jeu en cours dans la barre",
+      "en": "Current game icon in the status bar",
+      "frDesc": "Sablier dans Ages, soleil dans Seasons, à côté des rubis.",
+      "enDesc": "Hourglass in Ages, sun in Seasons, next to the rupees."
+    },
+    {
+      "id": "linked_warning",
+      "offset": "0x3ff4",
+      "default": true,
+      "fr": "Avertissement avant la partie liée",
+      "en": "Warning before the linked game",
+      "frDesc": "La première fois qu'on passe dans l'autre jeu sans avoir fini l'aventure en cours, le jeu demande confirmation (Oui / Non).",
+      "enDesc": "The first time you go to the other game before finishing the current adventure, the game asks for confirmation (Yes / No)."
+    },
+    {
+      "id": "auto_secrets",
+      "offset": "0x3ff5",
+      "default": true,
+      "fr": "Codes entre les jeux automatiques",
+      "en": "Automatic secrets between the games",
+      "frDesc": "Plus besoin de recopier les codes : quand un personnage demande le code donné dans l'autre aventure, il est transmis tout seul (Farore aussi).",
+      "enDesc": "No more copying secrets: when a character asks for the secret given in the other adventure, it is passed on automatically (Farore too)."
+    }
+  ]
+}

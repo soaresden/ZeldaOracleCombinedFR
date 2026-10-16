@@ -47,6 +47,15 @@
       "en": "Warning before the linked game",
       "frDesc": "La première fois qu'on passe dans l'autre jeu sans avoir fini l'aventure en cours, le jeu demande confirmation (Oui / Non).",
       "enDesc": "The first time you go to the other game before finishing the current adventure, the game asks for confirmation (Yes / No)."
+    },
+    {
+      "id": "auto_secrets",
+      "offset": "0x3ff5",
+      "default": true,
+      "fr": "Codes entre les jeux automatiques",
+      "en": "Automatic secrets between the games",
+      "frDesc": "Plus besoin de recopier les codes : quand un personnage demande le code donné dans l'autre aventure, il est transmis tout seul (Farore aussi).",
+      "enDesc": "No more copying secrets: when a character asks for the secret given in the other adventure, it is passed on automatically (Farore too)."
     }
   ]
 }

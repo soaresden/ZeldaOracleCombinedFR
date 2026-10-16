@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#120e16">
+<title>Zelda Oracles Combined – Générateur de ROM</title>
+<script>
+  // Langue : choix mémorisé (sb.lang) sinon langue du navigateur ; les éléments data-en passent en anglais.
+  (function () {
+    var l = null; try { l = localStorage.getItem('sb.lang'); } catch (_) {}
+    if (l !== 'fr' && l !== 'en') l = /^fr/i.test(navigator.language || '') ? 'fr' : 'en';
+    window.SB_LANG = l; document.documentElement.lang = l;
+    window.SBT = function (fr, en) { return l === 'en' ? en : fr; };
+    if (l === 'en') document.title = 'Zelda Oracles Combined – ROM generator';
+    document.addEventListener('DOMContentLoaded', function () {
+      if (l === 'en') document.querySelectorAll('[data-en]').forEach(function (e) { e.innerHTML = e.getAttribute('data-en'); });
+      var b = document.getElementById('lang');
+      b.textContent = l === 'en' ? '🇫🇷 FR' : '🇬🇧 EN';
+      b.onclick = function () { try { localStorage.setItem('sb.lang', l === 'en' ? 'fr' : 'en'); } catch (_) {} location.reload(); };
+    });
+  })();
+</script>
+<style>
+  :root{--bg:#120e16;--panel:#1c1722;--line:#352c40;--tx:#f1ecf5;--mut:#a79db3;--ages:#f06800;--seasons:#5090f8;--ok:#5fd38d;--bad:#ff6b6b}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(700px 420px at 0% -10%,rgba(240,104,0,.28) 0,transparent 60%),radial-gradient(700px 420px at 100% -10%,rgba(80,144,248,.28) 0,transparent 60%),var(--bg);color:var(--tx);font:16px/1.55 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;min-height:100vh}
+  main{max-width:860px;margin:0 auto;padding:48px 16px 64px}
+  h1{font-size:clamp(1.7rem,4vw,2.4rem);margin:0 0 6px;letter-spacing:-.5px}
+  h1 .a{color:var(--ages)} h1 .s{color:var(--seasons)}
+  header p{color:var(--mut);margin:0}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin:22px 0}
+  section h2{margin:0 0 4px;font-size:1.2rem}
+  section > p{margin:0 0 14px;color:var(--mut)}
+  .num{display:inline-flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--ages),var(--seasons));font-weight:800;margin-right:8px}
+  #drop{border:2px dashed #4b405a;border-radius:14px;padding:22px;text-align:center;cursor:pointer;transition:.15s}
+  #drop.over{border-color:var(--seasons);background:#211b2a}
+  #drop input{display:none}
+  .roms{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  .rom{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#17131c}
+  .rom b{display:block}
+  .rom span{color:var(--mut);font-size:.92rem}
+  .rom.ok{border-color:var(--ok)} .rom.ok span{color:var(--ok)}
+  .rom.bad{border-color:var(--bad)} .rom.bad span{color:var(--bad)}
+  .langs{display:flex;flex-wrap:wrap;gap:8px}
+  .langs label{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:11px;padding:10px 14px;cursor:pointer;min-height:44px;background:#17131c}
+  .langs input{accent-color:var(--seasons)}
+  .opt{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
+  .opt:first-of-type{border-top:0}
+  .opt input{width:22px;height:22px;margin-top:2px;accent-color:var(--ages);flex:none}
+  .opt b{display:block}
+  .opt span{color:var(--mut);font-size:.94rem}
+  button.go{width:100%;border:0;border-radius:14px;padding:16px;font:800 1.1rem system-ui;color:#fff;background:linear-gradient(135deg,var(--ages),var(--seasons));cursor:pointer;min-height:54px}
+  button.go:disabled{opacity:.45;cursor:not-allowed}
+  #status{margin-top:12px;min-height:1.5em;color:var(--mut)}
+  #status.err{color:var(--bad)} #status.done{color:var(--ok)}
+  footer{color:var(--mut);font-size:.9rem;margin-top:28px}
+  footer a{color:var(--tx)}
+  #lang{position:absolute;top:16px;right:16px;border:1px solid var(--line);background:#1d1724;color:var(--tx);border-radius:11px;padding:8px 12px;font:700 14px system-ui;cursor:pointer;min-height:40px}
+  @media (max-width:560px){.roms{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<button id="lang" title="Français / English">🇬🇧 EN</button>
+<main>
+  <header>
+    <h1>Zelda <span class="a">Ages</span> + <span class="s">Seasons</span> Combined</h1>
+    <p data-en="Both Oracle games in a single ROM, in the language of your choice, built from your own European ROMs. Nothing is uploaded: everything happens in your browser.">Les deux Oracle dans une seule ROM, dans la langue de ton choix, fabriquée à partir de tes propres ROMs européennes. Rien n'est envoyé : tout se passe dans ton navigateur.</p>
+  </header>
+
+  <section>
+    <h2><span class="num">1</span><span data-en="Your European ROMs">Tes ROMs européennes</span></h2>
+    <p data-en="Oracle of Ages and Oracle of Seasons, European version (En,Fr,De,Es,It). Drop both files here.">Oracle of Ages et Oracle of Seasons, version Europe (En,Fr,De,Es,It). Dépose les deux fichiers ici.</p>
+    <label id="drop">
+      <input id="files" type="file" accept=".gbc,.gb,.bin" multiple>
+      <span data-en="📂 Drop the two .gbc files, or click to choose them">📂 Glisse les deux fichiers .gbc, ou clique pour les choisir</span>
+    </label>
+    <div class="roms">
+      <div class="rom" id="rom-ages"><b>Oracle of Ages (Europe)</b><span data-en="Missing">Manquante</span></div>
+      <div class="rom" id="rom-seasons"><b>Oracle of Seasons (Europe)</b><span data-en="Missing">Manquante</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">2</span><span data-en="Game language">Langue du jeu</span></h2>
+    <p data-en="Nintendo's official translation, taken from the European ROMs.">La traduction officielle de Nintendo, reprise des ROMs européennes.</p>
+    <div class="langs" id="langs"></div>
+  </section>
+
+  <section>
+    <h2><span class="num">3</span><span data-en="Options">Options</span></h2>
+    <p data-en="Untick what you don't want. Bug fixes are always included.">Décoche ce que tu ne veux pas. Les corrections de bugs sont toujours incluses.</p>
+    <div id="options"></div>
+  </section>
+
+  <button class="go" id="go" disabled data-en="Generate the ROM">Générer la ROM</button>
+  <div id="status"></div>
+
+  <footer>
+    <p data-en="Based on the &lt;i&gt;crossworld&lt;/i&gt; hack of &lt;a href=&quot;https://github.com/Stewmath/oracles-disasm&quot;&gt;oracles-disasm&lt;/a&gt;. No ROM is distributed. Sources and details: &lt;a href=&quot;https://github.com/soaresden/ZeldaOracleCombinedFR&quot;&gt;ZeldaOracleCombinedFR&lt;/a&gt;.">D'après le hack <i>crossworld</i> d'<a href="https://github.com/Stewmath/oracles-disasm">oracles-disasm</a>. Aucune ROM n'est distribuée. Sources et détails : <a href="https://github.com/soaresden/ZeldaOracleCombinedFR">ZeldaOracleCombinedFR</a>.</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var LANGS = [
+    { id: 'en', label: '🇬🇧 English' }, { id: 'fr', label: '🇫🇷 Français' }, { id: 'de', label: '🇩🇪 Deutsch' },
+    { id: 'it', label: '🇮🇹 Italiano' }, { id: 'es', label: '🇪🇸 Español' }
+  ];
+  var LANG_KEY = 'zoc.gameLang', OPT_KEY = 'zoc.options';
+  var roms = { ages: null, seasons: null };
+  var manifest = null, options = null;
+  var $ = function (id) { return document.getElementById(id); };
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (_) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (_) {} }
+  };
+
+  // ---- CRC32
+  var CRC_TABLE = (function () {
+    var t = new Uint32Array(256);
+    for (var n = 0; n < 256; n++) { var c = n; for (var k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; }
+    return t;
+  })();
+  function crc32(bytes) {
+    var c = 0xffffffff;
+    for (var i = 0; i < bytes.length; i++) c = CRC_TABLE[(c ^ bytes[i]) & 0xff] ^ (c >>> 8);
+    return ((c ^ 0xffffffff) >>> 0).toString(16).padStart(8, '0');
+  }
+
+  // ---- BPS (même algorithme que fr/bps.py)
+  function applyBps(source, patch) {
+    var pos = 4;
+    if (String.fromCharCode(patch[0], patch[1], patch[2], patch[3]) !== 'BPS1') throw new Error('BPS');
+    function varint() {
+      var data = 0, shift = 1;
+      for (;;) {
+        var x = patch[pos++];
+        data += (x & 0x7f) * shift;
+        if (x & 0x80) return data;
+        shift *= 128; data += shift;
+      }
+    }
+    var ssize = varint(), tsize = varint(), msize = varint();
+    pos += msize;
+    var target = new Uint8Array(tsize), out = 0, srcRel = 0, tgtRel = 0, end = patch.length - 12;
+    while (pos < end) {
+      var data = varint(), cmd = data & 3, len = Math.floor(data / 4) + 1;
+      if (cmd === 0) { target.set(source.subarray(out, out + len), out); out += len; }
+      else if (cmd === 1) { target.set(patch.subarray(pos, pos + len), out); pos += len; out += len; }
+      else {
+        var d = varint(), off = d & 1 ? -Math.floor(d / 2) : Math.floor(d / 2);
+        if (cmd === 2) { srcRel += off; target.set(source.subarray(srcRel, srcRel + len), out); srcRel += len; out += len; }
+        else { tgtRel += off; while (len--) target[out++] = target[tgtRel++]; }
+      }
+    }
+    var want = (patch[end + 4] | patch[end + 5] << 8 | patch[end + 6] << 16 | patch[end + 7] << 24) >>> 0;
+    if (crc32(target) !== want.toString(16).padStart(8, '0')) throw new Error('CRC');
+    return target;
+  }
+
+  // ---- ROMs
+  function identify(bytes) {
+    var title = String.fromCharCode.apply(null, bytes.subarray(0x134, 0x143));
+    var europe = bytes[0x142] === 0x50; // « P »
+    if (/^ZELDA NAYRU/.test(title)) return { game: 'ages', europe: europe };
+    if (/^ZELDA DIN/.test(title)) return { game: 'seasons', europe: europe };
+    return null;
+  }
+  function showRom(game, state, text) {
+    var el = $('rom-' + game);
+    el.className = 'rom ' + state;
+    el.querySelector('span').textContent = text;
+  }
+  function readFiles(list) {
+    Array.prototype.forEach.call(list, function (f) {
+      var r = new FileReader();
+      r.onload = function () {
+        var bytes = new Uint8Array(r.result), id = identify(bytes);
+        if (!id) { setStatus(SBT('« ' + f.name + ' » n’est pas une ROM Oracle.', '“' + f.name + '” is not an Oracle ROM.'), 'err'); return; }
+        var want = manifest && manifest.source[id.game];
+        if (!id.europe) { roms[id.game] = null; showRom(id.game, 'bad', SBT('Version non européenne : il faut la ROM Europe', 'Not the European version: the Europe ROM is needed')); }
+        else if (want && crc32(bytes) !== want.crc32) { roms[id.game] = null; showRom(id.game, 'bad', SBT('Fichier différent du dump attendu (CRC32 ' + want.crc32 + ')', 'Not the expected dump (CRC32 ' + want.crc32 + ')')); }
+        else { roms[id.game] = bytes; showRom(id.game, 'ok', '✔ ' + f.name); }
+        refresh();
+      };
+      r.readAsArrayBuffer(f);
+    });
+  }
+
+  // ---- Interface
+  function setStatus(text, cls) { var s = $('status'); s.textContent = text; s.className = cls || ''; }
+  function refresh() { $('go').disabled = !(roms.ages && roms.seasons && manifest && options); }
+
+  function buildLangs() {
+    var saved = store.get(LANG_KEY) || (SB_LANG === 'fr' ? 'fr' : 'en');
+    LANGS.forEach(function (l) {
+      var lab = document.createElement('label');
+      var available = manifest && manifest.patches[l.id];
+      lab.innerHTML = '<input type="radio" name="lang" value="' + l.id + '"' + (l.id === saved ? ' checked' : '') + (available ? '' : ' disabled') + '> ' + l.label;
+      if (!available) lab.title = SBT('Pas encore disponible', 'Not available yet');
+      $('langs').appendChild(lab);
+    });
+    $('langs').onchange = function (e) { store.set(LANG_KEY, e.target.value); };
+  }
+  function buildOptions() {
+    var saved = {};
+    try { saved = JSON.parse(store.get(OPT_KEY) || '{}'); } catch (_) {}
+    options.options.forEach(function (o) {
+      var on = o.id in saved ? saved[o.id] : o['default'];
+      var div = document.createElement('label');
+      div.className = 'opt';
+      div.innerHTML = '<input type="checkbox" data-id="' + o.id + '"' + (on ? ' checked' : '') + '>' +
+        '<div><b>' + SBT(o.fr, o.en) + '</b><span>' + SBT(o.frDesc, o.enDesc) + '</span></div>';
+      $('options').appendChild(div);
+    });
+    $('options').onchange = function () {
+      var s = {};
+      document.querySelectorAll('#options input').forEach(function (i) { s[i.dataset.id] = i.checked; });
+      store.set(OPT_KEY, JSON.stringify(s));
+    };
+  }
+
+  function generate() {
+    var lang = (document.querySelector('input[name=lang]:checked') || {}).value;
+    var p = manifest.patches[lang];
+    if (!p) { setStatus(SBT('Choisis une langue.', 'Pick a language.'), 'err'); return; }
+    $('go').disabled = true;
+    setStatus(SBT('Téléchargement du patch…', 'Downloading the patch…'));
+    fetch(p.file).then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); }).then(function (buf) {
+      setStatus(SBT('Fabrication de la ROM…', 'Building the ROM…'));
+      var source = new Uint8Array(roms.ages.length + roms.seasons.length);
+      source.set(roms.ages, 0); source.set(roms.seasons, roms.ages.length);
+      var rom = applyBps(source, new Uint8Array(buf));
+      // Options : signature puis un octet par option
+      var sig = parseInt(options.signatureOffset, 16);
+      if (String.fromCharCode.apply(null, rom.subarray(sig, sig + 8)) !== options.signature) throw new Error('signature');
+      document.querySelectorAll('#options input').forEach(function (i) {
+        var o = options.options.filter(function (x) { return x.id === i.dataset.id; })[0];
+        rom[parseInt(o.offset, 16)] = i.checked ? 1 : 0;
+      });
+      // Somme de contrôle globale de l'en-tête Game Boy
+      var sum = 0;
+      for (var k = 0; k < rom.length; k++) if (k !== 0x14e && k !== 0x14f) sum = (sum + rom[k]) & 0xffff;
+      rom[0x14e] = sum >> 8; rom[0x14f] = sum & 0xff;
+      var name = 'Zelda Oracles Combined (' + lang.toUpperCase() + ').gbc';
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([rom], { type: 'application/octet-stream' }));
+      a.download = name; document.body.appendChild(a); a.click(); a.remove();
+      setStatus(SBT('✔ ROM prête : ' + name, '✔ ROM ready: ' + name), 'done');
+    }).catch(function (e) {
+      setStatus(SBT('Échec de la génération (' + e.message + ').', 'Generation failed (' + e.message + ').'), 'err');
+    }).then(refresh);
+  }
+
+  var drop = $('drop');
+  $('files').onchange = function (e) { readFiles(e.target.files); };
+  ['dragenter', 'dragover'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('over'); }); });
+  ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('over'); }); });
+  drop.addEventListener('drop', function (e) { readFiles(e.dataTransfer.files); });
+  $('go').onclick = generate;
+
+  Promise.all([
+    fetch('patches/manifest.json').then(function (r) { return r.json(); }),
+    fetch('options.json').then(function (r) { return r.json(); })
+  ]).then(function (res) {
+    manifest = res[0]; options = res[1];
+    buildLangs(); buildOptions(); refresh();
+  }).catch(function () {
+    setStatus(SBT('Impossible de charger les patchs.', 'Could not load the patches.'), 'err');
+  });
+})();
+</script>
+</body>
+</html>

@@ -4,3 +4,4 @@ out/
 tools-build/
 oracles-disasm/
 __pycache__/
+.claude/
