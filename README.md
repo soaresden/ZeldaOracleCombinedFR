@@ -41,6 +41,9 @@ de droite à Seasons (dans un des deux jeux, l'une des deux ramène en ville).
 | Icônes des portes de Vasu | Sablier au-dessus de la porte vers Ages, soleil au-dessus de celle vers Seasons. |
 | Icône du jeu dans la barre | Sablier dans Ages, soleil dans Seasons, à côté des rubis. |
 | Avertissement partie liée | La 1re fois qu'on part dans l'autre jeu sans avoir fini l'aventure, le jeu demande confirmation. |
+| Codes automatiques | Plus besoin de recopier les codes : quand un personnage demande le code donné dans l'autre aventure, il est transmis tout seul (Farore aussi). |
+| Récompenses sur la carte | Une fois la 1re aventure finie, un cercle clignote sur la carte là où un personnage attend pour donner un objet. Dans la partie liée : Farore, quand un code de retour est prêt. |
+| Barre d'état en bas | Comme dans Link's Awakening (en haut par défaut). Bientôt. |
 
 Les options sont des octets de la ROM (table à `$3FF0`, signature
 `ZOCFROPT` à `$3FE0`, voir `fr/options.json`) : la page les écrit selon les
@@ -86,8 +89,9 @@ Pour une seule langue (ici l'allemand), régénérer puis compiler :
 ## État
 
 - Testé dans un émulateur : intro complète, titre, nouvelle partie dans les
-  deux ordres, passage entre les jeux, raccourci, icônes, avertissement.
+  deux ordres, passage entre les jeux, raccourci, icônes, avertissement,
+  codes automatiques, marqueurs de récompense.
 - Le hack crossworld lui-même reste une preuve de concept (voir
   `oracles-disasm/crossworld_todo.md`) : quelques bugs graphiques connus.
-- En cours : codes entre les jeux automatiques avec suivi dans le menu Start ;
-  barre d'état en bas de l'écran (à l'étude).
+- En cours : écran de suivi des codes dans le menu Start ; barre d'état en bas
+  de l'écran (à l'étude).

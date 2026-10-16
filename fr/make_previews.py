@@ -32,6 +32,9 @@ BOOT = 'w1300,pstart,w150'
 NEW_AGES = BOOT + ',pstart,w150,pa,w60,pa,w60,pa,w20,pa,w20,pstart,w30,pa,w90,pa,w60,pa,w200' + ',pa,w50' * 30
 TO_VASU = ('oc6d1=04,oc758=10,mcbca=00,mcc02=00,w30,pselect,w120,mcbb6=58,w10,pa,w90,pa,w40,pa,w300')
 MAP_ON_VASU = 'oc6d1=04,oc758=10,mcbca=00,mcc02=00,w30,pselect,w120,mcbb6=58,w10,pa,w200'
+# Ages fini (FINISHEDGAME) et code de Troy commencé dans la sauvegarde Seasons
+# (SRAM banque 0) : un marqueur sur la case de Troy (0:1d)
+MAP_REWARD = 'oc6d1=04,oc6d2=10,m4000=00,oa676=40,m4000=01,mcbca=00,mcc02=00,w30,pselect,w90'
 
 
 class Game:
@@ -129,6 +132,8 @@ def main(langs):
         g = Game(rom(base), {'hud_game_icon': on}).run(NEW_AGES).shot('hud_game_icon_' + suffix)
         g.stop()
         g = Game(rom(base), {'door_icons': on}).run(NEW_AGES + ',' + TO_VASU).shot('door_icons_' + suffix)
+        g.stop()
+        g = Game(rom(base), {'reward_markers': on}).run(NEW_AGES + ',' + MAP_REWARD).shot('reward_markers_' + suffix)
         g.stop()
 
     # Écrans avec du texte : dans chaque langue

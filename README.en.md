@@ -40,6 +40,9 @@ one to Seasons (in each game, one of them leads back to town).
 | Icons above Vasu's doors | Hourglass above the door to Ages, sun above the door to Seasons. |
 | Game icon in the status bar | Hourglass in Ages, sun in Seasons, next to the rupees. |
 | Linked game warning | The first time you leave for the other game before finishing the current adventure, the game asks for confirmation. |
+| Automatic secrets | No more copying secrets: when a character asks for the secret given in the other adventure, it is passed on automatically (Farore too). |
+| Rewards on the map | Once the first adventure is finished, a circle blinks on the map where a character waits to give an item. In the linked game: Farore, when a return secret is ready. |
+| Status bar at the bottom | Like Link's Awakening (top by default). Coming soon. |
 
 Options are ROM bytes (table at `$3FF0`, signature `ZOCFROPT` at `$3FE0`, see
 `fr/options.json`): the page writes them according to the checkboxes, the game
@@ -85,8 +88,8 @@ For a single language (here German), regenerate then build:
 ## Status
 
 - Tested in an emulator: full intro, title, new game in both orders, travel
-  between games, shortcut, icons, warning.
+  between games, shortcut, icons, warning, automatic secrets, reward markers.
 - The crossworld hack itself is still a proof of concept (see
   `oracles-disasm/crossworld_todo.md`): a few known graphical bugs.
-- In progress: automatic secrets between the games with a tracker in the Start
-  menu; status bar at the bottom of the screen (being studied).
+- In progress: secrets tracker screen in the Start menu; status bar at the
+  bottom of the screen (being studied).

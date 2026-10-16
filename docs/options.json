@@ -84,6 +84,19 @@
       }
     },
     {
+      "id": "reward_markers",
+      "offset": "0x3ff7",
+      "default": true,
+      "fr": "Récompenses à récupérer sur la carte",
+      "en": "Rewards to collect on the map",
+      "frDesc": "Une fois la première aventure finie, un cercle clignote sur la carte là où un personnage attend pour donner un objet (code reçu dans l'autre jeu). Dans la partie liée : Farore, quand un code de retour est prêt.",
+      "enDesc": "Once the first adventure is finished, a circle blinks on the map where a character waits to give an item (secret received in the other game). In the linked game: Farore, when a return secret is ready.",
+      "preview": {
+        "on": "reward_markers_on.png",
+        "off": "reward_markers_off.png"
+      }
+    },
+    {
       "id": "hud_bottom",
       "offset": "0x3ff6",
       "default": false,
