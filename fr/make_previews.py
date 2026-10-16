@@ -34,7 +34,11 @@ TO_VASU = ('oc6d1=04,oc758=10,mcbca=00,mcc02=00,w30,pselect,w120,mcbb6=58,w10,pa
 MAP_ON_VASU = 'oc6d1=04,oc758=10,mcbca=00,mcc02=00,w30,pselect,w120,mcbb6=58,w10,pa,w200'
 # Ages fini (FINISHEDGAME) et code de Troy commencé dans la sauvegarde Seasons
 # (SRAM banque 0) : un marqueur sur la case de Troy (0:1d)
-MAP_REWARD = 'oc6d1=04,oc6d2=10,m4000=00,oa676=40,m4000=01,mcbca=00,mcc02=00,w30,pselect,w90'
+# Ages fini, 3 échanges à des étapes différentes (fini, Farore, récompense),
+# menu Start page 3 avec le curseur sur le sablier
+TO_TRACKER = ('oc6d1=04,oc6d2=10,m4000=00,oa676=70,oa677=40,m4000=01,oc6dd=c0,'
+              'mcbca=00,mcc02=00,w10,pstart,w60,pselect,w60,pselect,w60,pright,w10')
+MAP_REWARD ='oc6d1=04,oc6d2=10,m4000=00,oa676=40,m4000=01,mcbca=00,mcc02=00,w30,pselect,w90'
 
 
 class Game:
@@ -147,6 +151,13 @@ def main(langs):
         g = Game(rom(lang), {'linked_warning': True}).run(
             NEW_AGES + ',' + TO_VASU + ',hright:22,hdown:60,w250,pa,w250,pa,w300' + extra)
         g.shot('linked_warning_on_' + lang).stop()
+        # Suivi des codes (curseur sur Troy : récompense à récupérer) ; sans
+        # l'option, A sur le sablier ne fait rien
+        g = Game(rom(lang), {'secrets_tracker': True}).run(
+            NEW_AGES + ',' + TO_TRACKER + ',pa,w90,pdown,w20,pdown,w40')
+        g.shot('secrets_tracker_on_' + lang).stop()
+        g = Game(rom(lang), {'secrets_tracker': False}).run(NEW_AGES + ',' + TO_TRACKER + ',pa,w60')
+        g.shot('secrets_tracker_off_' + lang).stop()
         # Écran de saisie d'un code (ce qu'on évite avec les codes automatiques)
         g = Game(rom(lang), {}).run(NEW_AGES).open_secret_menu().run('w120')
         g.shot('auto_secrets_off_' + lang).stop()

@@ -43,6 +43,7 @@ de droite à Seasons (dans un des deux jeux, l'une des deux ramène en ville).
 | Avertissement partie liée | La 1re fois qu'on part dans l'autre jeu sans avoir fini l'aventure, le jeu demande confirmation. |
 | Codes automatiques | Plus besoin de recopier les codes : quand un personnage demande le code donné dans l'autre aventure, il est transmis tout seul (Farore aussi). |
 | Récompenses sur la carte | Une fois la 1re aventure finie, un cercle clignote sur la carte là où un personnage attend pour donner un objet. Dans la partie liée : Farore, quand un code de retour est prêt. |
+| Suivi des codes | Menu Start, 3e page : A sur le sablier (Ages) ou l'emblème des saisons (Seasons). Liste les 10 échanges entre les jeux : code pas encore reçu, récompense à récupérer, Farore à voir, terminé. Dans l'aventure 1, disponible une fois celle-ci finie. |
 | Barre d'état en bas | Comme dans Link's Awakening (en haut par défaut). Bientôt. |
 
 Les options sont des octets de la ROM (table à `$3FF0`, signature
@@ -55,10 +56,11 @@ cases cochées, le jeu les lit. Une seule ROM, un patch par langue.
 | --- | --- |
 | Textes (≈ 4 100) | `fr/make_fr_text.py --lang=xx` extrait la langue choisie des ROMs EU (ordre réel : EN FR DE IT ES, voir `fr/lang.py`). Les ~60 textes ajoutés par le hack sont des copies de textes de l'autre jeu. Textes propres au projet : `fr/extra_text.yaml`, en 5 langues. |
 | Images avec du texte | `fr/import_fr_gfx.py --lang=xx` : menus, sélection de fichier, sauvegarde, Game Over, secrets, cartes-titres des donjons, « À suivre… » (en-têtes à 5 langues des ROMs EU). |
+| Liste des secrets | `fr/make_secret_names.py --lang=xx` : noms de la liste de Farore (traduits dans les ROMs EU) et textes du suivi des codes. |
 | Menu AGES / SEASONS | `fr/patch_newgame_menu.py` : lettres du menu posées sur les boutons, pour les 5 langues. |
 | Police | `fr/import_fr_font.py` : police européenne (glyphes accentués en plus). |
 | Titre, icônes | `fr/import_title.py` (`fr/title_combined.png`, voir `fr/title_src/`), `fr/make_hud_icons.py`. |
-| Code | Branche [`fr/crossworld1`](https://github.com/soaresden/oracles-disasm/tree/fr/crossworld1) du fork : 3e base de texte (la VF ne tient pas dans l'adressage US), options, menus, icônes, avertissement, corrections. |
+| Code | Branche [`fr/crossworld1`](https://github.com/soaresden/oracles-disasm/tree/fr/crossworld1) du fork : 3e base de texte (la VF ne tient pas dans l'adressage US), options, menus, icônes, avertissement, codes automatiques, marqueurs, suivi des codes (liste de Farore déplacée hors de la banque 2), corrections. |
 | Patchs | `fr/bps.py`, `fr/make_patches.py` : patch BPS par langue, de « ROM Ages EU + ROM Seasons EU » vers la ROM finale (`docs/patches/`). |
 
 ## Compiler soi-même (Windows)
@@ -90,8 +92,7 @@ Pour une seule langue (ici l'allemand), régénérer puis compiler :
 
 - Testé dans un émulateur : intro complète, titre, nouvelle partie dans les
   deux ordres, passage entre les jeux, raccourci, icônes, avertissement,
-  codes automatiques, marqueurs de récompense.
+  codes automatiques, marqueurs de récompense, suivi des codes.
 - Le hack crossworld lui-même reste une preuve de concept (voir
   `oracles-disasm/crossworld_todo.md`) : quelques bugs graphiques connus.
-- En cours : écran de suivi des codes dans le menu Start ; barre d'état en bas
-  de l'écran (à l'étude).
+- En cours : barre d'état en bas de l'écran (à l'étude).

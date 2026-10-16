@@ -97,6 +97,19 @@
       }
     },
     {
+      "id": "secrets_tracker",
+      "offset": "0x3ff8",
+      "default": true,
+      "fr": "Suivi des codes dans le menu Start",
+      "en": "Secrets tracker in the Start menu",
+      "frDesc": "Menu Start, 3e page : A sur le sablier (Ages) ou l'emblème des saisons (Seasons). Liste les 10 échanges entre les jeux et où en est chacun. Dans l'aventure 1, disponible une fois celle-ci finie.",
+      "enDesc": "Start menu, 3rd page: A on the hourglass (Ages) or the seasons emblem (Seasons). Lists the 10 exchanges between the games and where each one stands. In adventure 1, available once it is finished.",
+      "preview": {
+        "on": "secrets_tracker_on_{lang}.png",
+        "off": "secrets_tracker_off_{lang}.png"
+      }
+    },
+    {
       "id": "hud_bottom",
       "offset": "0x3ff6",
       "default": false,

@@ -42,6 +42,7 @@ one to Seasons (in each game, one of them leads back to town).
 | Linked game warning | The first time you leave for the other game before finishing the current adventure, the game asks for confirmation. |
 | Automatic secrets | No more copying secrets: when a character asks for the secret given in the other adventure, it is passed on automatically (Farore too). |
 | Rewards on the map | Once the first adventure is finished, a circle blinks on the map where a character waits to give an item. In the linked game: Farore, when a return secret is ready. |
+| Secrets tracker | Start menu, 3rd page: A on the hourglass (Ages) or the seasons emblem (Seasons). Lists the 10 exchanges between the games: no secret yet, reward to collect, see Farore, complete. In adventure 1, available once it is finished. |
 | Status bar at the bottom | Like Link's Awakening (top by default). Coming soon. |
 
 Options are ROM bytes (table at `$3FF0`, signature `ZOCFROPT` at `$3FE0`, see
@@ -54,10 +55,11 @@ reads them. One ROM, one patch per language.
 | --- | --- |
 | Text (≈ 4,100) | `fr/make_fr_text.py --lang=xx` dumps the chosen language from the EU ROMs (actual order: EN FR DE IT ES, see `fr/lang.py`). The ~60 texts added by the hack are copies of texts from the other game. Project-specific texts: `fr/extra_text.yaml`, in 5 languages. |
 | Images containing words | `fr/import_fr_gfx.py --lang=xx`: menus, file select, save, Game Over, secrets, dungeon title cards, "To be continued" (5-language headers of the EU ROMs). |
+| Secret list | `fr/make_secret_names.py --lang=xx`: names in Farore's list (translated in the EU ROMs) and the secrets tracker texts. |
 | AGES / SEASONS menu | `fr/patch_newgame_menu.py`: menu letters drawn on the buttons, for all 5 languages. |
 | Font | `fr/import_fr_font.py`: European font (extra accented glyphs). |
 | Title, icons | `fr/import_title.py` (`fr/title_combined.png`, see `fr/title_src/`), `fr/make_hud_icons.py`. |
-| Code | Branch [`fr/crossworld1`](https://github.com/soaresden/oracles-disasm/tree/fr/crossworld1) of the fork: 3rd text base (the translations don't fit in the US text addressing), options, menus, icons, warning, fixes. |
+| Code | Branch [`fr/crossworld1`](https://github.com/soaresden/oracles-disasm/tree/fr/crossworld1) of the fork: 3rd text base (the translations don't fit in the US text addressing), options, menus, icons, warning, automatic secrets, markers, secrets tracker (Farore's list moved out of bank 2), fixes. |
 | Patches | `fr/bps.py`, `fr/make_patches.py`: one BPS patch per language, from "Ages EU ROM + Seasons EU ROM" to the final ROM (`docs/patches/`). |
 
 ## Building it yourself (Windows)
@@ -88,8 +90,8 @@ For a single language (here German), regenerate then build:
 ## Status
 
 - Tested in an emulator: full intro, title, new game in both orders, travel
-  between games, shortcut, icons, warning, automatic secrets, reward markers.
+  between games, shortcut, icons, warning, automatic secrets, reward markers,
+  secrets tracker.
 - The crossworld hack itself is still a proof of concept (see
   `oracles-disasm/crossworld_todo.md`): a few known graphical bugs.
-- In progress: secrets tracker screen in the Start menu; status bar at the
-  bottom of the screen (being studied).
+- In progress: status bar at the bottom of the screen (being studied).

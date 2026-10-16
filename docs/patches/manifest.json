@@ -14,28 +14,28 @@
   "patches": {
     "en": {
       "file": "patches/en.bps",
-      "size": 344592,
-      "targetCrc32": "6e35f271"
+      "size": 345487,
+      "targetCrc32": "d7829059"
     },
     "fr": {
       "file": "patches/fr.bps",
-      "size": 387259,
-      "targetCrc32": "b1b474ce"
+      "size": 388153,
+      "targetCrc32": "8d5bc621"
     },
     "de": {
       "file": "patches/de.bps",
-      "size": 573644,
-      "targetCrc32": "7a577165"
+      "size": 574558,
+      "targetCrc32": "9bdacfdb"
     },
     "it": {
       "file": "patches/it.bps",
-      "size": 528467,
-      "targetCrc32": "58e54541"
+      "size": 529381,
+      "targetCrc32": "d38d2964"
     },
     "es": {
       "file": "patches/es.bps",
-      "size": 426155,
-      "targetCrc32": "5da41570"
+      "size": 427055,
+      "targetCrc32": "2cc3d6b0"
     }
   }
 }
