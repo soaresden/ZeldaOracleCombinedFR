@@ -110,6 +110,19 @@
       }
     },
     {
+      "id": "gba_shop",
+      "offset": "0x3ff9",
+      "default": false,
+      "fr": "Boutique Advance (bonus GBA)",
+      "en": "Advance shop (GBA bonus)",
+      "frDesc": "Ouvre la boutique réservée à la Game Boy Advance (Lynna dans le passé, Horon dans Seasons) : bagues GBA et graines Gasha. Les couleurs restent celles de la GBC (le mode GBA les éclaircit pour l'écran sombre de la GBA). Idée reprise du patch <a href=\"https://www.romhacking.net/hacks/3580/\" target=\"_blank\" rel=\"noopener\">Force GBA Enhanced Mode</a>." ,
+      "enDesc": "Opens the shop reserved for the Game Boy Advance (Lynna in the past, Horon in Seasons): GBA rings and Gasha seeds. Colors stay GBC ones (GBA mode brightens them for the GBA's dark screen). Idea taken from the <a href=\"https://www.romhacking.net/hacks/3580/\" target=\"_blank\" rel=\"noopener\">Force GBA Enhanced Mode</a> patch.",
+      "preview": {
+        "on": "gba_shop_on.png",
+        "off": "gba_shop_off.png"
+      }
+    },
+    {
       "id": "hud_bottom",
       "offset": "0x3ff6",
       "default": false,

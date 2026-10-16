@@ -43,6 +43,7 @@ one to Seasons (in each game, one of them leads back to town).
 | Automatic secrets | No more copying secrets: when a character asks for the secret given in the other adventure, it is passed on automatically (Farore too). |
 | Rewards on the map | Once the first adventure is finished, a circle blinks on the map where a character waits to give an item. In the linked game: Farore, when a return secret is ready. |
 | Secrets tracker | Start menu, 3rd page: A on the hourglass (Ages) or the seasons emblem (Seasons). Lists the 10 exchanges between the games: no secret yet, reward to collect, see Farore, complete. In adventure 1, available once it is finished. |
+| Advance shop | Opens the shop reserved for the Game Boy Advance (Lynna in the past, Horon in Seasons), without brightening the colors like the real GBA mode. Idea taken from the [Force GBA Enhanced Mode](https://www.romhacking.net/hacks/3580/) patch. |
 | Status bar at the bottom | Like Link's Awakening (top by default): in game and in the Start menu, the bar moves to the bottom and the rest moves up. The map, the other menus and a few effects (time travel ripples…) keep it at the top. |
 
 Options are ROM bytes (table at `$3FF0`, signature `ZOCFROPT` at `$3FE0`, see
@@ -86,6 +87,13 @@ The (French) ROM goes to `out/combined.gbc` (or `OUT_NAME=...`). To build all
 
 For a single language (here German), regenerate then build:
 `python fr/make_fr_text.py --lang=de && python fr/import_fr_gfx.py --lang=de && python fr/patch_newgame_menu.py`, then `./build.sh`.
+
+## Credits
+
+- [oracles-disasm](https://github.com/Stewmath/oracles-disasm) and its crossworld hack (Stewmath and contributors).
+- Nintendo's official translations, taken from the European ROMs.
+- [zoragen-wpf](https://github.com/kabili207/zoragen-wpf) (kabili207): list of the secret exchanges between the games.
+- [Force GBA Enhanced Mode](https://www.romhacking.net/hacks/3580/) patch: idea for the Advance shop option.
 
 ## Status
 

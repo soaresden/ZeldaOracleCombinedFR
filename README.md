@@ -44,6 +44,7 @@ de droite à Seasons (dans un des deux jeux, l'une des deux ramène en ville).
 | Codes automatiques | Plus besoin de recopier les codes : quand un personnage demande le code donné dans l'autre aventure, il est transmis tout seul (Farore aussi). |
 | Récompenses sur la carte | Une fois la 1re aventure finie, un cercle clignote sur la carte là où un personnage attend pour donner un objet. Dans la partie liée : Farore, quand un code de retour est prêt. |
 | Suivi des codes | Menu Start, 3e page : A sur le sablier (Ages) ou l'emblème des saisons (Seasons). Liste les 10 échanges entre les jeux : code pas encore reçu, récompense à récupérer, Farore à voir, terminé. Dans l'aventure 1, disponible une fois celle-ci finie. |
+| Boutique Advance | Ouvre la boutique réservée à la Game Boy Advance (Lynna dans le passé, Horon dans Seasons), sans éclaircir les couleurs comme le vrai mode GBA. Idée reprise du patch [Force GBA Enhanced Mode](https://www.romhacking.net/hacks/3580/). |
 | Barre d'état en bas | Comme dans Link's Awakening (en haut par défaut) : en jeu et dans le menu Start, la barre passe en bas et le reste remonte. La carte, les autres menus et quelques effets (ondulations des voyages dans le temps…) la gardent en haut. |
 
 Les options sont des octets de la ROM (table à `$3FF0`, signature
@@ -87,6 +88,13 @@ compiler les 5 langues et refaire les patchs de la page :
 
 Pour une seule langue (ici l'allemand), régénérer puis compiler :
 `python fr/make_fr_text.py --lang=de && python fr/import_fr_gfx.py --lang=de && python fr/patch_newgame_menu.py`, puis `./build.sh`.
+
+## Crédits
+
+- [oracles-disasm](https://github.com/Stewmath/oracles-disasm) et son hack crossworld (Stewmath et contributeurs).
+- Traductions officielles de Nintendo, reprises des ROMs européennes.
+- [zoragen-wpf](https://github.com/kabili207/zoragen-wpf) (kabili207) : liste des échanges de codes entre les jeux.
+- Patch [Force GBA Enhanced Mode](https://www.romhacking.net/hacks/3580/) : idée de l'option Boutique Advance.
 
 ## État
 

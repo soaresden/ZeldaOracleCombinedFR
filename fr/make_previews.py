@@ -34,6 +34,10 @@ TO_VASU = ('oc6d1=04,oc758=10,mcbca=00,mcc02=00,w30,pselect,w120,mcbb6=58,w10,pa
 MAP_ON_VASU = 'oc6d1=04,oc758=10,mcbca=00,mcc02=00,w30,pselect,w120,mcbb6=58,w10,pa,w200'
 # Ages fini (FINISHEDGAME) et code de Troy commencé dans la sauvegarde Seasons
 # (SRAM banque 0) : un marqueur sur la case de Troy (0:1d)
+# Raccourci Vasu détourné vers Lynna dans le passé (case $58), devant la porte
+# de la boutique Advance, puis on monte dans la porte
+TO_GBA_SHOP = ('oc6d1=04,oc758=10,mcbca=00,mcc02=00,w30,pselect,w120,mcbb6=58,w10,pa,w90,pa,w40,pa,'
+               'w3,mcc47=81,mcc48=58,mcc4a=45,w300,hup:40,w150')
 # Épée et bouclier équipés (icônes A/B de la barre)
 EQUIP = 'mc684=01,mc685=05,mc6af=01,mc6b2=01,oc69a=22,mcbe9=ff,w30'
 # Ages fini, 3 échanges à des étapes différentes (fini, Farore, récompense),
@@ -138,6 +142,8 @@ def main(langs):
         g = Game(rom(base), {'hud_game_icon': on}).run(NEW_AGES).shot('hud_game_icon_' + suffix)
         g.stop()
         g = Game(rom(base), {'door_icons': on}).run(NEW_AGES + ',' + TO_VASU).shot('door_icons_' + suffix)
+        g.stop()
+        g = Game(rom(base), {'gba_shop': on}).run(NEW_AGES + ',' + TO_GBA_SHOP).shot('gba_shop_' + suffix)
         g.stop()
         g = Game(rom(base), {'hud_bottom': on}).run(NEW_AGES + ',' + EQUIP).shot('hud_bottom_' + suffix)
         g.stop()
