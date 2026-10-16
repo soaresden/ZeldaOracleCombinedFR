@@ -43,7 +43,7 @@ one to Seasons (in each game, one of them leads back to town).
 | Automatic secrets | No more copying secrets: when a character asks for the secret given in the other adventure, it is passed on automatically (Farore too). |
 | Rewards on the map | Once the first adventure is finished, a circle blinks on the map where a character waits to give an item. In the linked game: Farore, when a return secret is ready. |
 | Secrets tracker | Start menu, 3rd page: A on the hourglass (Ages) or the seasons emblem (Seasons). Lists the 10 exchanges between the games: no secret yet, reward to collect, see Farore, complete. In adventure 1, available once it is finished. |
-| Status bar at the bottom | Like Link's Awakening (top by default): in game, the bar moves to the bottom and the scenery moves up. Menus and a few effects (time travel ripples…) keep it at the top. |
+| Status bar at the bottom | Like Link's Awakening (top by default): in game and in the Start menu, the bar moves to the bottom and the rest moves up. The map, the other menus and a few effects (time travel ripples…) keep it at the top. |
 
 Options are ROM bytes (table at `$3FF0`, signature `ZOCFROPT` at `$3FE0`, see
 `fr/options.json`): the page writes them according to the checkboxes, the game

@@ -115,8 +115,8 @@
       "default": false,
       "fr": "Barre d'état en bas (comme Link's Awakening)",
       "en": "Status bar at the bottom (like Link's Awakening)",
-      "frDesc": "En haut par défaut. En jeu, la barre passe en bas de l'écran et le décor remonte. Les menus et quelques effets spéciaux (ondulations des voyages dans le temps...) la gardent en haut.",
-      "enDesc": "At the top by default. In game, the bar moves to the bottom of the screen and the scenery moves up. Menus and a few special effects (time travel ripples...) keep it at the top.",
+      "frDesc": "En haut par défaut. En jeu et dans le menu Start, la barre passe en bas de l'écran et le reste remonte. La carte, les autres menus et quelques effets spéciaux (ondulations des voyages dans le temps...) la gardent en haut.",
+      "enDesc": "At the top by default. In game and in the Start menu, the bar moves to the bottom of the screen and the rest moves up. The map, the other menus and a few special effects (time travel ripples...) keep it at the top.",
       "preview": {
         "on": "hud_bottom_on.png",
         "off": "hud_bottom_off.png"

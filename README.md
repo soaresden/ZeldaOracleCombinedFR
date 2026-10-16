@@ -44,7 +44,7 @@ de droite à Seasons (dans un des deux jeux, l'une des deux ramène en ville).
 | Codes automatiques | Plus besoin de recopier les codes : quand un personnage demande le code donné dans l'autre aventure, il est transmis tout seul (Farore aussi). |
 | Récompenses sur la carte | Une fois la 1re aventure finie, un cercle clignote sur la carte là où un personnage attend pour donner un objet. Dans la partie liée : Farore, quand un code de retour est prêt. |
 | Suivi des codes | Menu Start, 3e page : A sur le sablier (Ages) ou l'emblème des saisons (Seasons). Liste les 10 échanges entre les jeux : code pas encore reçu, récompense à récupérer, Farore à voir, terminé. Dans l'aventure 1, disponible une fois celle-ci finie. |
-| Barre d'état en bas | Comme dans Link's Awakening (en haut par défaut) : en jeu, la barre passe en bas et le décor remonte. Les menus et quelques effets (ondulations des voyages dans le temps…) la gardent en haut. |
+| Barre d'état en bas | Comme dans Link's Awakening (en haut par défaut) : en jeu et dans le menu Start, la barre passe en bas et le reste remonte. La carte, les autres menus et quelques effets (ondulations des voyages dans le temps…) la gardent en haut. |
 
 Les options sont des octets de la ROM (table à `$3FF0`, signature
 `ZOCFROPT` à `$3FE0`, voir `fr/options.json`) : la page les écrit selon les

@@ -34,6 +34,8 @@ TO_VASU = ('oc6d1=04,oc758=10,mcbca=00,mcc02=00,w30,pselect,w120,mcbb6=58,w10,pa
 MAP_ON_VASU = 'oc6d1=04,oc758=10,mcbca=00,mcc02=00,w30,pselect,w120,mcbb6=58,w10,pa,w200'
 # Ages fini (FINISHEDGAME) et code de Troy commencé dans la sauvegarde Seasons
 # (SRAM banque 0) : un marqueur sur la case de Troy (0:1d)
+# Épée et bouclier équipés (icônes A/B de la barre)
+EQUIP = 'mc684=01,mc685=05,mc6af=01,mc6b2=01,oc69a=22,mcbe9=ff,w30'
 # Ages fini, 3 échanges à des étapes différentes (fini, Farore, récompense),
 # menu Start page 3 avec le curseur sur le sablier
 TO_TRACKER = ('oc6d1=04,oc6d2=10,m4000=00,oa676=70,oa677=40,m4000=01,oc6dd=c0,'
@@ -137,7 +139,7 @@ def main(langs):
         g.stop()
         g = Game(rom(base), {'door_icons': on}).run(NEW_AGES + ',' + TO_VASU).shot('door_icons_' + suffix)
         g.stop()
-        g = Game(rom(base), {'hud_bottom': on}).run(NEW_AGES).shot('hud_bottom_' + suffix)
+        g = Game(rom(base), {'hud_bottom': on}).run(NEW_AGES + ',' + EQUIP).shot('hud_bottom_' + suffix)
         g.stop()
         g = Game(rom(base), {'reward_markers': on}).run(NEW_AGES + ',' + MAP_REWARD).shot('reward_markers_' + suffix)
         g.stop()
