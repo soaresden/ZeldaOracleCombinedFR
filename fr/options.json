@@ -20,6 +20,24 @@
       "en": "Map shortcut to Vasu",
       "frDesc": "Sur la carte, A sur la case de Vasu propose d'aller dans sa boutique (porte vers l'autre jeu).",
       "enDesc": "On the map, A on Vasu's square offers to warp to his shop (door to the other game)."
+    },
+    {
+      "id": "door_icons",
+      "offset": "0x3ff2",
+      "default": true,
+      "fr": "Icônes au-dessus des portes de Vasu",
+      "en": "Icons above Vasu's doors",
+      "frDesc": "Sablier (porte vers Ages) et soleil (porte vers Seasons) dans la boutique de Vasu.",
+      "enDesc": "Hourglass (door to Ages) and sun (door to Seasons) in Vasu's shop."
+    },
+    {
+      "id": "hud_game_icon",
+      "offset": "0x3ff3",
+      "default": true,
+      "fr": "Icône du jeu en cours dans la barre",
+      "en": "Current game icon in the status bar",
+      "frDesc": "Sablier dans Ages, soleil dans Seasons, à côté des rubis.",
+      "enDesc": "Hourglass in Ages, sun in Seasons, next to the rupees."
     }
   ]
 }
