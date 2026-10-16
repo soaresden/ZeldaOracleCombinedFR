@@ -11,6 +11,12 @@ Ce dépôt le traduit en **anglais, français, allemand, italien et espagnol** e
 reprenant la traduction officielle de Nintendo dans les ROMs européennes, et
 ajoute des améliorations de confort qu'on choisit à la génération.
 
+> **Base américaine.** Le jeu reste construit sur la **version américaine** : le
+> code est celui du désassemblage oracles-disasm (fait à partir des ROMs US),
+> dans lequel on remet les textes et les images des ROMs européennes. La ROM
+> générée contient donc **une seule langue**, choisie sur la page, sans menu de
+> langue au démarrage comme dans les versions européennes.
+
 ## 👉 Fabriquer sa ROM : [la page web](https://soaresden.github.io/ZeldaOracleCombinedFR/)
 
 On y dépose ses deux ROMs **Europe** (Oracle of Ages et Oracle of Seasons,

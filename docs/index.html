@@ -32,6 +32,7 @@
   section{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin:22px 0}
   section h2{margin:0 0 4px;font-size:1.2rem}
   section > p{margin:0 0 14px;color:var(--mut)}
+  section > p.note{font-size:.9rem;border-left:3px solid var(--line);padding-left:10px}
   .num{display:inline-flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--ages),var(--seasons));font-weight:800;margin-right:8px}
   #drop{border:2px dashed #4b405a;border-radius:14px;padding:22px;text-align:center;cursor:pointer;transition:.15s}
   #drop.over{border-color:var(--seasons);background:#211b2a}
@@ -79,7 +80,7 @@
 <main>
   <header>
     <h1>Zelda <span class="a">Ages</span> + <span class="s">Seasons</span> Combined</h1>
-    <p data-en="Both Oracle games in a single ROM, in the language of your choice, built from your own European ROMs. Nothing is uploaded: everything happens in your browser.">Les deux Oracle dans une seule ROM, dans la langue de ton choix, fabriquée à partir de tes propres ROMs européennes. Rien n'est envoyé : tout se passe dans ton navigateur.</p>
+    <p data-en="Both Oracle games in a single ROM, in the language of your choice, built from your own European ROMs on the American version's code. Nothing is uploaded: everything happens in your browser.">Les deux Oracle dans une seule ROM, dans la langue de ton choix, fabriquée à partir de tes propres ROMs européennes sur le code de la version américaine. Rien n'est envoyé : tout se passe dans ton navigateur.</p>
   </header>
 
   <section>
@@ -98,6 +99,7 @@
   <section>
     <h2><span class="num">2</span><span data-en="Game language">Langue du jeu</span></h2>
     <p data-en="Nintendo's official translation, taken from the European ROMs.">La traduction officielle de Nintendo, reprise des ROMs européennes.</p>
+    <p class="note" data-en="Good to know: the game is built on the &lt;b&gt;American version&lt;/b&gt; (the code of the oracles-disasm disassembly), into which the European texts and images are put back. The generated ROM therefore contains a single language, the one chosen here, with no language menu at startup.">Bon à savoir : le jeu est construit sur la <b>version américaine</b> (le code du désassemblage oracles-disasm), dans laquelle on remet les textes et images européens. La ROM générée contient donc une seule langue, celle choisie ici, sans menu de langue au démarrage.</p>
     <div class="langs" id="langs"></div>
   </section>
 
