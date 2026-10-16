@@ -38,6 +38,15 @@
       "en": "Current game icon in the status bar",
       "frDesc": "Sablier dans Ages, soleil dans Seasons, à côté des rubis.",
       "enDesc": "Hourglass in Ages, sun in Seasons, next to the rupees."
+    },
+    {
+      "id": "linked_warning",
+      "offset": "0x3ff4",
+      "default": true,
+      "fr": "Avertissement avant la partie liée",
+      "en": "Warning before the linked game",
+      "frDesc": "La première fois qu'on passe dans l'autre jeu sans avoir fini l'aventure en cours, le jeu demande confirmation (Oui / Non).",
+      "enDesc": "The first time you go to the other game before finishing the current adventure, the game asks for confirmation (Yes / No)."
     }
   ]
 }

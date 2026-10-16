@@ -2,11 +2,12 @@
 # 5 langues. Ajoutés par make_fr_text.py à la fin du groupe indiqué, avec un
 # index libre. Une ligne = 16 caractères maximum. Caractères spéciaux comme
 # dans les textes extraits : \xa6 = é, \xd3 / \xd6 = í / ì, \x98 = ¡, \x99 = ¿...
+# Les ancres YAML (&nom / *nom) évitent de recopier un texte commun aux 2 jeux.
 
 ages:
 - group: 0x03
   name: TX_VASU_WARP
-  text:
+  text: &vasu_warp
     en: |-
       Go to Vasu's?
         \opt()Yes \opt()No
@@ -21,24 +22,54 @@ ages:
         \opt()S\xd6 \opt()No
     es: |-
       \x99Ir con Vasu?
+        \opt()S\xd3 \opt()No
+
+- group: 0x03
+  name: TX_FR_LINKED_WARNING
+  text: &linked_warning
+    en: |-
+      You will enter
+      the linked game
+      before finishing
+      this adventure.\stop
+      Continue?
+        \opt()Yes \opt()No
+    fr: |-
+      Vous entrez dans
+      la partie li\xa6e
+      sans avoir fini
+      cette aventure.\stop
+      Continuer?
+        \opt()Oui \opt()Non
+    de: |-
+      Du betrittst das
+      verbundene Spiel
+      ohne dieses
+      Abenteuer zu
+      beenden.\stop
+      Fortfahren?
+        \opt()Ja \opt()Nein
+    it: |-
+      Entrerai nella
+      partita
+      collegata senza
+      aver finito
+      quest'avventura.\stop
+      Continuare?
+        \opt()S\xd6 \opt()No
+    es: |-
+      Vas a entrar en
+      la partida
+      vinculada sin
+      terminar esta
+      aventura.\stop
+      \x99Continuar?
         \opt()S\xd3 \opt()No
 
 seasons:
 - group: 0x03
   name: TX_VASU_WARP
-  text:
-    en: |-
-      Go to Vasu's?
-        \opt()Yes \opt()No
-    fr: |-
-      Aller chez Vasu?
-        \opt()Oui \opt()Non
-    de: |-
-      Zu Vasu gehen?
-        \opt()Ja \opt()Nein
-    it: |-
-      Andare da Vasu?
-        \opt()S\xd6 \opt()No
-    es: |-
-      \x99Ir con Vasu?
-        \opt()S\xd3 \opt()No
+  text: *vasu_warp
+- group: 0x03
+  name: TX_FR_LINKED_WARNING
+  text: *linked_warning
