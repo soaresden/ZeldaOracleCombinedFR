@@ -73,6 +73,7 @@ reads them. One ROM, one patch per language.
 | Font | `fr/import_fr_font.py`: European font (extra accented glyphs). |
 | Title, icons | `fr/import_title.py` (`fr/title_combined.png`, see `fr/title_src/`), `fr/make_hud_icons.py`. |
 | Code | Branch [`fr/crossworld1`](https://github.com/soaresden/oracles-disasm/tree/fr/crossworld1) of the fork: 3rd text base (the translations don't fit in the US text addressing), options, menus, icons, warning, automatic secrets, markers, secrets tracker (Farore's list moved out of bank 2), fixes. |
+| Release | `fr/make_release.py`: 160×144 screenshots and zip (patches, readme, ROM joining scripts); romhacking.net form in `romhacking/SUBMISSION.md` (French). |
 | Patches | `fr/bps.py`, `fr/make_patches.py`: one BPS patch per language, from "Ages EU ROM + Seasons EU ROM" to the final ROM (`docs/patches/`). |
 
 ## Building it yourself (Windows)

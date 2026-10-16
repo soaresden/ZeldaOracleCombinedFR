@@ -1,3 +1,4 @@
 *.sh text eol=lf
 *.patch -text
 *.bps binary
+*.bat text eol=crlf
