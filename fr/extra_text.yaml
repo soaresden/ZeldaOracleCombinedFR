@@ -1,17 +1,44 @@
-# Textes ajoutés par la VF (n'existent dans aucune ROM d'origine).
-# Ajoutés par make_fr_text.py à la fin du groupe indiqué, avec un index libre.
-# Une ligne de texte = 16 caractères maximum.
+# Textes ajoutés par ce projet (n'existent dans aucune ROM d'origine), dans les
+# 5 langues. Ajoutés par make_fr_text.py à la fin du groupe indiqué, avec un
+# index libre. Une ligne = 16 caractères maximum. Caractères spéciaux comme
+# dans les textes extraits : \xa6 = é, \xd3 / \xd6 = í / ì, \x98 = ¡, \x99 = ¿...
 
 ages:
 - group: 0x03
   name: TX_VASU_WARP
-  text: |-
-    Aller chez Vasu?
-     \opt()Oui \opt()Non
+  text:
+    en: |-
+      Go to Vasu's?
+        \opt()Yes \opt()No
+    fr: |-
+      Aller chez Vasu?
+        \opt()Oui \opt()Non
+    de: |-
+      Zu Vasu gehen?
+        \opt()Ja \opt()Nein
+    it: |-
+      Andare da Vasu?
+        \opt()S\xd6 \opt()No
+    es: |-
+      \x99Ir con Vasu?
+        \opt()S\xd3 \opt()No
 
 seasons:
 - group: 0x03
   name: TX_VASU_WARP
-  text: |-
-    Aller chez Vasu?
-     \opt()Oui \opt()Non
+  text:
+    en: |-
+      Go to Vasu's?
+        \opt()Yes \opt()No
+    fr: |-
+      Aller chez Vasu?
+        \opt()Oui \opt()Non
+    de: |-
+      Zu Vasu gehen?
+        \opt()Ja \opt()Nein
+    it: |-
+      Andare da Vasu?
+        \opt()S\xd6 \opt()No
+    es: |-
+      \x99Ir con Vasu?
+        \opt()S\xd3 \opt()No

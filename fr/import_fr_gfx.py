@@ -3,7 +3,7 @@ des donjons, « À suivre… »…) depuis les ROMs Europe.
 
 Dans les ROMs EU, une image qui dépend de la langue a un en-tête spécial :
     00, puis 5 sources de 3 octets (banque|mode<<6, adresse big-endian), une par
-    langue dans l'ordre EN FR DE ES IT, puis destination (2 octets) et taille.
+    langue dans l'ordre EN FR DE IT ES (voir fr/lang.py), puis destination (2 octets) et taille.
 La table des en-têtes EU suit le même ordre que celle du désassemblage : on
 parcourt les deux en parallèle pour savoir quelle image remplacer.
 
@@ -15,7 +15,7 @@ parcourt les deux en parallèle pour savoir quelle image remplacer.
 Le script ne lit que les ROMs EU et la table d'en-têtes (dans git) : on peut
 le relancer autant de fois qu'on veut.
 
-Usage : python fr/import_fr_gfx.py   (depuis la racine ZeldaOracleCombinedFR)
+Usage : python fr/import_fr_gfx.py   [--lang=fr|en|de|it|es]   (depuis la racine du dépôt)
 """
 import os
 import re
@@ -27,8 +27,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DISASM = os.path.join(ROOT, 'oracles-disasm')
 sys.path.insert(0, os.path.join(DISASM, 'tools'))
 from common import decompressGfxData  # noqa: E402
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import lang  # noqa: E402
 
-FRENCH = 1
+LANG_CODE, LANG = lang.current()
 # Dernier commit de master avant la branche crossworld : même ordre d'en-têtes que la ROM US.
 BASE_COMMIT = '309a2cff'
 GAMES = {
@@ -147,14 +149,14 @@ def french_images(game):
                 continue
             start = dest & 0xfff0
             if len(parts) == 1 and parts[0][1] == size:
-                src = parts[0][2][FRENCH]
+                src = parts[0][2][LANG]
                 endaddr = decompress(eu, src, size)[0]
                 result[name] = ('cmp', bytes([src[0] >> 6]) + eu[offset(src):endaddr])
             else:
                 # Image coupée par la version EU : on recolle les morceaux.
                 data = bytearray((size + 1) * 16)
                 for d, s, srcs in parts:
-                    piece = decompress(eu, srcs[FRENCH if len(srcs) == 5 else 0], s)[1]
+                    piece = decompress(eu, srcs[LANG if len(srcs) == 5 else 0], s)[1]
                     o = (d & 0xfff0) - start
                     piece = piece[:len(data) - o]
                     data[o:o + len(piece)] = piece

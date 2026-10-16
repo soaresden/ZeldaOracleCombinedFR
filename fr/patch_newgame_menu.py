@@ -1,8 +1,10 @@
-"""Menu « nouvelle partie » : remplace NOUVEAU JEU / SECRETS par AGES / SEASONS
-(on choisit par quel jeu commencer). Les lettres sont découpées dans les mots
-déjà présents dans l'image (même police), puis posées sur le bois du bouton.
+"""Menu « nouvelle partie » : remplace les deux premiers boutons (NOUVEAU JEU /
+SECRETS, NEW GAME / SECRETS, NEUES SPIEL / GEHEIMNIS...) par AGES / SEASONS
+(on choisit par quel jeu commencer). Les lettres sont celles de la police du
+menu (dessinées ci-dessous, relevées dans la version française), posées sur le
+bois du bouton. Même disposition dans les 5 langues.
 
-À lancer après import_fr_gfx.py (il part de l'image française).
+À lancer après import_fr_gfx.py.
 
 Usage : python fr/patch_newgame_menu.py [aperçu.png]
 """
@@ -21,9 +23,19 @@ SIZE = 0x67
 BLACK = 3
 # Boutons : (première colonne, nombre de colonnes) dans la bande de tuiles 8x16.
 # La 1re colonne de chaque bouton est le séparateur « | ».
-BUTTONS = {'NOUVEAU JEU': (16, 12), 'SECRETS': (28, 12), 'GAME LINK': (40, 12)}
+BUTTONS = [(16, 12), (28, 12), (40, 12)]
 TEXT_ROWS = range(4, 15)  # lignes des lettres (0-2 : bordure, 3 et 15 : bois)
-NEW_LABELS = {'NOUVEAU JEU': 'AGES', 'SECRETS': 'SEASONS'}
+NEW_LABELS = ['AGES', 'SEASONS']   # boutons 1 et 2
+
+# Lettres du menu, lignes 4 à 14 de la bande
+GLYPHS = {
+    'A': ['.####.', '######', '##..##', '##..##', '##..##', '##..##', '######', '######', '##..##', '##..##', '##..##'],
+    'G': ['.####.', '######', '##..##', '##..##', '##....', '##.###', '##.###', '##..##', '##..##', '######', '.####.'],
+    'E': ['#####', '#####', '##...', '##...', '#####', '#####', '##...', '##...', '##...', '#####', '#####'],
+    'S': ['.#####', '######', '##....', '##....', '#####.', '.#####', '....##', '....##', '....##', '######', '#####.'],
+    'O': ['.####.', '######', '##..##', '##..##', '##..##', '##..##', '##..##', '##..##', '##..##', '######', '.####.'],
+    'N': ['#...##', '##..##', '###.##', '######', '######', '######', '##.###', '##..##', '##..##', '##..##', '##..##'],
+}
 
 
 def to_pixels(data):
@@ -56,30 +68,9 @@ def to_data(px):
     return out
 
 
-def letters(px, word, button):
-    """Découpe les lettres noires d'un bouton : {lettre: [colonnes de pixels]}."""
-    first, ncols = BUTTONS[button]
-    x0, x1 = (first + 1) * 8, (first + ncols) * 8
-    # colonne de lettre : du noir dans les lignes du texte, mais pas en 3 ni en
-    # 15 (sinon c'est le séparateur « | » entre deux boutons)
-    black = [any(px[y][x] == BLACK for y in TEXT_ROWS)
-             and px[3][x] != BLACK and px[15][x] != BLACK for x in range(x0, x1)]
-    runs, start = [], None
-    for i, b in enumerate(black + [False]):
-        if b and start is None:
-            start = i
-        elif not b and start is not None:
-            runs.append((x0 + start, x0 + i))
-            start = None
-    chars = [ch for ch in word if ch != ' ']
-    assert len(runs) == len(chars), (button, len(runs), chars)
-    return {ch: [[px[y][x] == BLACK for y in range(16)] for x in range(a, b)]
-            for ch, (a, b) in zip(chars, runs)}
-
-
 def wood(px, button):
     """Fond du bouton sans texte : on remplace le noir par le bois de la ligne voisine."""
-    first, ncols = BUTTONS[button]
+    first, ncols = button
     x0, x1 = (first + 1) * 8, (first + ncols) * 8
     out = [row[x0:x1] for row in px]
     for x in range(x1 - x0):
@@ -103,23 +94,18 @@ def main():
     data = decompressGfxData(raw, 1, SIZE, raw[0])[1]
     px = to_pixels(data)
 
-    glyphs = {}
-    for button in BUTTONS:
-        glyphs.update({k: v for k, v in letters(px, button, button).items() if k not in glyphs})
-
-    for button, label in NEW_LABELS.items():
-        first, ncols = BUTTONS[button]
+    for button, label in zip(BUTTONS, NEW_LABELS):
+        first, ncols = button
         x0 = (first + 1) * 8
         bg = wood(px, button)
-        width = sum(len(glyphs[ch]) for ch in label) + 2 * (len(label) - 1)
+        width = sum(len(GLYPHS[ch][0]) for ch in label) + 2 * (len(label) - 1)
         x = (len(bg[0]) - width) // 2
         for ch in label:
-            for col in glyphs[ch]:
-                for y in range(16):
-                    if col[y]:
-                        bg[y][x] = BLACK
-                x += 1
-            x += 2
+            for gy, row in enumerate(GLYPHS[ch]):
+                for gx, c in enumerate(row):
+                    if c == '#':
+                        bg[TEXT_ROWS[0] + gy][x + gx] = BLACK
+            x += len(GLYPHS[ch][0]) + 2
         for y in range(16):
             px[y][x0:x0 + len(bg[0])] = bg[y]
 

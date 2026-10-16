@@ -1,6 +1,6 @@
 """Remplace le texte anglais du hack crossworld par la VF officielle des ROMs Europe.
 
-1. Extrait le texte français (langue 1) des deux ROMs EU avec dumpText.py.
+1. Extrait le texte de la langue choisie (fr/lang.py) des deux ROMs EU avec dumpText.py.
 2. Chaque texte du hack qui existe dans la ROM EU (même identifiant TX_xxxx)
    prend sa version française.
 3. Les textes ajoutés par le hack sont presque tous des copies de textes de
@@ -8,7 +8,7 @@
    retrouve le texte anglais identique dans l'autre jeu et on prend sa VF.
 4. Ce qui reste est pris dans fr/manual.yaml (traductions faites à la main).
 
-Usage : python fr/make_fr_text.py   (depuis la racine ZeldaOracleCombinedFR)
+Usage : python fr/make_fr_text.py   [--lang=fr|en|de|it|es]   (depuis la racine du dépôt)
 """
 import os
 import shutil
@@ -18,13 +18,16 @@ import tempfile
 
 import yaml
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import lang  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DISASM = os.path.join(ROOT, 'oracles-disasm')
 EU_ROMS = {
     'ages': 'Legend of Zelda, The - Oracle of Ages (Europe) (En,Fr,De,Es,It).gbc',
     'seasons': 'Legend of Zelda, The - Oracle of Seasons (Europe) (En,Fr,De,Es,It).gbc',
 }
-FRENCH = 1
+LANG_CODE, LANG = lang.current()
 # Dernier commit de la branche poc/crossworld1 (version anglaise du hack)
 CROSSWORLD_COMMIT = '37a4eef3'
 GAMES = ('ages', 'seasons')
@@ -38,7 +41,7 @@ def dump_french(work):
         os.makedirs(os.path.join(work, 'precompressed', 'text', game))
     for game in GAMES:
         subprocess.run([sys.executable, 'tools/dump/dumpText.py',
-                        os.path.join(ROOT, EU_ROMS[game]), str(FRENCH)],
+                        os.path.join(ROOT, EU_ROMS[game]), str(LANG)],
                        cwd=work, check=True, stdout=subprocess.DEVNULL)
 
 
@@ -82,7 +85,7 @@ def dump(doc, path):
     Dumper.add_representer(int, int_repr)
     with open(path, 'w', encoding='utf-8', newline='\n') as f:
         f.write('# See "text/info.txt" for documentation about this file.\n')
-        f.write('# VF : textes de la ROM Europe (langue 1), voir fr/make_fr_text.py.\n\n')
+        f.write('# Textes de la ROM Europe (langue %s), voir fr/make_fr_text.py.\n\n' % LANG_CODE)
         yaml.dump(doc, f, Dumper=Dumper, sort_keys=False, allow_unicode=True,
                   width=1000)
 
@@ -134,10 +137,10 @@ def main():
         # Textes propres à la VF (raccourci vers Vasu…), à la fin de leur groupe
         for extra in load(os.path.join(ROOT, 'fr', 'extra_text.yaml')).get(game, []):
             group = next(g for g in us[game]['groups'] if g['group'] == extra['group'])
-            group['data'].append({'name': extra['name'], 'index': 'auto', 'text': extra['text']})
+            group['data'].append({'name': extra['name'], 'index': 'auto', 'text': extra['text'][LANG_CODE]})
             stats['ajouté'] = stats.get('ajouté', 0) + 1
         dump(us[game], us_path[game])
-        print(game, stats)
+        print(game, LANG_CODE, stats)
         for n, t in missing:
             print('  A TRADUIRE %s : %r' % (n, t))
 
