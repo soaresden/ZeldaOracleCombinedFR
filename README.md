@@ -44,7 +44,7 @@ de droite à Seasons (dans un des deux jeux, l'une des deux ramène en ville).
 | Codes automatiques | Plus besoin de recopier les codes : quand un personnage demande le code donné dans l'autre aventure, il est transmis tout seul (Farore aussi). |
 | Récompenses sur la carte | Une fois la 1re aventure finie, un cercle clignote sur la carte là où un personnage attend pour donner un objet. Dans la partie liée : Farore, quand un code de retour est prêt. |
 | Suivi des codes | Menu Start, 3e page : A sur le sablier (Ages) ou l'emblème des saisons (Seasons). Liste les 10 échanges entre les jeux : code pas encore reçu, récompense à récupérer, Farore à voir, terminé. Dans l'aventure 1, disponible une fois celle-ci finie. |
-| Barre d'état en bas | Comme dans Link's Awakening (en haut par défaut). Bientôt. |
+| Barre d'état en bas | Comme dans Link's Awakening (en haut par défaut) : en jeu, la barre passe en bas et le décor remonte. Les menus et quelques effets (ondulations des voyages dans le temps…) la gardent en haut. |
 
 Les options sont des octets de la ROM (table à `$3FF0`, signature
 `ZOCFROPT` à `$3FE0`, voir `fr/options.json`) : la page les écrit selon les
@@ -92,7 +92,8 @@ Pour une seule langue (ici l'allemand), régénérer puis compiler :
 
 - Testé dans un émulateur : intro complète, titre, nouvelle partie dans les
   deux ordres, passage entre les jeux, raccourci, icônes, avertissement,
-  codes automatiques, marqueurs de récompense, suivi des codes.
+  codes automatiques, marqueurs de récompense, suivi des codes, barre en bas.
 - Le hack crossworld lui-même reste une preuve de concept (voir
   `oracles-disasm/crossworld_todo.md`) : quelques bugs graphiques connus.
-- En cours : barre d'état en bas de l'écran (à l'étude).
+- Barre d'état en bas : testée en extérieur, en intérieur, avec les boîtes de
+  texte et pendant les défilements d'écran, dans les deux jeux.

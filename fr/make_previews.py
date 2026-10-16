@@ -137,6 +137,8 @@ def main(langs):
         g.stop()
         g = Game(rom(base), {'door_icons': on}).run(NEW_AGES + ',' + TO_VASU).shot('door_icons_' + suffix)
         g.stop()
+        g = Game(rom(base), {'hud_bottom': on}).run(NEW_AGES).shot('hud_bottom_' + suffix)
+        g.stop()
         g = Game(rom(base), {'reward_markers': on}).run(NEW_AGES + ',' + MAP_REWARD).shot('reward_markers_' + suffix)
         g.stop()
 

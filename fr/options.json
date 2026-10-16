@@ -113,11 +113,14 @@
       "id": "hud_bottom",
       "offset": "0x3ff6",
       "default": false,
-      "available": false,
       "fr": "Barre d'état en bas (comme Link's Awakening)",
       "en": "Status bar at the bottom (like Link's Awakening)",
-      "frDesc": "En haut par défaut. Bientôt disponible.",
-      "enDesc": "At the top by default. Coming soon."
+      "frDesc": "En haut par défaut. En jeu, la barre passe en bas de l'écran et le décor remonte. Les menus et quelques effets spéciaux (ondulations des voyages dans le temps...) la gardent en haut.",
+      "enDesc": "At the top by default. In game, the bar moves to the bottom of the screen and the scenery moves up. Menus and a few special effects (time travel ripples...) keep it at the top.",
+      "preview": {
+        "on": "hud_bottom_on.png",
+        "off": "hud_bottom_off.png"
+      }
     }
   ]
 }
