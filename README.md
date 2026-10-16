@@ -29,11 +29,16 @@ ROM dans le navigateur (rien n'est envoyé). Aucune ROM n'est distribuée ici.
   commence. Le second jeu est une **partie liée** (comme avec le code de l'autre
   jeu) : on garde la vraie fin (Twinrova, Ganon).
 - **Intro du second jeu** : la première fois qu'on passe dans l'autre jeu, son
-  intro se joue normalement (le hack d'origine la sautait pour Seasons). La
-  partie liée reçoit alors l'épée en bois et le bouclier, comme dans les jeux
-  d'origine.
-- **Correction du hack d'origine** : laisser l'intro aller jusqu'au bout
-  faisait planter le jeu (écran « Game Boy Color only »).
+  intro se joue normalement (le hack d'origine la sautait pour Seasons). Comme
+  dans les jeux d'origine, la partie liée commence avec l'épée en bois (pas de
+  bouclier : Impa le donne dans Ages, il s'achète dans Seasons).
+- **Inventaire commun** (principe du hack crossworld) : à chaque changement de
+  jeu, Link garde tout ce qu'il a (objets, cœurs, rubis, graines, bagues,
+  niveaux, objets clés). Ce qu'on obtient dans un jeu se retrouve dans l'autre.
+- **Corrections du hack d'origine** : laisser l'intro aller jusqu'au bout
+  faisait planter le jeu (écran « Game Boy Color only ») ; les objets clés
+  utilisés (potion bue, noix Tuni, minerais, Livre des Sceaux, gants de Ricky…)
+  revenaient après deux changements de jeu.
 
 On change de jeu par la boutique de Vasu : la porte de gauche mène à Ages, celle
 de droite à Seasons (dans un des deux jeux, l'une des deux ramène en ville).

@@ -29,10 +29,16 @@ ROM in your browser (nothing is uploaded). No ROM is distributed here.
   game is a **linked game** (as if you had entered the other game's secret):
   the real ending (Twinrova, Ganon) is kept.
 - **Second game's intro**: the first time you go to the other game, its intro
-  plays normally (the original hack skipped it for Seasons). The linked game
-  then gets the wooden sword and shield, as in the original games.
-- **Fix for the original hack**: letting the intro play to the end crashed the
-  game ("Game Boy Color only" screen).
+  plays normally (the original hack skipped it for Seasons). As in the original
+  games, the linked game starts with the wooden sword (no shield: Impa gives it
+  in Ages, it's bought in Seasons).
+- **Shared inventory** (the crossworld hack's principle): at each change of
+  game, Link keeps everything he has (items, hearts, rupees, seeds, rings,
+  levels, key items). What you get in one game is there in the other.
+- **Fixes for the original hack**: letting the intro play to the end crashed
+  the game ("Game Boy Color only" screen); used key items (drunk potion, Tuni
+  nut, ores, Book of Seals, Ricky's gloves…) came back after two changes of
+  game.
 
 You change games through Vasu's shop: the left door leads to Ages, the right
 one to Seasons (in each game, one of them leads back to town).
