@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#120e16">
+<meta name="theme-color" content="#141030">
 <title>Zelda Oracles Combined – Générateur de ROM</title>
 <script>
   // Langue : choix mémorisé (sb.lang) sinon langue du navigateur ; les éléments data-en passent en anglais.
@@ -21,95 +21,173 @@
     });
   })();
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Cpath fill='%23f2741a' d='M0 0h8v1H0zM0 7h8v1H0z'/%3E%3Cpath fill='%235aa8f8' d='M1 1h6v1H1zM2 2h4v1H2zM3 3h2v2H3zM2 5h4v1H2zM1 6h6v1H1z'/%3E%3C/svg%3E">
 <style>
-  :root{--bg:#120e16;--panel:#1c1722;--line:#352c40;--tx:#f1ecf5;--mut:#a79db3;--ages:#f06800;--seasons:#5090f8;--ok:#5fd38d;--bad:#ff6b6b}
+  :root{
+    --bg:#0d0a1a;--bg2:#141030;--card:#17122f;--card2:#1e1840;--line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.16);
+    --tx:#f4f0ff;--mut:#aaa2c8;--ages:#f2741a;--ages2:#ffb04a;--seasons:#5aa8f8;--seasons2:#9fd0ff;
+    --royal:#6a44c8;--gold:#f0c45a;--ok:#5fd38d;--bad:#ff6b6b;--r:18px
+  }
   *{box-sizing:border-box}
-  body{margin:0;background:radial-gradient(700px 420px at 0% -10%,rgba(240,104,0,.28) 0,transparent 60%),radial-gradient(700px 420px at 100% -10%,rgba(80,144,248,.28) 0,transparent 60%),var(--bg);color:var(--tx);font:16px/1.55 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;min-height:100vh}
-  main{max-width:860px;margin:0 auto;padding:48px 16px 64px}
-  h1{font-size:clamp(1.7rem,4vw,2.4rem);margin:0 0 6px;letter-spacing:-.5px}
-  h1 .a{color:var(--ages)} h1 .s{color:var(--seasons)}
-  header p{color:var(--mut);margin:0}
-  section{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin:22px 0}
-  section h2{margin:0 0 4px;font-size:1.2rem}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;color:var(--tx);font:16px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;min-height:100vh;
+    background:
+      radial-gradient(900px 520px at -10% -15%,rgba(242,116,26,.30),transparent 62%),
+      radial-gradient(900px 520px at 110% -15%,rgba(90,168,248,.30),transparent 62%),
+      radial-gradient(700px 500px at 50% 120%,rgba(106,68,200,.22),transparent 65%),
+      linear-gradient(180deg,var(--bg2),var(--bg) 480px);
+    background-color:var(--bg)}
+  a{color:var(--seasons2)}
+  .pix{image-rendering:pixelated;image-rendering:crisp-edges}
+  main{max-width:960px;margin:0 auto;padding:28px 16px 64px}
+  .serif{font-family:Cinzel,Georgia,"Times New Roman",serif;letter-spacing:.02em}
+
+  /* En-tête */
+  .hero{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:34px;align-items:center;padding:36px 0 18px}
+  .bezel{position:relative;padding:14px 14px 30px;border-radius:16px 16px 40px 16px;
+    background:linear-gradient(160deg,#3b2f6e,#231b48 60%,#1a1438);box-shadow:0 22px 50px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -2px 0 rgba(0,0,0,.35)}
+  .bezel::after{content:"";position:absolute;left:18px;bottom:11px;width:7px;height:7px;border-radius:50%;background:#ff5a5a;box-shadow:0 0 8px #ff5a5a}
+  .screen-in{border-radius:6px;overflow:hidden;background:#000;aspect-ratio:160/144;box-shadow:inset 0 0 0 3px #0b0818}
+  .screen-in img{display:block;width:100%;height:100%}
+  .kicker{margin:0 0 6px;color:var(--gold);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.78rem}
+  h1{margin:0 0 12px;font-size:clamp(2rem,5.4vw,3.2rem);line-height:1.08;font-weight:800}
+  h1 .a{color:var(--ages2)} h1 .s{color:var(--seasons2)}
+  h1 small{display:block;font-size:.5em;color:var(--tx);opacity:.92;margin-top:4px}
+  .lead{margin:0 0 16px;color:var(--mut);font-size:1.03rem;max-width:56ch}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+  .chips li{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:.9rem;font-weight:600}
+  .ico{display:inline-block;width:16px;height:16px;flex:none}
+  .ico svg{display:block;width:100%;height:100%}
+
+  /* Étapes */
+  section{position:relative;background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:var(--r);padding:22px 22px 24px;margin:22px 0;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+  section::before{content:"";position:absolute;left:22px;right:22px;top:-1px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--ages),var(--royal),var(--seasons));opacity:.8}
+  section h2{display:flex;align-items:center;gap:14px;margin:0 0 6px;font-size:1.28rem;font-weight:800}
   section > p{margin:0 0 14px;color:var(--mut)}
-  section > p.note{font-size:.9rem;border-left:3px solid var(--line);padding-left:10px}
-  .num{display:inline-flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--ages),var(--seasons));font-weight:800;margin-right:8px}
-  #drop{border:2px dashed #4b405a;border-radius:14px;padding:22px;text-align:center;cursor:pointer;transition:.15s}
-  #drop.over{border-color:var(--seasons);background:#211b2a}
-  #drop input{display:none}
-  .roms{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-  .rom{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#17131c}
+  section > p.note{font-size:.92rem;padding:10px 12px;border-radius:12px;background:rgba(240,196,90,.07);border:1px solid rgba(240,196,90,.22);color:#dcd2b4}
+  section > p.note b{color:var(--gold)}
+  .num{flex:none;display:inline-grid;place-items:center;width:28px;height:28px;margin:0 2px;transform:rotate(45deg);border-radius:7px;
+    background:linear-gradient(135deg,var(--ages),var(--royal) 55%,var(--seasons));box-shadow:0 0 0 2px rgba(240,196,90,.55),0 6px 16px rgba(106,68,200,.4)}
+  .num span{transform:rotate(-45deg);font:800 .95rem system-ui}
+
+  /* ROMs */
+  #drop{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:110px;padding:20px;text-align:center;cursor:pointer;
+    border:2px dashed rgba(255,255,255,.22);border-radius:16px;background:rgba(255,255,255,.025);transition:border-color .15s,background .15s}
+  #drop:hover,#drop.over{border-color:var(--seasons);background:rgba(90,168,248,.08)}
+  #drop:focus-within{outline:2px solid var(--seasons);outline-offset:3px}
+  #drop .big{font-size:1.05rem;font-weight:700}
+  #drop .small{color:var(--mut);font-size:.88rem}
+  #drop input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+  .roms{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  .rom{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:12px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:rgba(0,0,0,.18)}
+  .rom .ico{grid-row:span 2;width:28px;height:28px}
   .rom b{display:block}
-  .rom span{color:var(--mut);font-size:.92rem}
-  .rom.ok{border-color:var(--ok)} .rom.ok span{color:var(--ok)}
-  .rom.bad{border-color:var(--bad)} .rom.bad span{color:var(--bad)}
+  .rom span{color:var(--mut);font-size:.9rem;overflow-wrap:anywhere}
+  .rom.ok{border-color:rgba(95,211,141,.6);background:rgba(95,211,141,.06)} .rom.ok span{color:var(--ok)}
+  .rom.bad{border-color:rgba(255,107,107,.6);background:rgba(255,107,107,.06)} .rom.bad span{color:var(--bad)}
+  #rom-ages{box-shadow:inset 3px 0 0 var(--ages)} #rom-seasons{box-shadow:inset 3px 0 0 var(--seasons)}
+
+  /* Langues */
   .langs{display:flex;flex-wrap:wrap;gap:8px}
-  .langs label{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:11px;padding:10px 14px;cursor:pointer;min-height:44px;background:#17131c}
-  .langs input{accent-color:var(--seasons)}
-  .optgrid{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start}
-  .preview{position:sticky;top:16px;background:#0f0c13;border:1px solid var(--line);border-radius:14px;padding:12px}
-  .screen{position:relative;border-radius:8px;overflow:hidden;background:#000;aspect-ratio:160/144}
-  .screen img{display:block;width:100%;height:100%;image-rendering:pixelated}
-  #pv-note{position:absolute;inset:auto 0 0 0;background:rgba(18,14,22,.88);color:var(--ok);font-weight:700;padding:10px 12px;font-size:.92rem;display:none}
+  .langs label{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);border-radius:999px;padding:9px 16px;cursor:pointer;min-height:44px;background:rgba(0,0,0,.2);font-weight:600;transition:.15s}
+  .langs label:hover{border-color:var(--seasons)}
+  .langs label:has(input:checked){border-color:var(--gold);background:rgba(240,196,90,.12);box-shadow:0 0 0 1px var(--gold) inset}
+  .langs input{accent-color:var(--gold);margin:0}
+
+  /* Options et aperçu */
+  .optgrid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:22px;align-items:start}
+  .preview{position:sticky;top:16px}
+  .preview .bezel{padding:12px 12px 26px}
+  .screen{position:relative}
+  #pv-note{position:absolute;inset:auto 0 0 0;background:rgba(13,10,26,.9);color:var(--ok);font-weight:700;padding:10px 12px;font-size:.92rem;display:none}
   .screen.dim img{filter:grayscale(.6) brightness(.55)}
-  .pv-cap{margin-top:10px;font-size:.95rem}
+  .pv-cap{margin-top:12px;font-size:.95rem}
   .pv-cap b{display:block}
-  .badge{display:inline-block;margin-top:4px;border-radius:999px;padding:2px 10px;font-weight:800;font-size:.85rem}
+  .badge{display:inline-block;margin-top:6px;border-radius:999px;padding:2px 10px;font-weight:800;font-size:.85rem}
   .badge.on{background:rgba(95,211,141,.15);color:var(--ok)} .badge.off{background:rgba(255,107,107,.13);color:var(--bad)}
-  .opt{display:flex;gap:12px;align-items:flex-start;padding:12px 8px;border-top:1px solid var(--line);border-radius:10px;cursor:pointer}
-  .opt.cur{background:#241d2c}
-  .opt.na{opacity:.55;cursor:not-allowed}
-  .soon{display:inline-block;margin-left:6px;border:1px solid var(--line);border-radius:999px;padding:0 8px;font-size:.78rem;color:var(--mut);font-weight:700}
+  .opt{display:flex;gap:12px;align-items:flex-start;padding:12px 10px;border-top:1px solid var(--line);border-radius:12px;cursor:pointer;transition:background .12s}
   .opt:first-of-type{border-top:0}
-  .opt input{width:22px;height:22px;margin-top:2px;accent-color:var(--ages);flex:none}
+  .opt:hover{background:rgba(255,255,255,.03)}
+  .opt.cur{background:linear-gradient(90deg,rgba(242,116,26,.10),rgba(90,168,248,.08));box-shadow:inset 3px 0 0 var(--gold)}
+  .opt.na{opacity:.55;cursor:not-allowed}
+  .soon{display:inline-block;margin-left:6px;border:1px solid var(--line2);border-radius:999px;padding:0 8px;font-size:.78rem;color:var(--mut);font-weight:700}
+  .opt input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--ages);flex:none}
   .opt b{display:block}
-  .opt span{color:var(--mut);font-size:.94rem}
-  button.go{width:100%;border:0;border-radius:14px;padding:16px;font:800 1.1rem system-ui;color:#fff;background:linear-gradient(135deg,var(--ages),var(--seasons));cursor:pointer;min-height:54px}
-  button.go:disabled{opacity:.45;cursor:not-allowed}
-  #status{margin-top:12px;min-height:1.5em;color:var(--mut)}
+  .opt span{color:var(--mut);font-size:.93rem}
+
+  /* Bouton */
+  button.go{position:relative;width:100%;border:0;border-radius:16px;padding:17px;min-height:58px;cursor:pointer;color:#fff;font:800 1.15rem Cinzel,Georgia,serif;letter-spacing:.06em;
+    background:linear-gradient(110deg,var(--ages),var(--royal) 50%,var(--seasons));box-shadow:0 0 0 2px rgba(240,196,90,.65),0 14px 34px rgba(106,68,200,.45);transition:transform .12s,filter .12s}
+  button.go:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.08)}
+  button.go:disabled{opacity:.4;cursor:not-allowed;box-shadow:0 0 0 1px var(--line2)}
+  #status{margin-top:12px;min-height:1.5em;color:var(--mut);text-align:center}
   #status.err{color:var(--bad)} #status.done{color:var(--ok)}
-  footer{color:var(--mut);font-size:.9rem;margin-top:28px}
+
+  footer{color:var(--mut);font-size:.9rem;margin-top:36px;padding-top:18px;border-top:1px solid var(--line);text-align:center}
   footer a{color:var(--tx)}
-  #lang{position:absolute;top:16px;right:16px;border:1px solid var(--line);background:#1d1724;color:var(--tx);border-radius:11px;padding:8px 12px;font:700 14px system-ui;cursor:pointer;min-height:40px}
-  @media (max-width:560px){.roms{grid-template-columns:1fr}}
-  @media (max-width:760px){.optgrid{grid-template-columns:1fr}.preview{position:static;order:-1;max-width:340px;width:100%;margin:0 auto}}
+  #lang{position:absolute;top:16px;right:16px;z-index:2;border:1px solid var(--line2);background:rgba(23,18,47,.85);color:var(--tx);border-radius:999px;padding:8px 14px;font:700 14px system-ui;cursor:pointer;min-height:40px}
+  #lang:hover{border-color:var(--gold)}
+
+  @media (max-width:760px){
+    .hero{grid-template-columns:1fr;gap:22px;padding-top:44px;text-align:center}
+    .hero .bezel{max-width:300px;width:100%;margin:0 auto}
+    .lead{margin-left:auto;margin-right:auto}
+    .chips{justify-content:center}
+    .optgrid{grid-template-columns:1fr}
+    .preview{position:static;order:-1;max-width:320px;width:100%;margin:0 auto}
+  }
+  @media (max-width:560px){.roms{grid-template-columns:1fr} section{padding:18px 16px 20px} section::before{left:16px;right:16px}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <button id="lang" title="Français / English">🇬🇧 EN</button>
 <main>
-  <header>
-    <h1>Zelda <span class="a">Ages</span> + <span class="s">Seasons</span> Combined</h1>
-    <p data-en="Both Oracle games in a single ROM, in the language of your choice, built from your own European ROMs on the American version's code. Nothing is uploaded: everything happens in your browser.">Les deux Oracle dans une seule ROM, dans la langue de ton choix, fabriquée à partir de tes propres ROMs européennes sur le code de la version américaine. Rien n'est envoyé : tout se passe dans ton navigateur.</p>
+  <header class="hero">
+    <div class="bezel"><div class="screen-in"><img class="pix" src="screenshots/1-title.png" width="160" height="144" alt="Zelda Oracle of Ages + Seasons"></div></div>
+    <div>
+      <p class="kicker">Oracle of Ages + Oracle of Seasons</p>
+      <h1 class="serif">Zelda <span class="a">Oracles</span> <span class="s">Combined</span><small data-en="ROM generator">Générateur de ROM</small></h1>
+      <p class="lead" data-en="Both Oracle games in a single ROM, in the language of your choice, built from your own European ROMs on the American version's code. Nothing is uploaded: everything happens in your browser.">Les deux Oracle dans une seule ROM, dans la langue de ton choix, fabriquée à partir de tes propres ROMs européennes sur le code de la version américaine. Rien n'est envoyé : tout se passe dans ton navigateur.</p>
+      <ul class="chips">
+        <li><i class="ico" data-icon="ages"></i>Ages <i class="ico" data-icon="seasons"></i>Seasons</li>
+        <li data-en="5 languages">5 langues</li>
+        <li data-en="In your browser">Dans ton navigateur</li>
+      </ul>
+    </div>
   </header>
 
   <section>
-    <h2><span class="num">1</span><span data-en="Your European ROMs">Tes ROMs européennes</span></h2>
+    <h2 class="serif"><span class="num"><span>1</span></span><span data-en="Your European ROMs">Tes ROMs européennes</span></h2>
     <p data-en="Oracle of Ages and Oracle of Seasons, European version (En,Fr,De,Es,It). Drop both files here.">Oracle of Ages et Oracle of Seasons, version Europe (En,Fr,De,Es,It). Dépose les deux fichiers ici.</p>
     <label id="drop">
       <input id="files" type="file" accept=".gbc,.gb,.bin" multiple>
-      <span data-en="📂 Drop the two .gbc files, or click to choose them">📂 Glisse les deux fichiers .gbc, ou clique pour les choisir</span>
+      <span class="big" data-en="📂 Drop the two .gbc files here">📂 Glisse les deux fichiers .gbc ici</span>
+      <span class="small" data-en="or click to choose them">ou clique pour les choisir</span>
     </label>
     <div class="roms">
-      <div class="rom" id="rom-ages"><b>Oracle of Ages (Europe)</b><span data-en="Missing">Manquante</span></div>
-      <div class="rom" id="rom-seasons"><b>Oracle of Seasons (Europe)</b><span data-en="Missing">Manquante</span></div>
+      <div class="rom" id="rom-ages"><i class="ico" data-icon="ages"></i><b>Oracle of Ages (Europe)</b><span data-en="Missing">Manquante</span></div>
+      <div class="rom" id="rom-seasons"><i class="ico" data-icon="seasons"></i><b>Oracle of Seasons (Europe)</b><span data-en="Missing">Manquante</span></div>
     </div>
   </section>
 
   <section>
-    <h2><span class="num">2</span><span data-en="Game language">Langue du jeu</span></h2>
+    <h2 class="serif"><span class="num"><span>2</span></span><span data-en="Game language">Langue du jeu</span></h2>
     <p data-en="Nintendo's official translation, taken from the European ROMs.">La traduction officielle de Nintendo, reprise des ROMs européennes.</p>
     <p class="note" data-en="Good to know: the game is built on the &lt;b&gt;American version&lt;/b&gt; (the code of the oracles-disasm disassembly), into which the European texts and images are put back. The generated ROM therefore contains a single language, the one chosen here, with no language menu at startup.">Bon à savoir : le jeu est construit sur la <b>version américaine</b> (le code du désassemblage oracles-disasm), dans laquelle on remet les textes et images européens. La ROM générée contient donc une seule langue, celle choisie ici, sans menu de langue au démarrage.</p>
     <div class="langs" id="langs"></div>
   </section>
 
   <section>
-    <h2><span class="num">3</span><span data-en="Options">Options</span></h2>
+    <h2 class="serif"><span class="num"><span>3</span></span><span data-en="Options">Options</span></h2>
     <p data-en="Untick what you don't want; the preview shows the result. Bug fixes are always included.">Décoche ce que tu ne veux pas ; l'aperçu montre le résultat. Les corrections de bugs sont toujours incluses.</p>
     <div class="optgrid">
       <div id="options"></div>
       <aside class="preview" aria-live="polite">
-        <div class="screen" id="pv-screen"><img id="pv-img" alt=""><div id="pv-note"></div></div>
+        <div class="bezel"><div class="screen-in screen" id="pv-screen"><img class="pix" id="pv-img" alt=""><div id="pv-note"></div></div></div>
         <div class="pv-cap"><b id="pv-title"></b><span class="badge" id="pv-state"></span></div>
       </aside>
     </div>
@@ -137,6 +215,25 @@
     get: function (k) { try { return localStorage.getItem(k); } catch (_) { return null; } },
     set: function (k, v) { try { localStorage.setItem(k, v); } catch (_) {} }
   };
+
+  // ---- Icônes du jeu (sablier = Ages, soleil = Seasons), dessins de fr/make_hud_icons.py
+  var ICONS = {
+    ages: { rows: ['33333333', '23000032', '22311322', '22231222', '22230222', '22300322', '23111132', '33333333'],
+            pal: { '0': '#ffe9c2', '1': '#ffb04a', '3': '#f2741a' } },
+    seasons: { rows: ['22212222', '21212122', '22111222', '11101112', '22111222', '21212122', '22212222', '22222222'],
+               pal: { '0': '#ffffff', '1': '#5aa8f8' } }
+  };
+  function iconSvg(name) {
+    var d = ICONS[name], rects = '';
+    d.rows.forEach(function (row, y) {
+      for (var x = 0; x < 8; x++) {
+        var c = d.pal[row[x]];
+        if (c) rects += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + c + '"/>';
+      }
+    });
+    return '<svg viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true">' + rects + '</svg>';
+  }
+  document.querySelectorAll('[data-icon]').forEach(function (e) { e.innerHTML = iconSvg(e.getAttribute('data-icon')); });
 
   // ---- CRC32
   var CRC_TABLE = (function () {
