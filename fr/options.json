@@ -1,0 +1,25 @@
+{
+  "signature": "ZOCFROPT",
+  "signatureOffset": "0x3fe0",
+  "version": 1,
+  "options": [
+    {
+      "id": "title_combined",
+      "offset": "0x3ff0",
+      "default": true,
+      "fr": "Écran titre combiné Ages + Seasons",
+      "en": "Combined Ages + Seasons title screen",
+      "frDesc": "Sinon, écran titre d'origine d'Oracle of Ages.",
+      "enDesc": "Otherwise, the original Oracle of Ages title screen."
+    },
+    {
+      "id": "vasu_shortcut",
+      "offset": "0x3ff1",
+      "default": true,
+      "fr": "Raccourci carte vers Vasu",
+      "en": "Map shortcut to Vasu",
+      "frDesc": "Sur la carte, A sur la case de Vasu propose d'aller dans sa boutique (porte vers l'autre jeu).",
+      "enDesc": "On the map, A on Vasu's square offers to warp to his shop (door to the other game)."
+    }
+  ]
+}
