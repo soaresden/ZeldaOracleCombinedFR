@@ -10,7 +10,10 @@
 2. Niveau 0 : chaque objet à niveaux (épée, bouclier, bracelet, plume,
    boomerang, grappin) est donné puis son niveau remis à 0 ; le menu doit
    toujours le montrer (c'était la plume affichée en lance-pierres).
-3. Aller-retour : tous les objets d'un jeu sont donnés, puis le jeu change
+3. Objets de donjon : dans chaque donjon (1 à 8), carte, boussole, clé du
+   boss et petite clé ; l'inventaire ne doit pas bouger et le bon bit doit être
+   mis (la carte d'Ages écrivait dans la 1re case : pelle devenue plume).
+4. Aller-retour : tous les objets d'un jeu sont donnés, puis le jeu change
    d'aventure comme par la porte de Vasu (wSwapGame) ; les objets doivent être
    là et bien affichés dans l'autre jeu, puis de nouveau dans le premier.
 
@@ -25,7 +28,7 @@ from pyboy import PyBoy
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DIS = os.path.join(ROOT, 'oracles-disasm')
-ROM = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'out', 'zoc-fr.gbc')
+ROM = [a for a in sys.argv[1:] if not a.startswith('--')][0] if [a for a in sys.argv[1:] if not a.startswith('--')] else os.path.join(ROOT, 'out', 'zoc-fr.gbc')
 
 BOOT = 'w1300,pstart,w150,pstart,w150'
 NEW_GAME = {
@@ -302,6 +305,47 @@ def test_level_zero(game, problems):
     r.pb.stop(save=False)
 
 
+DUNGEON_ITEMS = ((0x33, 'wDungeonMaps', 'carte'), (0x32, 'wDungeonCompasses', 'boussole'),
+                 (0x31, 'wDungeonBossKeys', 'clé du boss'))
+
+
+def test_dungeon_items(game, problems):
+    print('== %s : objets de donjon' % game, flush=True)
+    r = Runner(game)
+    m = r.pb.memory
+    r.reset_inventory()
+    for t, c in ((0x05, 1), (0x19, 1), (0x16, 1), (0x15, 0), (0x06, 1), (0x17, 1)):
+        if t not in NOT_IN_GAME[game]:
+            r.call('giveTreasure', a=t, c=c)
+            r.pb.tick(2, False)
+    before = r.inventory()
+    for d in range(1, 9):
+        m[r.addr('wDungeonIndex')] = d
+        for t, var, name in DUNGEON_ITEMS:
+            for i in range(2):
+                m[r.addr(var) + i] = 0
+            r.call('giveTreasure', a=t, c=0)
+            r.pb.tick(2, False)
+            bits = m[r.addr(var)] | m[r.addr(var) + 1] << 8
+            ok_bit = bits == 1 << d
+            inv = r.inventory()
+            line = '%-7s donjon %d %-12s bits %04x  inventaire %s' % (
+                game, d, name, bits, 'intact' if inv == before else 'MODIFIÉ ' + ' '.join('%02x' % x for x in inv[:6]))
+            print(line, flush=True)
+            if not ok_bit or inv != before:
+                problems.append(line)
+                for i, v in enumerate(before):   # remet l'inventaire pour la suite
+                    m[r.addr('wInventoryB') + i] = v
+        keys = r.addr('wDungeonSmallKeys') + d
+        m[keys] = 0
+        r.call('giveTreasure', a=0x30, c=1)
+        r.pb.tick(2, False)
+        if m[keys] != 1 or r.inventory() != before:
+            problems.append('%-7s donjon %d petite clé : %d clé(s), inventaire %s' % (
+                game, d, m[keys], 'intact' if r.inventory() == before else 'MODIFIÉ'))
+    r.pb.stop(save=False)
+
+
 def test_round_trip(first, problems):
     print('== aller-retour : objets de %s' % first, flush=True)
     r = Runner(first)
@@ -337,10 +381,19 @@ def test_round_trip(first, problems):
 
 def main():
     problems = []
+    if '--donjons' in sys.argv:   # seulement les objets de donjon (rapide)
+        for game in ('ages', 'seasons'):
+            test_dungeon_items(game, problems)
+        print('\n%d anomalie(s)' % len(problems))
+        for p in problems:
+            print(p)
+        sys.exit(1 if problems else 0)
     for game in ('ages', 'seasons'):
         test_obtain(game, problems)
     for game in ('ages', 'seasons'):
         test_level_zero(game, problems)
+    for game in ('ages', 'seasons'):
+        test_dungeon_items(game, problems)
     for game in ('ages', 'seasons'):
         test_round_trip(game, problems)
     print('\n%d anomalie(s)' % len(problems))
