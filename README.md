@@ -75,7 +75,7 @@ cases cochées, le jeu les lit. Une seule ROM, un patch par langue.
 | Police | `fr/import_fr_font.py` : police européenne (glyphes accentués en plus). |
 | Titre, icônes | `fr/import_title.py` (`fr/title_combined.png`, voir `fr/title_src/`), `fr/make_hud_icons.py`. |
 | Code | Branche [`fr/crossworld1`](https://github.com/soaresden/oracles-disasm/tree/fr/crossworld1) du fork : 3e base de texte (la VF ne tient pas dans l'adressage US), options, menus, icônes, avertissement, codes automatiques, marqueurs, suivi des codes (liste de Farore déplacée hors de la banque 2), corrections. |
-| Tests | `fr/test_items.py` (PyBoy) : dans les deux jeux, chaque objet donné comme le jeu le fait, avec un niveau 0, puis après un aller-retour entre les jeux ; vérifie l'inventaire et l'affichage du menu. |
+| Tests | `fr/test_items.py` (PyBoy) : dans les deux jeux, chaque objet donné comme le jeu le fait, avec un niveau 0, puis après un aller-retour entre les jeux ; vérifie l'inventaire et l'affichage du menu. `fr/fuzz_menus.py` : appuis au hasard dans les menus (carte, Select, raccourci Vasu, suivi, bagues) en surveillant qu'aucun objet n'apparaisse ou ne disparaisse. |
 | Publication | `fr/make_release.py` : captures 160×144 et zip (patchs, lisez-moi, scripts pour coller les ROMs) ; fiche romhacking.net dans `romhacking/SUBMISSION.md`. |
 | Patchs | `fr/bps.py`, `fr/make_patches.py` : patch BPS par langue, de « ROM Ages EU + ROM Seasons EU » vers la ROM finale (`docs/patches/`). |
 
