@@ -38,7 +38,9 @@ ROM dans le navigateur (rien n'est envoyé). Aucune ROM n'est distribuée ici.
 - **Corrections du hack d'origine** : laisser l'intro aller jusqu'au bout
   faisait planter le jeu (écran « Game Boy Color only ») ; les objets clés
   utilisés (potion bue, noix Tuni, minerais, Livre des Sceaux, gants de Ricky…)
-  revenaient après deux changements de jeu.
+  revenaient après deux changements de jeu ; un objet à niveaux (plume,
+  boomerang…) dont le niveau valait 0 s'affichait comme un autre objet (la plume
+  en lance-pierres) : il est montré niveau 1 et son niveau est réparé.
 
 On change de jeu par la boutique de Vasu : la porte de gauche mène à Ages, celle
 de droite à Seasons (dans un des deux jeux, l'une des deux ramène en ville).
@@ -73,6 +75,7 @@ cases cochées, le jeu les lit. Une seule ROM, un patch par langue.
 | Police | `fr/import_fr_font.py` : police européenne (glyphes accentués en plus). |
 | Titre, icônes | `fr/import_title.py` (`fr/title_combined.png`, voir `fr/title_src/`), `fr/make_hud_icons.py`. |
 | Code | Branche [`fr/crossworld1`](https://github.com/soaresden/oracles-disasm/tree/fr/crossworld1) du fork : 3e base de texte (la VF ne tient pas dans l'adressage US), options, menus, icônes, avertissement, codes automatiques, marqueurs, suivi des codes (liste de Farore déplacée hors de la banque 2), corrections. |
+| Tests | `fr/test_items.py` (PyBoy) : dans les deux jeux, chaque objet donné comme le jeu le fait, avec un niveau 0, puis après un aller-retour entre les jeux ; vérifie l'inventaire et l'affichage du menu. |
 | Publication | `fr/make_release.py` : captures 160×144 et zip (patchs, lisez-moi, scripts pour coller les ROMs) ; fiche romhacking.net dans `romhacking/SUBMISSION.md`. |
 | Patchs | `fr/bps.py`, `fr/make_patches.py` : patch BPS par langue, de « ROM Ages EU + ROM Seasons EU » vers la ROM finale (`docs/patches/`). |
 
