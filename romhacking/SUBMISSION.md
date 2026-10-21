@@ -3,8 +3,8 @@
 Formulaire : https://www.romhacking.net/hacks/addentrypage/ (Submissions → Submit Files).
 Les textes à coller sont en anglais (le site est anglophone). Fichiers prêts :
 
-- zip : `out/release/ZeldaOraclesCombined-v1.0.zip` (5 patchs BPS, `readme.txt`,
-  `join_roms.bat`, `join_roms.sh`), refait par `python fr/make_release.py 1.0`
+- zip : `out/release/ZeldaOraclesCombined-v1.1.zip` (5 patchs BPS, `readme.txt`,
+  `join_roms.bat`, `join_roms.sh`), refait par `python fr/make_release.py 1.1 --no-shots`
 - captures 160×144 : `docs/screenshots/`, en ligne sur GitHub Pages (URLs ci-dessous,
   à coller directement : la Scratchpad n'est pas nécessaire)
 
@@ -17,9 +17,9 @@ Les textes à coller sont en anglais (le site est anglophone). Fichiers prêts :
 | Platform | `Game Boy` (la GBC est rangée sous Game Boy sur le site) |
 | Game | `Legend of Zelda, The: Oracle of Ages` (une seule fiche jeu possible ; Seasons est cité dans la description) |
 | Author | `soaresden` |
-| Version | `1.0` |
+| Version | `1.1` |
 | Release Date | la date d'envoi |
-| Download Link | lien du zip (voir plus bas : release GitHub) |
+| Download Link | `https://github.com/soaresden/ZeldaOracleCombinedFR/releases/download/v1.1/ZeldaOraclesCombined-v1.1.zip` |
 
 ## Media
 
@@ -99,5 +99,5 @@ SHA-1: B353C8B7EE2A597B4DAC207B02DCABC6BFB8C7C6
 ## Lien de téléchargement
 
 Le formulaire demande un lien, pas un fichier. Le plus propre : une release
-GitHub `v1.0` du dépôt avec le zip en pièce jointe :
-`https://github.com/soaresden/ZeldaOracleCombinedFR/releases/download/v1.0/ZeldaOraclesCombined-v1.0.zip`
+GitHub `v1.1` du dépôt avec le zip en pièce jointe :
+`https://github.com/soaresden/ZeldaOracleCombinedFR/releases/download/v1.1/ZeldaOraclesCombined-v1.1.zip`
