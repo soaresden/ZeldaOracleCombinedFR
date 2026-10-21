@@ -358,9 +358,32 @@ def test_round_trip(first, problems):
         r.call('giveTreasure', a=t, c=subids[t][0][1])
         r.pb.tick(2, False)
         given.append(t)
+    # Bagues : les 8 octets des bagues obtenues, les 5 cases de la boîte, la liste
+    # des bagues à faire estimer (le hack d'origine n'en copiait qu'une partie)
+    m = r.pb.memory
+    rings = [0x01, 0x80, 0x22, 0x40, 0x09, 0x10, 0x00, 0xc4]
+    box = [0x05, 0x17, 0x2a, 0xff, 0x3c]
+    unappraised = [0x48, 0x63, 0xff]
+    for i, v in enumerate(rings):
+        m[r.addr('wRingsObtained') + i] = v
+    for i, v in enumerate(box):
+        m[r.addr('wRingBoxContents') + i] = v
+    for i, v in enumerate(unappraised):
+        m[r.addr('wUnappraisedRings') + i] = v
+    m[r.addr('wNumUnappraisedRingsBcd')] = 0x02
     for step in (first, OTHER[first], first):
         if step != r.game:
             r.swap()
+        got = ([m[r.addr('wRingsObtained') + i] for i in range(8)],
+               [m[r.addr('wRingBoxContents') + i] for i in range(5)],
+               [m[r.addr('wUnappraisedRings') + i] for i in range(3)])
+        ok = got == (rings, box, unappraised)
+        line = '%-7s bagues %s  boîte %s  à estimer %s' % (
+            r.game, ' '.join('%02x' % x for x in got[0]), ' '.join('%02x' % x for x in got[1]),
+            ' '.join('%02x' % x for x in got[2]))
+        print(line + ('' if ok else '  <-- différent'), flush=True)
+        if not ok:
+            problems.append('aller-retour depuis %s : %s' % (first, line))
         inv = r.inventory()
         for t in given:
             w = where(inv, t)
@@ -381,9 +404,13 @@ def test_round_trip(first, problems):
 
 def main():
     problems = []
-    if '--donjons' in sys.argv:   # seulement les objets de donjon (rapide)
+    quick = {'--donjons': test_dungeon_items,      # seulement les objets de donjon
+             '--aller-retour': test_round_trip}     # seulement les changements de jeu
+    for flag, test in quick.items():
+        if flag not in sys.argv:
+            continue
         for game in ('ages', 'seasons'):
-            test_dungeon_items(game, problems)
+            test(game, problems)
         print('\n%d anomalie(s)' % len(problems))
         for p in problems:
             print(p)
