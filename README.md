@@ -42,7 +42,9 @@ ROM dans le navigateur (rien n'est envoyé). Aucune ROM n'est distribuée ici.
   boomerang…) dont le niveau valait 0 s'affichait comme un autre objet (la plume
   en lance-pierres) : il est montré niveau 1 et son niveau est réparé ; dans
   Ages, ramasser une carte de donjon ne l'enregistrait pas et modifiait le
-  1er objet de l'inventaire (la pelle devenait une plume).
+  1er objet de l'inventaire (la pelle devenait une plume) ; en changeant de jeu,
+  seule une partie des bagues obtenues et de la boîte à bagues passait, et les
+  bagues pas encore estimées étaient perdues.
 
 On change de jeu par la boutique de Vasu : la porte de gauche mène à Ages, celle
 de droite à Seasons (dans un des deux jeux, l'une des deux ramène en ville).
@@ -59,6 +61,8 @@ de droite à Seasons (dans un des deux jeux, l'une des deux ramène en ville).
 | Codes automatiques | Plus besoin de recopier les codes : quand un personnage demande le code donné dans l'autre aventure, il est transmis tout seul (Farore aussi). |
 | Récompenses sur la carte | Une fois la 1re aventure finie, un cercle clignote sur la carte là où un personnage attend pour donner un objet. Dans la partie liée : Farore, quand un code de retour est prêt. |
 | Suivi des codes | Menu Start, 3e page : A sur le sablier (Ages) ou l'emblème des saisons (Seasons). Liste les 10 échanges entre les jeux : code pas encore reçu, récompense à récupérer, Farore à voir, terminé. Dans l'aventure 1, disponible une fois celle-ci finie. |
+| Quarts de cœur sur la carte | Un cœur clignote sur la carte du monde partout où un quart de cœur attend encore (grottes : sur la case de l'entrée) ; il disparaît une fois pris. |
+| Suivi 100 % | Menu Start, 3e page : A sur les quarts de cœur. Quarts, réceptacles, essences, bagues, quête d'échange, secrets : combien sont faits, et le pourcentage total. A sur une ligne : ce qui manque, avec la case de la carte (◄ ► pour les pages) ; sur la quête d'échange, le cadre du bas dit où aller ensuite. Noms dans la langue du jeu. |
 | Boutique Advance | Ouvre la boutique réservée à la Game Boy Advance (Lynna dans le passé, Horon dans Seasons), sans éclaircir les couleurs comme le vrai mode GBA. Idée reprise du patch [Force GBA Enhanced Mode](https://www.romhacking.net/hacks/3580/). |
 | Barre d'état en bas | Comme dans Link's Awakening (en haut par défaut) : la barre est en bas partout où elle s'affiche (jeu, menu Start, évaluation des bagues, ondulations des voyages dans le temps) et le reste remonte. |
 
@@ -118,6 +122,8 @@ Pour une seule langue (ici l'allemand), régénérer puis compiler :
 - Testé dans un émulateur : intro complète, titre, nouvelle partie dans les
   deux ordres, passage entre les jeux, raccourci, icônes, avertissement,
   codes automatiques, marqueurs de récompense, suivi des codes, barre en bas.
+- Suivi 100 % et cœurs sur la carte : compilés dans les 5 langues, pas encore
+  testés dans l'émulateur.
 - Le hack crossworld lui-même reste une preuve de concept (voir
   `oracles-disasm/crossworld_todo.md`) : quelques bugs graphiques connus.
 - Barre d'état en bas : testée en extérieur, en intérieur, avec les boîtes de

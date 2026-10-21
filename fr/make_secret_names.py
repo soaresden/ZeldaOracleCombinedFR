@@ -122,4 +122,5 @@ def main():
     print(OUT, code)
 
 
-main()
+if __name__ == '__main__':
+    main()

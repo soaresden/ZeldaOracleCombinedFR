@@ -15,6 +15,7 @@ gen() {  # régénère textes et images d'une langue
     "$PYTHON" fr/import_fr_gfx.py --lang="$1" >/dev/null
     "$PYTHON" fr/patch_newgame_menu.py >/dev/null
     "$PYTHON" fr/make_secret_names.py --lang="$1" >/dev/null
+    "$PYTHON" fr/make_completion.py --lang="$1" >/dev/null
 }
 
 for lang in $LANGS; do

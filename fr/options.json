@@ -110,6 +110,26 @@
       }
     },
     {
+      "id": "map_hearts",
+      "offset": "0x3ffa",
+      "default": true,
+      "fr": "Quarts de cœur à prendre sur la carte",
+      "en": "Heart pieces to collect on the map",
+      "frDesc": "Un cœur clignote sur la carte du monde à chaque endroit où un quart de cœur attend encore (grottes : sur la case de l'entrée). Il disparaît une fois le quart pris.",
+      "enDesc": "A heart blinks on the overworld map wherever a heart piece is still waiting (caves: on the entrance square). It disappears once the piece is taken.",
+      "preview": null
+    },
+    {
+      "id": "completion",
+      "offset": "0x3ffb",
+      "default": true,
+      "fr": "Suivi 100 % dans le menu Start",
+      "en": "100% tracker in the Start menu",
+      "frDesc": "Menu Start, 3e page : A sur les quarts de cœur. Quarts de cœur, réceptacles, essences, anneaux, quête d'échange, secrets : combien sont faits, et le pourcentage total. A sur une ligne : la liste de ce qui manque, avec la case de la carte (◄ ► pour les pages). Sur la ligne de la quête d'échange, le cadre du bas dit où aller ensuite.",
+      "enDesc": "Start menu, 3rd page: A on the heart pieces. Heart pieces, heart containers, essences, rings, trading sequence, secrets: how many are done, and the total percentage. A on a row: the list of what is missing, with the map square (◄ ► for the pages). On the trading row, the bottom box tells where to go next.",
+      "preview": null
+    },
+    {
       "id": "gba_shop",
       "offset": "0x3ff9",
       "default": false,

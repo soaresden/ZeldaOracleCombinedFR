@@ -41,7 +41,9 @@ ROM in your browser (nothing is uploaded). No ROM is distributed here.
   game; a level item (feather, boomerang…) whose level was 0 showed up as another
   item (the feather as a slingshot): it is shown at level 1 and its level is
   repaired; in Ages, picking up a dungeon map didn't record it and changed the
-  first inventory item (the shovel turned into a feather).
+  first inventory item (the shovel turned into a feather); when changing games,
+  only part of the obtained rings and of the ring box came along, and the rings
+  not yet appraised were lost.
 
 You change games through Vasu's shop: the left door leads to Ages, the right
 one to Seasons (in each game, one of them leads back to town).
@@ -58,6 +60,8 @@ one to Seasons (in each game, one of them leads back to town).
 | Automatic secrets | No more copying secrets: when a character asks for the secret given in the other adventure, it is passed on automatically (Farore too). |
 | Rewards on the map | Once the first adventure is finished, a circle blinks on the map where a character waits to give an item. In the linked game: Farore, when a return secret is ready. |
 | Secrets tracker | Start menu, 3rd page: A on the hourglass (Ages) or the seasons emblem (Seasons). Lists the 10 exchanges between the games: no secret yet, reward to collect, see Farore, complete. In adventure 1, available once it is finished. |
+| Heart pieces on the map | A heart blinks on the overworld map wherever a heart piece is still waiting (caves: on the entrance square); it disappears once taken. |
+| 100% tracker | Start menu, 3rd page: A on the heart pieces. Heart pieces, containers, essences, rings, trading sequence, secrets: how many are done, and the total percentage. A on a row: what is missing, with the map square (◄ ► for the pages); on the trading row, the bottom box tells where to go next. Names in the game's language. |
 | Advance shop | Opens the shop reserved for the Game Boy Advance (Lynna in the past, Horon in Seasons), without brightening the colors like the real GBA mode. Idea taken from the [Force GBA Enhanced Mode](https://www.romhacking.net/hacks/3580/) patch. |
 | Status bar at the bottom | Like Link's Awakening (top by default): the bar is at the bottom wherever it shows (game, Start menu, ring appraisal, time travel ripples) and the rest moves up. |
 
@@ -117,6 +121,8 @@ For a single language (here German), regenerate then build:
 - Tested in an emulator: full intro, title, new game in both orders, travel
   between games, shortcut, icons, warning, automatic secrets, reward markers,
   secrets tracker, bottom status bar.
+- 100% tracker and map hearts: built in all 5 languages, not yet tested in the
+  emulator.
 - The crossworld hack itself is still a proof of concept (see
   `oracles-disasm/crossworld_todo.md`): a few known graphical bugs.
 - Status bar at the bottom: tested outdoors, indoors, with text boxes, during
