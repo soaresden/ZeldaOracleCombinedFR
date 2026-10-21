@@ -66,6 +66,11 @@ Also fixed from the original crossworld hack: crash at the end of the intro, use
 
 The BPS patches apply to BOTH European ROMs joined end to end (Ages first): see readme.txt (join_roms.bat / join_roms.sh included). A ROM made from the patches has the default options; use the web page to change them.
 
+Version history:
+1.2 - In Ages, picking up a dungeon map didn't record it and changed the first inventory item (the shovel turned into a feather in dungeon 1): bug of the original crossworld hack, fixed. The automatic test now also checks maps, compasses and keys in all 8 dungeons of both games.
+1.1 - A level item (feather, boomerang...) whose level was 0 showed up in the menu as another item (the feather as a slingshot): it is now shown at level 1 and its level is repaired. New automatic test of every item of both games (obtaining, level 0, round trip between the games).
+1.0 - First release.
+
 Sources: https://github.com/soaresden/ZeldaOracleCombinedFR
 Credits: Stewmath and contributors (oracles-disasm, crossworld), Nintendo (translations), kabili207 (zoragen-wpf, secret exchanges reference), "Force GBA Enhanced Mode" patch (Advance shop idea).
 ```

@@ -71,6 +71,20 @@ OPTIONS (web page checkboxes, default in brackets)
 - Status bar at the bottom of the screen, like Link's Awakening [off]
 
 
+VERSION HISTORY
+---------------
+1.2 - In Ages, picking up a dungeon map didn't record it and changed the
+      first inventory item (the shovel turned into a feather in dungeon 1):
+      bug of the original crossworld hack, fixed. The automatic test now also
+      checks maps, compasses and keys in all 8 dungeons of both games.
+1.1 - A level item (feather, boomerang...) whose level was 0 showed up in the
+      menu as another item (the feather as a slingshot): it is now shown at
+      level 1 and its level is repaired. New automatic test of every item of
+      both games (obtaining, level 0, round trip between the games).
+1.0 - First release.
+Existing saves keep working with every version.
+
+
 KNOWN ISSUES
 ------------
 The crossworld hack itself is a proof of concept: a few graphical glitches are
@@ -100,3 +114,7 @@ A la main : coller les deux ROMs europeennes (Ages puis Seasons) avec
 join_roms.bat / join_roms.sh, puis appliquer le patch BPS de sa langue.
 Le jeu est construit sur la version americaine (desassemblage oracles-disasm)
 avec les textes et images europeens : une seule langue par ROM.
+
+Versions : 1.2 = la carte de donjon d'Ages ne modifie plus le 1er objet de
+l'inventaire (pelle devenue plume) ; 1.1 = un objet a niveaux de niveau 0
+s'affiche correctement ; 1.0 = premiere version.
