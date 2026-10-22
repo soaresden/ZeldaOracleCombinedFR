@@ -44,7 +44,9 @@ ROM dans le navigateur (rien n'est envoyé). Aucune ROM n'est distribuée ici.
   Ages, ramasser une carte de donjon ne l'enregistrait pas et modifiait le
   1er objet de l'inventaire (la pelle devenait une plume) ; en changeant de jeu,
   seule une partie des bagues obtenues et de la boîte à bagues passait, et les
-  bagues pas encore estimées étaient perdues.
+  bagues pas encore estimées étaient perdues ; l'icône du jeu dans la barre et
+  celles des portes de Vasu pouvaient être remplacées par les graphismes d'une
+  boutique.
 
 On change de jeu par la boutique de Vasu : la porte de gauche mène à Ages, celle
 de droite à Seasons (dans un des deux jeux, l'une des deux ramène en ville).
@@ -81,7 +83,7 @@ cases cochées, le jeu les lit. Une seule ROM, un patch par langue.
 | Police | `fr/import_fr_font.py` : police européenne (glyphes accentués en plus). |
 | Titre, icônes | `fr/import_title.py` (`fr/title_combined.png`, voir `fr/title_src/`), `fr/make_hud_icons.py`. |
 | Code | Branche [`fr/crossworld1`](https://github.com/soaresden/oracles-disasm/tree/fr/crossworld1) du fork : 3e base de texte (la VF ne tient pas dans l'adressage US), options, menus, icônes, avertissement, codes automatiques, marqueurs, suivi des codes (liste de Farore déplacée hors de la banque 2), corrections. |
-| Tests | `fr/test_items.py` (PyBoy) : dans les deux jeux, chaque objet donné comme le jeu le fait, avec un niveau 0, objets de donjon (carte, boussole, clés) dans les 8 donjons, puis après un aller-retour entre les jeux ; vérifie l'inventaire et l'affichage du menu. `fr/fuzz_menus.py` : appuis au hasard dans les menus (carte, Select, raccourci Vasu, suivi, bagues) en surveillant qu'aucun objet n'apparaisse ou ne disparaisse. |
+| Tests | `fr/test_items.py` (PyBoy) : dans les deux jeux, chaque objet donné comme le jeu le fait, avec un niveau 0, objets de donjon (carte, boussole, clés) dans les 8 donjons, puis après un aller-retour entre les jeux ; vérifie l'inventaire et l'affichage du menu. `fr/fuzz_menus.py` : appuis au hasard dans les menus (carte, Select, raccourci Vasu, suivi, bagues) en surveillant qu'aucun objet n'apparaisse ou ne disparaisse. `fr/test_completion.py` : suivi 100 % et cœurs sur la carte. `build.sh` s'arrête si la banque 0 (commune aux deux jeux) diffère entre Ages et Seasons. |
 | Publication | `fr/make_release.py` : captures 160×144 et zip (patchs, lisez-moi, scripts pour coller les ROMs) ; fiche romhacking.net dans `romhacking/SUBMISSION.md`. |
 | Patchs | `fr/bps.py`, `fr/make_patches.py` : patch BPS par langue, de « ROM Ages EU + ROM Seasons EU » vers la ROM finale (`docs/patches/`). |
 
@@ -122,8 +124,9 @@ Pour une seule langue (ici l'allemand), régénérer puis compiler :
 - Testé dans un émulateur : intro complète, titre, nouvelle partie dans les
   deux ordres, passage entre les jeux, raccourci, icônes, avertissement,
   codes automatiques, marqueurs de récompense, suivi des codes, barre en bas.
-- Suivi 100 % et cœurs sur la carte : compilés dans les 5 langues, pas encore
-  testés dans l'émulateur.
+- Suivi 100 % et cœurs sur la carte : testés dans les deux jeux par
+  `fr/test_completion.py` (comptes, listes de ce qui manque, pages, cœurs
+  affichés sur la carte), et joués sur console.
 - Le hack crossworld lui-même reste une preuve de concept (voir
   `oracles-disasm/crossworld_todo.md`) : quelques bugs graphiques connus.
 - Barre d'état en bas : testée en extérieur, en intérieur, avec les boîtes de

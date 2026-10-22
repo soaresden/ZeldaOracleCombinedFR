@@ -44,6 +44,12 @@ EQUIP = 'mc684=01,mc685=05,mc6af=01,mc6b2=01,oc69a=22,mcbe9=ff,w30'
 # menu Start page 3 avec le curseur sur le sablier
 TO_TRACKER = ('oc6d1=04,oc6d2=10,m4000=00,oa676=70,oa677=40,m4000=01,oc6dd=c0,'
               'mcbca=00,mcc02=00,w10,pstart,w60,pselect,w60,pselect,w60,pright,w10')
+# Carte avec les quarts de cœur pas encore pris (cœurs clignotants)
+MAP_HEARTS = 'oc6d1=04,mcbca=00,mcc02=00,w30,pselect,w150'
+# Une partie un peu avancée (quarts, réceptacle, essence, bagues, objet d'échange),
+# menu Start page 3, A sur les quarts de cœur
+TO_COMPLETION = ('oc6d1=04,oc70d=20,oc78b=20,oc913=20,oc6bf=01,oc616=0b,mc6c0=02,oc6a2=02,'
+                 'mcbca=00,mcc02=00,w10,pstart,w60,pselect,w60,pselect,w60,pright,w10,pdown,w20,pa,w150')
 MAP_REWARD ='oc6d1=04,oc6d2=10,m4000=00,oa676=40,m4000=01,mcbca=00,mcc02=00,w30,pselect,w90'
 
 
@@ -84,6 +90,15 @@ class Game:
         im = self.pb.screen.image.convert('RGB').resize((320, 288), Image.NEAREST)
         im.save(os.path.join(OUT, name + '.png'), optimize=True)
         print(name)
+        return self
+
+    def wait_blink(self):
+        # Cœurs de la carte : attendre la moitié du clignotement où ils sont affichés
+        for _ in range(40):
+            self.pb.tick(1, False)
+            if self.pb.memory[SYMS['wFrameCounter']] & 0x10:
+                break
+        self.pb.tick(2, False)
         return self
 
     def wait_title_press_start(self):
@@ -149,6 +164,8 @@ def main(langs):
         g.stop()
         g = Game(rom(base), {'reward_markers': on}).run(NEW_AGES + ',' + MAP_REWARD).shot('reward_markers_' + suffix)
         g.stop()
+        g = Game(rom(base), {'map_hearts': on}).run(NEW_AGES + ',' + MAP_HEARTS).wait_blink()
+        g.shot('map_hearts_' + suffix).stop()
 
     # Écrans avec du texte : dans chaque langue
     for lang in langs:
@@ -168,6 +185,10 @@ def main(langs):
         g.shot('secrets_tracker_on_' + lang).stop()
         g = Game(rom(lang), {'secrets_tracker': False}).run(NEW_AGES + ',' + TO_TRACKER + ',pa,w60')
         g.shot('secrets_tracker_off_' + lang).stop()
+        # Suivi 100 % (résumé) ; sans l'option, A sur les quarts ne fait rien
+        for on in (True, False):
+            g = Game(rom(lang), {'completion': on}).run(NEW_AGES + ',' + TO_COMPLETION)
+            g.shot('completion_%s_%s' % ('on' if on else 'off', lang)).stop()
         # Écran de saisie d'un code (ce qu'on évite avec les codes automatiques)
         g = Game(rom(lang), {}).run(NEW_AGES).open_secret_menu().run('w120')
         g.shot('auto_secrets_off_' + lang).stop()

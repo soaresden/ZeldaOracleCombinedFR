@@ -67,12 +67,24 @@ OPTIONS (web page checkboxes, default in brackets)
 - Rewards to collect marked on the map [on]
 - Secrets tracker in the Start menu (3rd page, A on the hourglass / season
   emblem) [on]
+- Heart pieces still to collect blinking on the overworld map [on]
+- 100% tracker in the Start menu (3rd page, A on the heart pieces): heart
+  pieces, containers, essences, rings, trading sequence, secrets; A on a row
+  lists what is missing with its map square [on]
 - Advance shop (GBA bonus) without the GBA's brightened colors [off]
 - Status bar at the bottom of the screen, like Link's Awakening [off]
 
 
 VERSION HISTORY
 ---------------
+1.3 - New options: heart pieces still to collect blink on the map; 100%
+      tracker in the Start menu (heart pieces, heart containers, essences,
+      rings, trading sequence, secrets, with the list of what is missing and
+      its map square, and where to go next in the trading sequence).
+      When changing games, all obtained rings, the whole ring box and the
+      rings waiting to be appraised now come along (only part of them did).
+      The game icon in the status bar and the icons above Vasu's doors could
+      be replaced by shop graphics: fixed.
 1.2 - In Ages, picking up a dungeon map didn't record it and changed the
       first inventory item (the shovel turned into a feather in dungeon 1):
       bug of the original crossworld hack, fixed. The automatic test now also
@@ -115,6 +127,8 @@ join_roms.bat / join_roms.sh, puis appliquer le patch BPS de sa langue.
 Le jeu est construit sur la version americaine (desassemblage oracles-disasm)
 avec les textes et images europeens : une seule langue par ROM.
 
-Versions : 1.2 = la carte de donjon d'Ages ne modifie plus le 1er objet de
+Versions : 1.3 = coeurs a prendre sur la carte, suivi 100 % dans le menu
+Start, toutes les bagues passent d'un jeu a l'autre, icones de la barre et
+des portes de Vasu corrigees ; 1.2 = la carte de donjon d'Ages ne modifie plus le 1er objet de
 l'inventaire (pelle devenue plume) ; 1.1 = un objet a niveaux de niveau 0
 s'affiche correctement ; 1.0 = premiere version.

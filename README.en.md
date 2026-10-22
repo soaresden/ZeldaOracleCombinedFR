@@ -43,7 +43,8 @@ ROM in your browser (nothing is uploaded). No ROM is distributed here.
   repaired; in Ages, picking up a dungeon map didn't record it and changed the
   first inventory item (the shovel turned into a feather); when changing games,
   only part of the obtained rings and of the ring box came along, and the rings
-  not yet appraised were lost.
+  not yet appraised were lost; the game icon in the status bar and the icons
+  above Vasu's doors could be replaced by a shop's graphics.
 
 You change games through Vasu's shop: the left door leads to Ages, the right
 one to Seasons (in each game, one of them leads back to town).
@@ -80,7 +81,7 @@ reads them. One ROM, one patch per language.
 | Font | `fr/import_fr_font.py`: European font (extra accented glyphs). |
 | Title, icons | `fr/import_title.py` (`fr/title_combined.png`, see `fr/title_src/`), `fr/make_hud_icons.py`. |
 | Code | Branch [`fr/crossworld1`](https://github.com/soaresden/oracles-disasm/tree/fr/crossworld1) of the fork: 3rd text base (the translations don't fit in the US text addressing), options, menus, icons, warning, automatic secrets, markers, secrets tracker (Farore's list moved out of bank 2), fixes. |
-| Tests | `fr/test_items.py` (PyBoy): in both games, every item given the way the game does, with a level of 0, dungeon items (map, compass, keys) in all 8 dungeons, then after a round trip between the games; checks the inventory and the menu display. `fr/fuzz_menus.py`: random presses in the menus (map, Select, Vasu shortcut, tracker, rings) watching that no item appears or disappears. |
+| Tests | `fr/test_items.py` (PyBoy): in both games, every item given the way the game does, with a level of 0, dungeon items (map, compass, keys) in all 8 dungeons, then after a round trip between the games; checks the inventory and the menu display. `fr/fuzz_menus.py`: random presses in the menus (map, Select, Vasu shortcut, tracker, rings) watching that no item appears or disappears. `fr/test_completion.py`: 100% tracker and map hearts. `build.sh` stops if bank 0 (shared by both games) differs between Ages and Seasons. |
 | Release | `fr/make_release.py`: 160×144 screenshots and zip (patches, readme, ROM joining scripts); romhacking.net form in `romhacking/SUBMISSION.md` (French). |
 | Patches | `fr/bps.py`, `fr/make_patches.py`: one BPS patch per language, from "Ages EU ROM + Seasons EU ROM" to the final ROM (`docs/patches/`). |
 
@@ -121,8 +122,9 @@ For a single language (here German), regenerate then build:
 - Tested in an emulator: full intro, title, new game in both orders, travel
   between games, shortcut, icons, warning, automatic secrets, reward markers,
   secrets tracker, bottom status bar.
-- 100% tracker and map hearts: built in all 5 languages, not yet tested in the
-  emulator.
+- 100% tracker and map hearts: tested in both games by `fr/test_completion.py`
+  (counts, lists of what is missing, pages, hearts shown on the map), and played
+  on a handheld.
 - The crossworld hack itself is still a proof of concept (see
   `oracles-disasm/crossworld_todo.md`): a few known graphical bugs.
 - Status bar at the bottom: tested outdoors, indoors, with text boxes, during
