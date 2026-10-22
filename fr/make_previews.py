@@ -178,4 +178,5 @@ def main(langs):
     os.remove(os.path.join(ROOT, 'out', 'preview_tmp.gbc'))
 
 
-main(sys.argv[1:] or ['en', 'fr', 'de', 'it', 'es'])
+if __name__ == '__main__':
+    main(sys.argv[1:] or ['en', 'fr', 'de', 'it', 'es'])

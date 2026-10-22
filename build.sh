@@ -23,6 +23,17 @@ build_game() {  # $1 = ages|seasons, $2 = AGES|SEASONS
 
 build_game ages AGES
 build_game seasons SEASONS
+# La banque 0 est commune aux deux jeux dans la ROM combinée : elle doit être
+# identique (sauf la somme de contrôle de l'en-tête), sinon un jeu appelle des
+# adresses de l'autre et plante.
+$PYTHON - <<'PYEOF'
+a = open('ages.gbc', 'rb').read()[:0x4000]
+s = open('seasons.gbc', 'rb').read()[:0x4000]
+diff = [i for i in range(0x4000) if a[i] != s[i] and i not in (0x14e, 0x14f)]
+if diff:
+    raise SystemExit('ERREUR : banque 0 différente entre Ages et Seasons aux adresses '
+                     + ' '.join('%04x' % i for i in diff[:16]))
+PYEOF
 $PYTHON tools/misc/merge_games.py
 mv -f combined.gbc "$ROOT/out/${OUT_NAME:-combined.gbc}"
 echo "-> out/${OUT_NAME:-combined.gbc}"
