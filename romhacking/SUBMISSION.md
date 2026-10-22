@@ -33,11 +33,11 @@ les aperçus de la page (`previews/`, agrandis en 320×288). Les captures de
 | YouTube Share URL | (vide) |
 | Title Image | `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/1-title.png` (titre combiné, différent de l'original) |
 | Image1 | `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/2-new-game-ages-or-seasons.png` |
-| Image2 | `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/5-secrets-tracker.png` |
+| Image2 | `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/8-100-percent-tracker.png` |
 | Image3 | `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/4-vasu-doors-to-each-game.png` |
 | Image4 | `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/3-status-bar-at-the-bottom.png` |
 
-Autres captures disponibles : `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/6-reward-markers-on-the-map.png`, `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/7-advance-shop.png`.
+Autres captures disponibles : `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/9-heart-pieces-on-the-map.png`, `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/5-secrets-tracker.png`, `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/6-reward-markers-on-the-map.png`, `https://soaresden.github.io/ZeldaOracleCombinedFR/screenshots/7-advance-shop.png`.
 
 ## Description
 
@@ -49,6 +49,8 @@ When starting a new game you pick AGES or SEASONS: the other game becomes the li
 Based on the "crossworld" hack of the oracles-disasm disassembly (Stewmath and contributors), which only existed in English. The game code is the American one, with the texts and images of the European ROMs put back: each ROM holds one language, with no language menu at startup.
 
 Easiest way: the web page https://soaresden.github.io/ZeldaOracleCombinedFR/ builds the ROM in your browser from your two European ROMs, with the language and the options you tick (nothing is uploaded).
+
+The page can also keep the games separate: from one European ROM (Ages and/or Seasons), it makes the original game in the chosen language with only the options that make sense without merging (status bar at the bottom, Advance shop, heart pieces on the map, 100% tracker).
 
 Options (default in brackets):
 - Combined Ages + Seasons title screen [on]
