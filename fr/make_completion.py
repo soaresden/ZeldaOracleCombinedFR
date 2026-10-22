@@ -18,7 +18,9 @@ import lang as langmod
 from make_secret_names import encode, center, db
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DISASM = os.path.join(ROOT, 'oracles-disasm')
+# ZOC_DISASM : jeux séparés (oracles-hud) : pas de catégorie « Secrets » (FR_COMP_NO_SECRETS)
+DISASM = os.environ.get('ZOC_DISASM') or os.path.join(ROOT, 'oracles-disasm')
+NO_SECRETS = bool(os.environ.get('ZOC_DISASM'))
 OUT = os.path.join(DISASM, 'code', 'crossworldCompletionData.s')
 
 ROW = 16    # caractères d'une ligne du menu
@@ -241,7 +243,8 @@ def game_data(game, code, t):
         entries.append(('wFrCompTrade+%d' % (i >> 3), 1 << (i & 7), item_name(code, game, texts, tx), box))
     cats.append(entries)
     # 5 secrets : pas de liste (A ouvre le suivi des codes), bits dans wFrCompSecrets
-    cats.append([('wFrCompSecrets+%d' % (i >> 3), 1 << (i & 7), None, None) for i in range(10)])
+    if not NO_SECRETS:
+        cats.append([('wFrCompSecrets+%d' % (i >> 3), 1 << (i & 7), None, None) for i in range(10)])
     return cats
 
 
@@ -286,7 +289,7 @@ def main():
         lines.append('\t.db $ff')
         lines.append('.endif')
         lines.append('')
-    labels = t['labels']
+    labels = [l for i, l in enumerate(t['labels']) if not (NO_SECRETS and i == 5)]
     for i, l in enumerate(labels):
         assert len(encode(l)) <= 10, l
     lines.append('frCompLabels:')

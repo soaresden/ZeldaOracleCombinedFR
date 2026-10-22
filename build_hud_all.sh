@@ -12,10 +12,17 @@ export PYTHONIOENCODING=utf-8
 export ZOC_DISASM="$ROOT/oracles-hud" ZOC_TEXT_BASE=309a2cff
 LANGS="${*:-en fr de it es}"
 
-gen() {  # textes et images d'une langue dans oracles-hud
+gen() {  # textes, images et données d'une langue dans oracles-hud
     "$PYTHON" fr/make_fr_text.py --lang="$1" >/dev/null
     "$PYTHON" fr/import_fr_gfx.py --lang="$1" >/dev/null
+    "$PYTHON" fr/make_secret_names.py --lang="$1" >/dev/null
+    "$PYTHON" fr/make_completion.py --lang="$1" >/dev/null
 }
+
+# Code commun avec le combined (liste de Farore, menu Complétion, image du cœur)
+for f in code/crossworldSecretList.s code/crossworldCompletion.s gfx/common/gfx_fr_map_heart.bin; do
+    cp -f "oracles-disasm/$f" "oracles-hud/$f"
+done
 
 for lang in $LANGS; do
     echo "===== langue $lang ====="

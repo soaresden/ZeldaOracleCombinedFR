@@ -77,7 +77,8 @@ cases cochées, le jeu les lit. Une seule ROM, un patch par langue.
 En haut de la page, le choix **Jeux séparés** ne fusionne pas les jeux : Oracle
 of Ages et/ou Oracle of Seasons restent deux jeux séparés, dans la langue
 choisie, avec les options qui ont du sens sans la fusion (barre d'état en bas,
-boutique Advance ; table d'options `ZOCHUDOP` en `$3FE0`). Une seule ROM
+boutique Advance, quarts de cœur sur la carte, suivi 100 % sans les secrets ;
+table d'options `ZOCHUDOP` en `$3FE0`). Une seule ROM
 européenne suffit (un patch par jeu et par langue, `docs/patches/hud/`).
 
 Comme le combined, ces jeux sont construits sur le code américain

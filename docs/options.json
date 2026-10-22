@@ -112,6 +112,7 @@
     {
       "id": "map_hearts",
       "offset": "0x3ffa",
+      "hudOffset": "0x3ff2",
       "default": true,
       "fr": "Quarts de cœur à prendre sur la carte",
       "en": "Heart pieces to collect on the map",
@@ -125,6 +126,9 @@
     {
       "id": "completion",
       "offset": "0x3ffb",
+      "hudOffset": "0x3ff3",
+      "hudFrDesc": "Menu Start, 3e page : A sur les quarts de cœur. Quarts de cœur, réceptacles, essences, anneaux, quête d'échange : combien sont faits, et le pourcentage total. A sur une ligne : la liste de ce qui manque, avec la case de la carte (◄ ► pour les pages). Sur la ligne de la quête d'échange, le cadre du bas dit où aller ensuite.",
+      "hudEnDesc": "Start menu, 3rd page: A on the heart pieces. Heart pieces, heart containers, essences, rings, trading sequence: how many are done, and the total percentage. A on a row: the list of what is missing, with the map square (◄ ► for the pages). On the trading row, the bottom box tells where to go next.",
       "default": true,
       "fr": "Suivi 100 % dans le menu Start",
       "en": "100% tracker in the Start menu",
@@ -154,6 +158,8 @@
       "offset": "0x3ff6",
       "hudOffset": "0x3ff0",
       "hudDefault": true,
+      "hudFrDesc": "Comme dans Link's Awakening : la barre est en bas de l'écran partout où elle s'affiche (jeu, menu Start, évaluation des bagues, ondulations des voyages dans le temps) et le reste remonte.",
+      "hudEnDesc": "Like Link's Awakening: the bar is at the bottom of the screen wherever it shows (game, Start menu, ring appraisal, time travel ripples) and the rest moves up.",
       "default": false,
       "fr": "Barre d'état en bas (comme Link's Awakening)",
       "en": "Status bar at the bottom (like Link's Awakening)",

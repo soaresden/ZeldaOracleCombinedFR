@@ -15,7 +15,7 @@ import lang as langmod
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SEASONS_EU = os.path.join(ROOT, 'Legend of Zelda, The - Oracle of Seasons (Europe) (En,Fr,De,Es,It).gbc')
-OUT = os.path.join(ROOT, 'oracles-disasm', 'code', 'crossworldSecretNames.s')
+OUT = os.path.join(os.environ.get('ZOC_DISASM') or os.path.join(ROOT, 'oracles-disasm'), 'code', 'crossworldSecretNames.s')
 
 LANG_TABLES = 0x8f47   # 5 pointeurs (EN FR DE IT ES) vers les tables de noms, banque 2
 NUM_NAMES = 0x1a

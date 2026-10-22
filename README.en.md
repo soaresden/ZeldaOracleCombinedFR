@@ -75,7 +75,8 @@ reads them. One ROM, one patch per language.
 At the top of the page, the **Separate games** choice doesn't merge the games:
 Oracle of Ages and/or Oracle of Seasons stay two separate games, in the chosen
 language, with the options that make sense without merging (status bar at the
-bottom, Advance shop; options table `ZOCHUDOP` at `$3FE0`). One European ROM is
+bottom, Advance shop, heart pieces on the map, 100% tracker without the
+secrets; options table `ZOCHUDOP` at `$3FE0`). One European ROM is
 enough (one patch per game and language, `docs/patches/hud/`).
 
 Like the combined version, these games are built on the American code (the 2020

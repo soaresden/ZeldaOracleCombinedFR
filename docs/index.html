@@ -382,7 +382,8 @@
       div.className = 'opt' + (available ? '' : ' na');
       div.dataset.id = o.id;
       div.innerHTML = '<input type="checkbox" data-id="' + o.id + '"' + (on ? ' checked' : '') + (available ? '' : ' disabled') + '>' +
-        '<div><b>' + SBT(o.fr, o.en) + (available ? '' : '<span class="soon">' + SBT('bientôt', 'soon') + '</span>') + '</b><span>' + SBT(o.frDesc, o.enDesc) + '</span></div>';
+        '<div><b>' + SBT(o.fr, o.en) + (available ? '' : '<span class="soon">' + SBT('bientôt', 'soon') + '</span>') + '</b><span>' +
+        (hudOnly() && o.hudFrDesc ? SBT(o.hudFrDesc, o.hudEnDesc) : SBT(o.frDesc, o.enDesc)) + '</span></div>';
       div.addEventListener('mouseenter', function () { showPreview(o.id); });
       div.addEventListener('focusin', function () { showPreview(o.id); });
       $('options').appendChild(div);
