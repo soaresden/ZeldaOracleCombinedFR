@@ -77,6 +77,9 @@ OPTIONS (web page checkboxes, default in brackets)
 
 VERSION HISTORY
 ---------------
+1.4 - In Ages, the seed trees showed status bar digits instead of the tree:
+      bug of the original crossworld hack (it loaded 16 status bar tiles too
+      many, over the trees' graphics), fixed.
 1.3 - New options: heart pieces still to collect blink on the map; 100%
       tracker in the Start menu (heart pieces, heart containers, essences,
       rings, trading sequence, secrets, with the list of what is missing and
@@ -127,7 +130,8 @@ join_roms.bat / join_roms.sh, puis appliquer le patch BPS de sa langue.
 Le jeu est construit sur la version americaine (desassemblage oracles-disasm)
 avec les textes et images europeens : une seule langue par ROM.
 
-Versions : 1.3 = coeurs a prendre sur la carte, suivi 100 % dans le menu
+Versions : 1.4 = arbres a graines d'Ages corriges (chiffres de la barre a la
+place de l'arbre) ; 1.3 = coeurs a prendre sur la carte, suivi 100 % dans le menu
 Start, toutes les bagues passent d'un jeu a l'autre, icones de la barre et
 des portes de Vasu corrigees ; 1.2 = la carte de donjon d'Ages ne modifie plus le 1er objet de
 l'inventaire (pelle devenue plume) ; 1.1 = un objet a niveaux de niveau 0
