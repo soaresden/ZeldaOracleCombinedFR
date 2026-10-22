@@ -2,53 +2,53 @@
   "patches": {
     "ages-en": {
       "file": "patches/hud/ages-en.bps",
-      "size": 153733,
-      "targetCrc32": "4f3c7881"
+      "size": 160518,
+      "targetCrc32": "d94cc52d"
     },
     "ages-fr": {
       "file": "patches/hud/ages-fr.bps",
-      "size": 164232,
-      "targetCrc32": "e61aded3"
+      "size": 171017,
+      "targetCrc32": "cd4a6ee7"
     },
     "ages-de": {
       "file": "patches/hud/ages-de.bps",
-      "size": 295248,
-      "targetCrc32": "22cbfc62"
+      "size": 302033,
+      "targetCrc32": "766eb67f"
     },
     "ages-it": {
       "file": "patches/hud/ages-it.bps",
-      "size": 263102,
-      "targetCrc32": "57494c29"
+      "size": 269887,
+      "targetCrc32": "7549d801"
     },
     "ages-es": {
       "file": "patches/hud/ages-es.bps",
-      "size": 161996,
-      "targetCrc32": "3467d761"
+      "size": 168781,
+      "targetCrc32": "ec72428f"
     },
     "seasons-en": {
       "file": "patches/hud/seasons-en.bps",
-      "size": 124991,
-      "targetCrc32": "8d794597"
+      "size": 131431,
+      "targetCrc32": "ffe6db71"
     },
     "seasons-fr": {
       "file": "patches/hud/seasons-fr.bps",
-      "size": 156230,
-      "targetCrc32": "c9b0a6f5"
+      "size": 162670,
+      "targetCrc32": "72c406c6"
     },
     "seasons-de": {
       "file": "patches/hud/seasons-de.bps",
-      "size": 232086,
-      "targetCrc32": "be3ea53c"
+      "size": 238526,
+      "targetCrc32": "8356a80f"
     },
     "seasons-it": {
       "file": "patches/hud/seasons-it.bps",
-      "size": 210327,
-      "targetCrc32": "27dbf2be"
+      "size": 216767,
+      "targetCrc32": "5eea2095"
     },
     "seasons-es": {
       "file": "patches/hud/seasons-es.bps",
-      "size": 215638,
-      "targetCrc32": "e7d15b6e"
+      "size": 222078,
+      "targetCrc32": "bff58564"
     }
   },
   "source": {
@@ -62,5 +62,7 @@
       "crc32": "dbac1357",
       "file": "Legend of Zelda, The - Oracle of Seasons (Europe) (En,Fr,De,Es,It).gbc"
     }
-  }
+  },
+  "signature": "ZOCHUDOP",
+  "signatureOffset": "0x3fe0"
 }

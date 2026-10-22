@@ -72,12 +72,13 @@ Les options sont des octets de la ROM (table à `$3FF0`, signature
 `ZOCFROPT` à `$3FE0`, voir `fr/options.json`) : la page les écrit selon les
 cases cochées, le jeu les lit. Une seule ROM, un patch par langue.
 
-## Jeux séparés : seulement la barre du bas
+## Jeux séparés
 
-Sur la page, la case **Jeux séparés : seulement la barre du bas** ne fusionne pas
-les jeux : Oracle of Ages et/ou Oracle of Seasons restent deux jeux séparés,
-dans la langue choisie, avec seulement la barre d'état en bas de l'écran. Une
-seule ROM européenne suffit (un patch par jeu et par langue, `docs/patches/hud/`).
+En haut de la page, le choix **Jeux séparés** ne fusionne pas les jeux : Oracle
+of Ages et/ou Oracle of Seasons restent deux jeux séparés, dans la langue
+choisie, avec les options qui ont du sens sans la fusion (barre d'état en bas,
+boutique Advance ; table d'options `ZOCHUDOP` en `$3FE0`). Une seule ROM
+européenne suffit (un patch par jeu et par langue, `docs/patches/hud/`).
 
 Comme le combined, ces jeux sont construits sur le code américain
 (désassemblage oracles-disasm de 2020, branche `hack/hud-bottom` du fork,

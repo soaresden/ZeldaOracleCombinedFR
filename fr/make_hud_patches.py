@@ -29,6 +29,8 @@ def main(langs):
     path = os.path.join(OUT, 'manifest.json')
     manifest = json.load(open(path, encoding='utf-8')) if os.path.exists(path) else {}
     manifest.setdefault('patches', {})
+    manifest['signature'] = 'ZOCHUDOP'          # table d'options (oracles-hud, code/hudOptions.s)
+    manifest['signatureOffset'] = '0x3fe0'
     for game, name in EU.items():
         source = open(os.path.join(ROOT, name), 'rb').read()
         manifest.setdefault('source', {})[game] = {'size': len(source), 'crc32': crc(source), 'file': name}

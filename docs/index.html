@@ -115,8 +115,12 @@
   .opt:hover{background:rgba(255,255,255,.03)}
   .opt.cur{background:linear-gradient(90deg,rgba(242,116,26,.10),rgba(90,168,248,.08));box-shadow:inset 3px 0 0 var(--gold)}
   .opt.na{opacity:.55;cursor:not-allowed}
-  .opt.mode{border:1px solid var(--line2);border-radius:12px;margin-bottom:14px;background:rgba(255,255,255,.03)}
-  .optgrid.hud #options{opacity:.35;pointer-events:none}
+  .modes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+  .modes label{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line2);border-radius:14px;cursor:pointer;background:rgba(255,255,255,.03);transition:background .12s,border-color .12s}
+  .modes label.sel{border-color:var(--gold);background:linear-gradient(90deg,rgba(242,116,26,.12),rgba(90,168,248,.10))}
+  .modes input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--ages);flex:none}
+  .modes b{display:block;font-size:1.05rem}
+  .modes span{color:var(--mut);font-size:.93rem}
   .soon{display:inline-block;margin-left:6px;border:1px solid var(--line2);border-radius:999px;padding:0 8px;font-size:.78rem;color:var(--mut);font-weight:700}
   .opt input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--ages);flex:none}
   .opt b{display:block}
@@ -141,6 +145,7 @@
     .lead{margin-left:auto;margin-right:auto}
     .chips{justify-content:center}
     .optgrid{grid-template-columns:1fr}
+    .modes{grid-template-columns:1fr}
     .preview{position:static;order:-1;max-width:320px;width:100%;margin:0 auto}
   }
   @media (max-width:560px){.roms{grid-template-columns:1fr} section{padding:18px 16px 20px} section::before{left:16px;right:16px}}
@@ -166,11 +171,21 @@
   </header>
 
   <section>
+    <h2 class="serif" data-en="What do you want to make?">Que veux-tu fabriquer ?</h2>
+    <div class="modes" id="modes">
+      <label><input type="radio" name="mode" value="combined">
+        <div><b data-en="One game: Ages + Seasons">Jeu unique : Ages + Seasons</b><span data-en="Both games merged into one ROM: you travel between them through Vasu's shop, with a single inventory, and all the options.">Les deux jeux fusionnés dans une seule ROM : on passe de l'un à l'autre par la boutique de Vasu, avec un seul inventaire, et toutes les options.</span></div></label>
+      <label><input type="radio" name="mode" value="hud">
+        <div><b data-en="Separate games: Ages and/or Seasons">Jeux séparés : Ages et/ou Seasons</b><span data-en="The original games, not merged, one ROM per game, with the options that make sense without merging (status bar at the bottom, Advance shop…).">Les jeux d'origine, non fusionnés, une ROM par jeu, avec les options qui ont du sens sans la fusion (barre d'état en bas, boutique Advance…).</span></div></label>
+    </div>
+  </section>
+
+  <section>
     <h2 class="serif"><span class="num"><span>1</span></span><span data-en="Your European ROMs">Tes ROMs européennes</span></h2>
-    <p data-en="Oracle of Ages and Oracle of Seasons, European version (En,Fr,De,Es,It). Drop both files here.">Oracle of Ages et Oracle of Seasons, version Europe (En,Fr,De,Es,It). Dépose les deux fichiers ici.</p>
+    <p id="roms-help"></p>
     <label id="drop">
       <input id="files" type="file" accept=".gbc,.gb,.bin" multiple>
-      <span class="big" data-en="📂 Drop the two .gbc files here">📂 Glisse les deux fichiers .gbc ici</span>
+      <span class="big" id="drop-big"></span>
       <span class="small" data-en="or click to choose them">ou clique pour les choisir</span>
     </label>
     <div class="roms">
@@ -189,10 +204,6 @@
   <section>
     <h2 class="serif"><span class="num"><span>3</span></span><span data-en="Options">Options</span></h2>
     <p data-en="Untick what you don't want; the preview shows the result. Bug fixes are always included.">Décoche ce que tu ne veux pas ; l'aperçu montre le résultat. Les corrections de bugs sont toujours incluses.</p>
-    <label class="opt mode" id="mode-hud">
-      <input type="checkbox" id="hud-only">
-      <div><b data-en="Separate games: bottom status bar only">Jeux séparés : seulement la barre du bas</b><span data-en="No merging: Oracle of Ages and/or Oracle of Seasons stay two separate games, with only the status bar at the bottom of the screen (like Link's Awakening), in the language chosen above. One European ROM is enough; with both, you get both games. The options below are those of the combined version.">Pas de fusion : Oracle of Ages et/ou Oracle of Seasons restent deux jeux séparés, avec seulement la barre d'état en bas de l'écran (comme Link's Awakening), dans la langue choisie plus haut. Une seule ROM européenne suffit ; avec les deux, tu obtiens les deux jeux. Les options en dessous sont celles de la version combinée.</span></div>
-    </label>
     <div class="optgrid">
       <div id="options"></div>
       <aside class="preview" aria-live="polite">
@@ -219,7 +230,7 @@
   var LANG_KEY = 'zoc.gameLang', OPT_KEY = 'zoc.options';
   var roms = { ages: null, seasons: null };
   var manifest = null, options = null, hudManifest = null;
-  var HUD_KEY = 'zoc.hudOnly';
+  var MODE_KEY = 'zoc.mode', HUD_OPT_KEY = 'zoc.hudOptions';
   var $ = function (id) { return document.getElementById(id); };
   var store = {
     get: function (k) { try { return localStorage.getItem(k); } catch (_) { return null; } },
@@ -319,12 +330,34 @@
 
   // ---- Interface
   function setStatus(text, cls) { var s = $('status'); s.textContent = text; s.className = cls || ''; }
-  function hudOnly() { return $('hud-only').checked; }
+  // Mode : « combined » (jeu unique) ou « hud » (jeux séparés, patches/hud/)
+  function hudOnly() { return (document.querySelector('input[name=mode]:checked') || {}).value === 'hud'; }
   function refresh() {
     var hud = hudOnly();
-    document.querySelector('.optgrid').classList.toggle('hud', hud);
-    $('go').disabled = hud ? !(hudManifest && (roms.ages || roms.seasons))
+    $('go').disabled = hud ? !(hudManifest && options && (roms.ages || roms.seasons))
                            : !(roms.ages && roms.seasons && manifest && options);
+  }
+  // Options du mode en cours : jeux séparés = celles qui ont un « hudOffset »
+  function modeOptions() {
+    return options.options.filter(function (o) { return !hudOnly() || o.hudOffset; });
+  }
+  function optOffset(o) { return parseInt(hudOnly() ? o.hudOffset : o.offset, 16); }
+  function optDefault(o) { return hudOnly() && 'hudDefault' in o ? o.hudDefault : o['default']; }
+  function setMode(mode) {
+    document.querySelectorAll('input[name=mode]').forEach(function (i) {
+      i.checked = i.value === mode; i.parentNode.classList.toggle('sel', i.checked);
+    });
+    store.set(MODE_KEY, mode);
+    $('roms-help').textContent = mode === 'hud'
+      ? SBT('Oracle of Ages et/ou Oracle of Seasons, version Europe (En,Fr,De,Es,It). Une seule suffit : tu obtiens un jeu par ROM déposée.',
+            'Oracle of Ages and/or Oracle of Seasons, European version (En,Fr,De,Es,It). One is enough: you get one game per ROM you drop.')
+      : SBT('Oracle of Ages et Oracle of Seasons, version Europe (En,Fr,De,Es,It). Dépose les deux fichiers ici.',
+            'Oracle of Ages and Oracle of Seasons, European version (En,Fr,De,Es,It). Drop both files here.');
+    $('drop-big').textContent = mode === 'hud'
+      ? SBT('📂 Glisse le ou les fichiers .gbc ici', '📂 Drop the .gbc file(s) here')
+      : SBT('📂 Glisse les deux fichiers .gbc ici', '📂 Drop the two .gbc files here');
+    if (options) buildOptions();
+    refresh();
   }
 
   function buildLangs() {
@@ -339,11 +372,12 @@
     $('langs').onchange = function (e) { store.set(LANG_KEY, e.target.value); if (currentPreview) showPreview(currentPreview); };
   }
   function buildOptions() {
-    var saved = {};
-    try { saved = JSON.parse(store.get(OPT_KEY) || '{}'); } catch (_) {}
-    options.options.forEach(function (o) {
+    var saved = {}, key = hudOnly() ? HUD_OPT_KEY : OPT_KEY;
+    try { saved = JSON.parse(store.get(key) || '{}'); } catch (_) {}
+    $('options').innerHTML = '';
+    modeOptions().forEach(function (o) {
       var available = o.available !== false;
-      var on = available && (o.id in saved ? saved[o.id] : o['default']);
+      var on = available && (o.id in saved ? saved[o.id] : optDefault(o));
       var div = document.createElement('label');
       div.className = 'opt' + (available ? '' : ' na');
       div.dataset.id = o.id;
@@ -356,10 +390,10 @@
     $('options').onchange = function (e) {
       var s = {};
       document.querySelectorAll('#options input').forEach(function (i) { s[i.dataset.id] = i.checked; });
-      store.set(OPT_KEY, JSON.stringify(s));
+      store.set(hudOnly() ? HUD_OPT_KEY : OPT_KEY, JSON.stringify(s));
       if (e.target.dataset.id) showPreview(e.target.dataset.id);
     };
-    var first = options.options.filter(function (o) { return o.preview; })[0];
+    var first = modeOptions().filter(function (o) { return o.preview; })[0];
     if (first) showPreview(first.id);
   }
 
@@ -384,6 +418,19 @@
     $('pv-state').className = 'badge ' + (on ? 'on' : 'off');
   }
 
+  // Options : signature puis un octet par option, et somme de contrôle globale
+  function writeOptions(rom, signature, signatureOffset) {
+    var sig = parseInt(signatureOffset, 16);
+    if (String.fromCharCode.apply(null, rom.subarray(sig, sig + 8)) !== signature) throw new Error('signature');
+    document.querySelectorAll('#options input').forEach(function (i) {
+      var o = options.options.filter(function (x) { return x.id === i.dataset.id; })[0];
+      if (o.available !== false) rom[optOffset(o)] = i.checked ? 1 : 0;
+    });
+    var sum = 0;
+    for (var k = 0; k < rom.length; k++) if (k !== 0x14e && k !== 0x14f) sum = (sum + rom[k]) & 0xffff;
+    rom[0x14e] = sum >> 8; rom[0x14f] = sum & 0xff;
+  }
+
   function download(rom, name) {
     var a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([rom], { type: 'application/octet-stream' }));
@@ -403,7 +450,8 @@
         return fetch(hudManifest.patches[g + '-' + lang].file).then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); });
       }).then(function (buf) {
         var rom = applyBps(roms[g], new Uint8Array(buf));
-        var name = 'Zelda Oracle of ' + (g === 'ages' ? 'Ages' : 'Seasons') + ' (' + lang.toUpperCase() + ') - ' + SBT('barre en bas', 'bottom status bar') + '.gbc';
+        writeOptions(rom, hudManifest.signature, hudManifest.signatureOffset);
+        var name = 'Zelda Oracle of ' + (g === 'ages' ? 'Ages' : 'Seasons') + ' (' + lang.toUpperCase() + ').gbc';
         download(rom, name);
         names.push(name);
       });
@@ -426,17 +474,7 @@
       var source = new Uint8Array(roms.ages.length + roms.seasons.length);
       source.set(roms.ages, 0); source.set(roms.seasons, roms.ages.length);
       var rom = applyBps(source, new Uint8Array(buf));
-      // Options : signature puis un octet par option
-      var sig = parseInt(options.signatureOffset, 16);
-      if (String.fromCharCode.apply(null, rom.subarray(sig, sig + 8)) !== options.signature) throw new Error('signature');
-      document.querySelectorAll('#options input').forEach(function (i) {
-        var o = options.options.filter(function (x) { return x.id === i.dataset.id; })[0];
-        if (o.available !== false) rom[parseInt(o.offset, 16)] = i.checked ? 1 : 0;
-      });
-      // Somme de contrôle globale de l'en-tête Game Boy
-      var sum = 0;
-      for (var k = 0; k < rom.length; k++) if (k !== 0x14e && k !== 0x14f) sum = (sum + rom[k]) & 0xffff;
-      rom[0x14e] = sum >> 8; rom[0x14f] = sum & 0xff;
+      writeOptions(rom, options.signature, options.signatureOffset);
       var name = 'Zelda Oracles Combined (' + lang.toUpperCase() + ').gbc';
       download(rom, name);
       setStatus(SBT('✔ ROM prête : ' + name, '✔ ROM ready: ' + name), 'done');
@@ -451,32 +489,16 @@
   ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('over'); }); });
   drop.addEventListener('drop', function (e) { readFiles(e.dataTransfer.files); });
   $('go').onclick = generate;
-  $('hud-only').checked = store.get(HUD_KEY) === '1';
-  function showHudPreview() {
-    if (!hudOnly()) return;
-    currentPreview = null;
-    document.querySelectorAll('#options .opt').forEach(function (d) { d.classList.remove('cur'); });
-    $('pv-img').src = 'previews/hud_bottom_on.png';
-    $('pv-img').alt = $('pv-title').textContent = SBT('Jeux séparés : seulement la barre du bas', 'Separate games: bottom status bar only');
-    $('pv-note').style.display = 'none';
-    $('pv-screen').classList.remove('dim');
-    $('pv-state').textContent = SBT('✔ Activé', '✔ On');
-    $('pv-state').className = 'badge on';
-  }
-  $('hud-only').onchange = function () {
-    store.set(HUD_KEY, hudOnly() ? '1' : '0'); refresh();
-    if (hudOnly()) showHudPreview(); else if (options) showPreview('hud_bottom');
-  };
-  $('mode-hud').addEventListener('mouseenter', showHudPreview);
+  $('modes').onchange = function (e) { setMode(e.target.value); };
   fetch('patches/hud/manifest.json').then(function (r) { return r.json(); }).then(function (m) { hudManifest = m; refresh(); })
-    .catch(function () { $('mode-hud').classList.add('na'); $('hud-only').disabled = true; });
+    .catch(function () { var i = document.querySelector('input[name=mode][value=hud]'); i.disabled = true; i.parentNode.style.opacity = '.5'; });
 
   Promise.all([
     fetch('patches/manifest.json').then(function (r) { return r.json(); }),
     fetch('options.json').then(function (r) { return r.json(); })
   ]).then(function (res) {
     manifest = res[0]; options = res[1];
-    buildLangs(); buildOptions(); refresh(); showHudPreview();
+    buildLangs(); setMode(store.get(MODE_KEY) === 'hud' ? 'hud' : 'combined');
   }).catch(function () {
     setStatus(SBT('Impossible de charger les patchs.', 'Could not load the patches.'), 'err');
   });

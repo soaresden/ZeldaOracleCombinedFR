@@ -138,6 +138,7 @@
     {
       "id": "gba_shop",
       "offset": "0x3ff9",
+      "hudOffset": "0x3ff1",
       "default": false,
       "fr": "Boutique Advance (bonus GBA)",
       "en": "Advance shop (GBA bonus)",
@@ -151,6 +152,8 @@
     {
       "id": "hud_bottom",
       "offset": "0x3ff6",
+      "hudOffset": "0x3ff0",
+      "hudDefault": true,
       "default": false,
       "fr": "Barre d'état en bas (comme Link's Awakening)",
       "en": "Status bar at the bottom (like Link's Awakening)",
