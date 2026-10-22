@@ -24,7 +24,7 @@ import sys
 import tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DISASM = os.path.join(ROOT, 'oracles-disasm')
+DISASM = os.environ.get('ZOC_DISASM') or os.path.join(ROOT, 'oracles-disasm')
 sys.path.insert(0, os.path.join(DISASM, 'tools'))
 from common import decompressGfxData  # noqa: E402
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

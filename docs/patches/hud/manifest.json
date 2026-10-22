@@ -1,0 +1,66 @@
+{
+  "patches": {
+    "ages-en": {
+      "file": "patches/hud/ages-en.bps",
+      "size": 153733,
+      "targetCrc32": "4f3c7881"
+    },
+    "ages-fr": {
+      "file": "patches/hud/ages-fr.bps",
+      "size": 164232,
+      "targetCrc32": "e61aded3"
+    },
+    "ages-de": {
+      "file": "patches/hud/ages-de.bps",
+      "size": 295248,
+      "targetCrc32": "22cbfc62"
+    },
+    "ages-it": {
+      "file": "patches/hud/ages-it.bps",
+      "size": 263102,
+      "targetCrc32": "57494c29"
+    },
+    "ages-es": {
+      "file": "patches/hud/ages-es.bps",
+      "size": 161996,
+      "targetCrc32": "3467d761"
+    },
+    "seasons-en": {
+      "file": "patches/hud/seasons-en.bps",
+      "size": 124991,
+      "targetCrc32": "8d794597"
+    },
+    "seasons-fr": {
+      "file": "patches/hud/seasons-fr.bps",
+      "size": 156230,
+      "targetCrc32": "c9b0a6f5"
+    },
+    "seasons-de": {
+      "file": "patches/hud/seasons-de.bps",
+      "size": 232086,
+      "targetCrc32": "be3ea53c"
+    },
+    "seasons-it": {
+      "file": "patches/hud/seasons-it.bps",
+      "size": 210327,
+      "targetCrc32": "27dbf2be"
+    },
+    "seasons-es": {
+      "file": "patches/hud/seasons-es.bps",
+      "size": 215638,
+      "targetCrc32": "e7d15b6e"
+    }
+  },
+  "source": {
+    "ages": {
+      "size": 2097152,
+      "crc32": "5933e3fa",
+      "file": "Legend of Zelda, The - Oracle of Ages (Europe) (En,Fr,De,Es,It).gbc"
+    },
+    "seasons": {
+      "size": 2097152,
+      "crc32": "dbac1357",
+      "file": "Legend of Zelda, The - Oracle of Seasons (Europe) (En,Fr,De,Es,It).gbc"
+    }
+  }
+}

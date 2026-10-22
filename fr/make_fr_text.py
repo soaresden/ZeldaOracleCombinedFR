@@ -22,14 +22,16 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lang  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DISASM = os.path.join(ROOT, 'oracles-disasm')
+# ZOC_DISASM : autre désassemblage (oracles-hud : jeux d'origine séparés, barre du bas seule)
+DISASM = os.environ.get('ZOC_DISASM') or os.path.join(ROOT, 'oracles-disasm')
 EU_ROMS = {
     'ages': 'Legend of Zelda, The - Oracle of Ages (Europe) (En,Fr,De,Es,It).gbc',
     'seasons': 'Legend of Zelda, The - Oracle of Seasons (Europe) (En,Fr,De,Es,It).gbc',
 }
 LANG_CODE, LANG = lang.current()
 # Dernier commit de la branche poc/crossworld1 (version anglaise du hack)
-CROSSWORLD_COMMIT = '37a4eef3'
+# (ZOC_TEXT_BASE : autre commit, ex. 309a2cff pour les jeux d'origine)
+CROSSWORLD_COMMIT = os.environ.get('ZOC_TEXT_BASE', '37a4eef3')
 GAMES = ('ages', 'seasons')
 
 
@@ -135,7 +137,8 @@ def main():
                 missing.append((names(e)[0], e['text']))
 
         # Textes propres à la VF (raccourci vers Vasu…), à la fin de leur groupe
-        for extra in load(os.path.join(ROOT, 'fr', 'extra_text.yaml')).get(game, []):
+        extras = [] if os.environ.get('ZOC_TEXT_BASE') else load(os.path.join(ROOT, 'fr', 'extra_text.yaml')).get(game, [])
+        for extra in extras:
             group = next(g for g in us[game]['groups'] if g['group'] == extra['group'])
             group['data'].append({'name': extra['name'], 'index': 'auto', 'text': extra['text'][LANG_CODE]})
             stats['ajouté'] = stats.get('ajouté', 0) + 1

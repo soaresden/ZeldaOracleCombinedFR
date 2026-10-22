@@ -115,6 +115,8 @@
   .opt:hover{background:rgba(255,255,255,.03)}
   .opt.cur{background:linear-gradient(90deg,rgba(242,116,26,.10),rgba(90,168,248,.08));box-shadow:inset 3px 0 0 var(--gold)}
   .opt.na{opacity:.55;cursor:not-allowed}
+  .opt.mode{border:1px solid var(--line2);border-radius:12px;margin-bottom:14px;background:rgba(255,255,255,.03)}
+  .optgrid.hud #options{opacity:.35;pointer-events:none}
   .soon{display:inline-block;margin-left:6px;border:1px solid var(--line2);border-radius:999px;padding:0 8px;font-size:.78rem;color:var(--mut);font-weight:700}
   .opt input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--ages);flex:none}
   .opt b{display:block}
@@ -187,6 +189,10 @@
   <section>
     <h2 class="serif"><span class="num"><span>3</span></span><span data-en="Options">Options</span></h2>
     <p data-en="Untick what you don't want; the preview shows the result. Bug fixes are always included.">Décoche ce que tu ne veux pas ; l'aperçu montre le résultat. Les corrections de bugs sont toujours incluses.</p>
+    <label class="opt mode" id="mode-hud">
+      <input type="checkbox" id="hud-only">
+      <div><b data-en="Separate games: bottom status bar only">Jeux séparés : seulement la barre du bas</b><span data-en="No merging: Oracle of Ages and/or Oracle of Seasons stay two separate games, with only the status bar at the bottom of the screen (like Link's Awakening), in the language chosen above. One European ROM is enough; with both, you get both games. The options below are those of the combined version.">Pas de fusion : Oracle of Ages et/ou Oracle of Seasons restent deux jeux séparés, avec seulement la barre d'état en bas de l'écran (comme Link's Awakening), dans la langue choisie plus haut. Une seule ROM européenne suffit ; avec les deux, tu obtiens les deux jeux. Les options en dessous sont celles de la version combinée.</span></div>
+    </label>
     <div class="optgrid">
       <div id="options"></div>
       <aside class="preview" aria-live="polite">
@@ -212,7 +218,8 @@
   ];
   var LANG_KEY = 'zoc.gameLang', OPT_KEY = 'zoc.options';
   var roms = { ages: null, seasons: null };
-  var manifest = null, options = null;
+  var manifest = null, options = null, hudManifest = null;
+  var HUD_KEY = 'zoc.hudOnly';
   var $ = function (id) { return document.getElementById(id); };
   var store = {
     get: function (k) { try { return localStorage.getItem(k); } catch (_) { return null; } },
@@ -312,7 +319,13 @@
 
   // ---- Interface
   function setStatus(text, cls) { var s = $('status'); s.textContent = text; s.className = cls || ''; }
-  function refresh() { $('go').disabled = !(roms.ages && roms.seasons && manifest && options); }
+  function hudOnly() { return $('hud-only').checked; }
+  function refresh() {
+    var hud = hudOnly();
+    document.querySelector('.optgrid').classList.toggle('hud', hud);
+    $('go').disabled = hud ? !(hudManifest && (roms.ages || roms.seasons))
+                           : !(roms.ages && roms.seasons && manifest && options);
+  }
 
   function buildLangs() {
     var saved = store.get(LANG_KEY) || (SB_LANG === 'fr' ? 'fr' : 'en');
@@ -371,7 +384,38 @@
     $('pv-state').className = 'badge ' + (on ? 'on' : 'off');
   }
 
+  function download(rom, name) {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([rom], { type: 'application/octet-stream' }));
+    a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  // Jeux séparés avec seulement la barre du bas : un patch par ROM Europe (patches/hud/)
+  function generateHud() {
+    var lang = (document.querySelector('input[name=lang]:checked') || {}).value;
+    var games = ['ages', 'seasons'].filter(function (g) { return roms[g] && hudManifest.patches[g + '-' + lang]; });
+    if (!games.length) { setStatus(SBT('Choisis une langue.', 'Pick a language.'), 'err'); return; }
+    $('go').disabled = true;
+    setStatus(SBT('Téléchargement du patch…', 'Downloading the patch…'));
+    var names = [];
+    games.reduce(function (chain, g) {
+      return chain.then(function () {
+        return fetch(hudManifest.patches[g + '-' + lang].file).then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); });
+      }).then(function (buf) {
+        var rom = applyBps(roms[g], new Uint8Array(buf));
+        var name = 'Zelda Oracle of ' + (g === 'ages' ? 'Ages' : 'Seasons') + ' (' + lang.toUpperCase() + ') - ' + SBT('barre en bas', 'bottom status bar') + '.gbc';
+        download(rom, name);
+        names.push(name);
+      });
+    }, Promise.resolve()).then(function () {
+      setStatus(SBT('✔ ROM prête : ', '✔ ROM ready: ') + names.join(', '), 'done');
+    }).catch(function (e) {
+      setStatus(SBT('Échec de la génération (' + e.message + ').', 'Generation failed (' + e.message + ').'), 'err');
+    }).then(refresh);
+  }
+
   function generate() {
+    if (hudOnly()) return generateHud();
     var lang = (document.querySelector('input[name=lang]:checked') || {}).value;
     var p = manifest.patches[lang];
     if (!p) { setStatus(SBT('Choisis une langue.', 'Pick a language.'), 'err'); return; }
@@ -394,9 +438,7 @@
       for (var k = 0; k < rom.length; k++) if (k !== 0x14e && k !== 0x14f) sum = (sum + rom[k]) & 0xffff;
       rom[0x14e] = sum >> 8; rom[0x14f] = sum & 0xff;
       var name = 'Zelda Oracles Combined (' + lang.toUpperCase() + ').gbc';
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(new Blob([rom], { type: 'application/octet-stream' }));
-      a.download = name; document.body.appendChild(a); a.click(); a.remove();
+      download(rom, name);
       setStatus(SBT('✔ ROM prête : ' + name, '✔ ROM ready: ' + name), 'done');
     }).catch(function (e) {
       setStatus(SBT('Échec de la génération (' + e.message + ').', 'Generation failed (' + e.message + ').'), 'err');
@@ -409,13 +451,32 @@
   ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('over'); }); });
   drop.addEventListener('drop', function (e) { readFiles(e.dataTransfer.files); });
   $('go').onclick = generate;
+  $('hud-only').checked = store.get(HUD_KEY) === '1';
+  function showHudPreview() {
+    if (!hudOnly()) return;
+    currentPreview = null;
+    document.querySelectorAll('#options .opt').forEach(function (d) { d.classList.remove('cur'); });
+    $('pv-img').src = 'previews/hud_bottom_on.png';
+    $('pv-img').alt = $('pv-title').textContent = SBT('Jeux séparés : seulement la barre du bas', 'Separate games: bottom status bar only');
+    $('pv-note').style.display = 'none';
+    $('pv-screen').classList.remove('dim');
+    $('pv-state').textContent = SBT('✔ Activé', '✔ On');
+    $('pv-state').className = 'badge on';
+  }
+  $('hud-only').onchange = function () {
+    store.set(HUD_KEY, hudOnly() ? '1' : '0'); refresh();
+    if (hudOnly()) showHudPreview(); else if (options) showPreview('hud_bottom');
+  };
+  $('mode-hud').addEventListener('mouseenter', showHudPreview);
+  fetch('patches/hud/manifest.json').then(function (r) { return r.json(); }).then(function (m) { hudManifest = m; refresh(); })
+    .catch(function () { $('mode-hud').classList.add('na'); $('hud-only').disabled = true; });
 
   Promise.all([
     fetch('patches/manifest.json').then(function (r) { return r.json(); }),
     fetch('options.json').then(function (r) { return r.json(); })
   ]).then(function (res) {
     manifest = res[0]; options = res[1];
-    buildLangs(); buildOptions(); refresh();
+    buildLangs(); buildOptions(); refresh(); showHudPreview();
   }).catch(function () {
     setStatus(SBT('Impossible de charger les patchs.', 'Could not load the patches.'), 'err');
   });

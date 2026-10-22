@@ -70,6 +70,18 @@ Options are ROM bytes (table at `$3FF0`, signature `ZOCFROPT` at `$3FE0`, see
 `fr/options.json`): the page writes them according to the checkboxes, the game
 reads them. One ROM, one patch per language.
 
+## Separate games: bottom status bar only
+
+On the page, the **Separate games: bottom status bar only** box doesn't merge
+the games: Oracle of Ages and/or Oracle of Seasons stay two separate games, in
+the chosen language, with only the status bar at the bottom of the screen. One
+European ROM is enough (one patch per game and language, `docs/patches/hud/`).
+
+Like the combined version, these games are built on the American code (the 2020
+oracles-disasm disassembly, `hack/hud-bottom` branch of the fork, `oracles-hud`
+folder) with the European texts and images; the bar comes from the combined
+version (`fr/port_hud_bottom.py`). Build: `./build_hud_all.sh`.
+
 ## How it's made
 
 | What | How |
