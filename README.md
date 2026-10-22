@@ -46,7 +46,8 @@ ROM dans le navigateur (rien n'est envoyé). Aucune ROM n'est distribuée ici.
   seule une partie des bagues obtenues et de la boîte à bagues passait, et les
   bagues pas encore estimées étaient perdues ; l'icône du jeu dans la barre et
   celles des portes de Vasu pouvaient être remplacées par les graphismes d'une
-  boutique.
+  boutique ; dans Ages, les arbres à graines montraient des chiffres de la barre
+  d'état à la place de l'arbre.
 
 On change de jeu par la boutique de Vasu : la porte de gauche mène à Ages, celle
 de droite à Seasons (dans un des deux jeux, l'une des deux ramène en ville).

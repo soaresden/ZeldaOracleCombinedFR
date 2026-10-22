@@ -44,7 +44,8 @@ ROM in your browser (nothing is uploaded). No ROM is distributed here.
   first inventory item (the shovel turned into a feather); when changing games,
   only part of the obtained rings and of the ring box came along, and the rings
   not yet appraised were lost; the game icon in the status bar and the icons
-  above Vasu's doors could be replaced by a shop's graphics.
+  above Vasu's doors could be replaced by a shop's graphics; in Ages, the seed
+  trees showed status bar digits instead of the tree.
 
 You change games through Vasu's shop: the left door leads to Ages, the right
 one to Seasons (in each game, one of them leads back to town).
