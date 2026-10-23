@@ -380,8 +380,14 @@ def test_round_trip(first, problems):
     for name, values in link.items():
         for i, v in enumerate(values):
             m[r.addr(name) + i] = v
+    # Retour vers le premier jeu depuis un jeu où le gamin n'a pas de nom (et
+    # l'ID n'est pas décidé) : ils ne doivent pas effacer ceux du premier jeu
     for step in (first, OTHER[first], first):
         if step != r.game:
+            if step == first:
+                for n, size in (('wGameID', 2), ('wKidName', 7)):   # wKidName + wChildStatus
+                    for i in range(size):
+                        m[r.addr(n) + i] = 0
             r.swap()
         got = {n: [m[r.addr(n) + i] for i in range(len(v))] for n, v in link.items()}
         bad = [n for n in link if got[n] != link[n]]
