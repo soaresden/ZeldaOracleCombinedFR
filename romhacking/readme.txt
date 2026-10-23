@@ -77,6 +77,11 @@ OPTIONS (web page checkboxes, default in brackets)
 
 VERSION HISTORY
 ---------------
+1.5 - When changing games, the kid's name and character and the game ID
+      (what the original games' link secret carried) now come along; they
+      are only copied when set in the game left. Rupees, play time and the
+      death, enemy and rupee counters were only half copied (199 rupees
+      became 99): fixed.
 1.4 - In Ages, the seed trees showed status bar digits instead of the tree:
       bug of the original crossworld hack (it loaded 16 status bar tiles too
       many, over the trees' graphics), fixed.
@@ -130,7 +135,8 @@ join_roms.bat / join_roms.sh, puis appliquer le patch BPS de sa langue.
 Le jeu est construit sur la version americaine (desassemblage oracles-disasm)
 avec les textes et images europeens : une seule langue par ROM.
 
-Versions : 1.4 = arbres a graines d'Ages corriges (chiffres de la barre a la
+Versions : 1.5 = nom et caractere du gamin, ID et compteurs complets entre
+les jeux (199 rubis devenaient 99) ; 1.4 = arbres a graines d'Ages corriges (chiffres de la barre a la
 place de l'arbre) ; 1.3 = coeurs a prendre sur la carte, suivi 100 % dans le menu
 Start, toutes les bagues passent d'un jeu a l'autre, icones de la barre et
 des portes de Vasu corrigees ; 1.2 = la carte de donjon d'Ages ne modifie plus le 1er objet de

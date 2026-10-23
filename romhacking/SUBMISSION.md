@@ -3,8 +3,8 @@
 Formulaire : https://www.romhacking.net/hacks/addentrypage/ (Submissions → Submit Files).
 Les textes à coller sont en anglais (le site est anglophone). Fichiers prêts :
 
-- zip : `out/release/ZeldaOraclesCombined-v1.4.zip` (5 patchs BPS, `readme.txt`,
-  `join_roms.bat`, `join_roms.sh`), refait par `python fr/make_release.py 1.4 --no-shots`
+- zip : `out/release/ZeldaOraclesCombined-v1.5.zip` (5 patchs BPS, `readme.txt`,
+  `join_roms.bat`, `join_roms.sh`), refait par `python fr/make_release.py 1.5 --no-shots`
 - captures 160×144 : `docs/screenshots/`, en ligne sur GitHub Pages (URLs ci-dessous,
   à coller directement : la Scratchpad n'est pas nécessaire)
 
@@ -17,9 +17,9 @@ Les textes à coller sont en anglais (le site est anglophone). Fichiers prêts :
 | Platform | `Game Boy` (la GBC est rangée sous Game Boy sur le site) |
 | Game | `Legend of Zelda, The: Oracle of Ages` (une seule fiche jeu possible ; Seasons est cité dans la description) |
 | Author | `soaresden` |
-| Version | `1.4` |
+| Version | `1.5` |
 | Release Date | la date d'envoi |
-| Download Link | `https://github.com/soaresden/ZeldaOracleCombinedFR/releases/download/v1.4/ZeldaOraclesCombined-v1.4.zip` |
+| Download Link | `https://github.com/soaresden/ZeldaOracleCombinedFR/releases/download/v1.5/ZeldaOraclesCombined-v1.5.zip` |
 
 ## Media
 
@@ -66,11 +66,12 @@ Options (default in brackets):
 - Advance shop (GBA bonus) without the GBA's brightened colors [off]
 - Status bar at the bottom of the screen, like Link's Awakening [off]
 
-Also fixed from the original crossworld hack: crash at the end of the intro, used key items coming back after two changes of game, rings partly lost when changing games, seed trees in Ages drawn with status bar digits.
+Also fixed from the original crossworld hack: crash at the end of the intro, used key items coming back after two changes of game, rings partly lost when changing games, seed trees in Ages drawn with status bar digits, kid's name/character and game ID not carried over, rupees and counters half copied.
 
 The BPS patches apply to BOTH European ROMs joined end to end (Ages first): see readme.txt (join_roms.bat / join_roms.sh included). A ROM made from the patches has the default options; use the web page to change them.
 
 Version history:
+1.5 - When changing games, the kid's name and character and the game ID (what the original games' link secret carried) now come along; they are only copied when set in the game left, so a game where the kid isn't named yet doesn't erase his name. Rupees, play time and the death, enemy and rupee counters were only half copied (199 rupees became 99): fixed. Existing saves keep working.
 1.4 - In Ages, the seed trees showed status bar digits instead of the tree: bug of the original crossworld hack (it loaded 16 status bar tiles too many, over the trees' graphics), fixed. Existing saves keep working.
 1.3 - New options: heart pieces still to collect blink on the map; 100% tracker in the Start menu (heart pieces, heart containers, essences, rings, trading sequence, secrets, with the list of what is missing and its map square, and where to go next in the trading sequence). When changing games, all obtained rings, the whole ring box and the rings waiting to be appraised now come along (only part of them did). The game icon in the status bar and the icons above Vasu's doors could be replaced by shop graphics: fixed.
 1.2 - In Ages, picking up a dungeon map didn't record it and changed the first inventory item (the shovel turned into a feather in dungeon 1): bug of the original crossworld hack, fixed. The automatic test now also checks maps, compasses and keys in all 8 dungeons of both games.
@@ -110,5 +111,5 @@ SHA-1: B353C8B7EE2A597B4DAC207B02DCABC6BFB8C7C6
 ## Lien de téléchargement
 
 Le formulaire demande un lien, pas un fichier. Le plus propre : une release
-GitHub `v1.4` du dépôt avec le zip en pièce jointe :
-`https://github.com/soaresden/ZeldaOracleCombinedFR/releases/download/v1.4/ZeldaOraclesCombined-v1.4.zip`
+GitHub `v1.5` du dépôt avec le zip en pièce jointe :
+`https://github.com/soaresden/ZeldaOracleCombinedFR/releases/download/v1.5/ZeldaOraclesCombined-v1.5.zip`
