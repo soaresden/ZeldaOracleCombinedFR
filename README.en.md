@@ -45,7 +45,10 @@ ROM in your browser (nothing is uploaded). No ROM is distributed here.
   only part of the obtained rings and of the ring box came along, and the rings
   not yet appraised were lost; the game icon in the status bar and the icons
   above Vasu's doors could be replaced by a shop's graphics; in Ages, the seed
-  trees showed status bar digits instead of the tree.
+  trees showed status bar digits instead of the tree; when changing games, the
+  kid's name and character and the game ID (what the original games' link secret
+  carried) didn't follow, and rupees, play time and counters were only half
+  copied (199 rupees became 99).
 
 You change games through Vasu's shop: the left door leads to Ages, the right
 one to Seasons (in each game, one of them leads back to town).
