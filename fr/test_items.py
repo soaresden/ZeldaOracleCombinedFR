@@ -371,9 +371,24 @@ def test_round_trip(first, problems):
     for i, v in enumerate(unappraised):
         m[r.addr('wUnappraisedRings') + i] = v
     m[r.addr('wNumUnappraisedRingsBcd')] = 0x02
+    # Ce que porte le code de liaison des jeux d'origine (ZoraGen : Hero, Child,
+    # ID, Behavior, Friend, Free Ring Given) + les rubis
+    link = {'wGameID': [0x34, 0x12], 'wLinkName': [0x44, 0x65, 0x6e, 0x69, 0x73],
+            'wKidName': [0x54, 0x6f, 0x74, 0x6f, 0x00, 0x00], 'wChildStatus': [0x2d],
+            'wAnimalCompanion': [0x0c], 'wObtainedRingBox': [0x01], 'wNumRupees': [0x99, 0x01],
+            'wDeathCounter': [0x12, 0x01], 'wTotalEnemiesKilled': [0x34, 0x02], 'wTotalRupeesCollected': [0x56, 0x03]}
+    for name, values in link.items():
+        for i, v in enumerate(values):
+            m[r.addr(name) + i] = v
     for step in (first, OTHER[first], first):
         if step != r.game:
             r.swap()
+        got = {n: [m[r.addr(n) + i] for i in range(len(v))] for n, v in link.items()}
+        bad = [n for n in link if got[n] != link[n]]
+        print('%-7s code de liaison %s' % (r.game, 'ok' if not bad else 'DIFFERENT : ' + ' '.join(
+            '%s=%s' % (n, ' '.join('%02x' % x for x in got[n])) for n in bad)), flush=True)
+        if bad:
+            problems.append('aller-retour depuis %s : %s différent(s) dans %s' % (first, ', '.join(bad), r.game))
         got = ([m[r.addr('wRingsObtained') + i] for i in range(8)],
                [m[r.addr('wRingBoxContents') + i] for i in range(5)],
                [m[r.addr('wUnappraisedRings') + i] for i in range(3)])
