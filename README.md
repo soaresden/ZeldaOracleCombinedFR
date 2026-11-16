@@ -132,7 +132,7 @@ Pour une seule langue (ici l'allemand), régénérer puis compiler :
 
 ## Crédits
 
-- [oracles-disasm](https://github.com/Stewmath/oracles-disasm) et son hack crossworld (Stewmath et contributeurs).
+- [oracles-disasm](https://github.com/Stewmath/oracles-disasm) (Stewmath et contributeurs) et son hack crossworld (branche `poc/crossworld1`, Daniel Jianoran), crédité sur l'écran titre.
 - Traductions officielles de Nintendo, reprises des ROMs européennes.
 - [zoragen-wpf](https://github.com/kabili207/zoragen-wpf) (kabili207) : liste des échanges de codes entre les jeux.
 - Patch [Force GBA Enhanced Mode](https://www.romhacking.net/hacks/3580/) : idée de l'option Boutique Advance.

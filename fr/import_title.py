@@ -3,6 +3,8 @@ déjà réduit à 8 palettes de 4 couleurs, voir fr/title_src/) en données Game
 Color pour la moitié Ages de la ROM (celle qui démarre) :
 
 - gfx/ages/gfx_titlecombo_1.bin / _2.bin : tuiles 2bpp (VRAM banque 0, $8800 puis $9000)
+- gfx/ages/gfx_titlecombo_3.bin : les tuiles au-delà de 256 (VRAM banque 1, $9000 :
+  zone de fond seulement, les sprites du titre n'y vont pas ; bit 3 des attributs)
 - gfx/ages/map_titlecombo.bin / flg_titlecombo.bin : carte de tuiles et attributs 32x18
 - data/ages/paletteData.s : les 8 palettes de fond du titre (paletteData4018)
 
@@ -58,16 +60,21 @@ def main():
             tile_data.append(key)
         n = tile_index[key]
         tx, ty = i % W, i // W
-        # Mode d'adressage $8800 : tuiles $80-$ff en $8800, $00-$7f en $9000
-        tilemap[ty * MAP_W + tx] = (n + 0x80) & 0xff
-        attrs[ty * MAP_W + tx] = p
-    assert len(tile_data) <= 256, '%d tuiles (256 maximum)' % len(tile_data)
+        # Mode d'adressage $8800 : tuiles $80-$ff en $8800, $00-$7f en $9000 ;
+        # au-delà de 256, banque 1 de la VRAM en $9000
+        tilemap[ty * MAP_W + tx] = (n + 0x80) & 0xff if n < 256 else n - 256
+        attrs[ty * MAP_W + tx] = p | (0x08 if n >= 256 else 0)
+    assert len(tile_data) <= 384, '%d tuiles (384 maximum)' % len(tile_data)
 
     def write(name, data):
         with open(os.path.join(GFX_DIR, name), 'wb') as f:
             f.write(data)
-    write('gfx_titlecombo_1.bin', b''.join(tile_data[:128]))
-    write('gfx_titlecombo_2.bin', b''.join(tile_data[128:]) or bytes(16))
+    def chunk(a, b):  # 128 tuiles exactement (taille des en-têtes graphiques)
+        data = b''.join(tile_data[a:b])
+        return data + bytes(128 * 16 - len(data))
+    write('gfx_titlecombo_1.bin', chunk(0, 128))
+    write('gfx_titlecombo_2.bin', chunk(128, 256))
+    write('gfx_titlecombo_3.bin', chunk(256, 384))
     write('map_titlecombo.bin', bytes(tilemap))
     write('flg_titlecombo.bin', bytes(attrs))
 

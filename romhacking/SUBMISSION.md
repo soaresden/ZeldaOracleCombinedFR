@@ -3,8 +3,8 @@
 Formulaire : https://www.romhacking.net/hacks/addentrypage/ (Submissions → Submit Files).
 Les textes à coller sont en anglais (le site est anglophone). Fichiers prêts :
 
-- zip : `out/release/ZeldaOraclesCombined-v1.5.zip` (5 patchs BPS, `readme.txt`,
-  `join_roms.bat`, `join_roms.sh`), refait par `python fr/make_release.py 1.5 --no-shots`
+- zip : `out/release/ZeldaOraclesCombined-v1.6.zip` (5 patchs BPS, `readme.txt`,
+  `join_roms.bat`, `join_roms.sh`), refait par `python fr/make_release.py 1.6 --no-shots`
 - captures 160×144 : `docs/screenshots/`, en ligne sur GitHub Pages (URLs ci-dessous,
   à coller directement : la Scratchpad n'est pas nécessaire)
 
@@ -17,9 +17,9 @@ Les textes à coller sont en anglais (le site est anglophone). Fichiers prêts :
 | Platform | `Game Boy` (la GBC est rangée sous Game Boy sur le site) |
 | Game | `Legend of Zelda, The: Oracle of Ages` (une seule fiche jeu possible ; Seasons est cité dans la description) |
 | Author | `soaresden` |
-| Version | `1.5` |
+| Version | `1.6` |
 | Release Date | la date d'envoi |
-| Download Link | `https://github.com/soaresden/ZeldaOracleCombinedFR/releases/download/v1.5/ZeldaOraclesCombined-v1.5.zip` |
+| Download Link | `https://github.com/soaresden/ZeldaOracleCombinedFR/releases/download/v1.6/ZeldaOraclesCombined-v1.6.zip` |
 
 ## Media
 
@@ -66,11 +66,12 @@ Options (default in brackets):
 - Advance shop (GBA bonus) without the GBA's brightened colors [off]
 - Status bar at the bottom of the screen, like Link's Awakening [off]
 
-Also fixed from the original crossworld hack: crash at the end of the intro, used key items coming back after two changes of game, rings partly lost when changing games, seed trees in Ages drawn with status bar digits, kid's name/character and game ID not carried over, rupees and counters half copied.
+Also fixed from the original crossworld hack: crash at the end of the intro, used key items coming back after two changes of game, rings partly lost when changing games, seed trees in Ages drawn with status bar digits, kid's name/character and game ID not carried over, rupees and counters half copied, shop prices in Ages hidden by status bar icons, items from the other game blocking the story (past portal below the Maku Tree, companion flute, Ambi's guards).
 
 The BPS patches apply to BOTH European ROMs joined end to end (Ages first): see readme.txt (join_roms.bat / join_roms.sh included). A ROM made from the patches has the default options; use the web page to change them.
 
 Version history:
+1.6 - Playing Seasons first then Ages: items carried over from Seasons broke the Ages story, as Ages uses some of them as story markers. The portal back from the past after saving the Maku Tree stayed closed (it opened "until you get the seed satchel"); the companion called with his flute from the other game couldn't be ridden; after Ambi's guard took the mystery seeds at the palace, the soldier at the mystery seed tree still took Link to the palace, leaving menu and items disabled. All fixed, in both games for the companion. In Ages shops, status bar icons hid the prices (the strange flute showed 000 rupees): fixed. The title screen now credits the original crossworld mod (Daniel Jianoran). Existing saves keep working.
 1.5 - When changing games, the kid's name and character and the game ID (what the original games' link secret carried) now come along; they are only copied when set in the game left, so a game where the kid isn't named yet doesn't erase his name. Rupees, play time and the death, enemy and rupee counters were only half copied (199 rupees became 99): fixed. Existing saves keep working.
 1.4 - In Ages, the seed trees showed status bar digits instead of the tree: bug of the original crossworld hack (it loaded 16 status bar tiles too many, over the trees' graphics), fixed. Existing saves keep working.
 1.3 - New options: heart pieces still to collect blink on the map; 100% tracker in the Start menu (heart pieces, heart containers, essences, rings, trading sequence, secrets, with the list of what is missing and its map square, and where to go next in the trading sequence). When changing games, all obtained rings, the whole ring box and the rings waiting to be appraised now come along (only part of them did). The game icon in the status bar and the icons above Vasu's doors could be replaced by shop graphics: fixed.
@@ -111,5 +112,5 @@ SHA-1: B353C8B7EE2A597B4DAC207B02DCABC6BFB8C7C6
 ## Lien de téléchargement
 
 Le formulaire demande un lien, pas un fichier. Le plus propre : une release
-GitHub `v1.5` du dépôt avec le zip en pièce jointe :
-`https://github.com/soaresden/ZeldaOracleCombinedFR/releases/download/v1.5/ZeldaOraclesCombined-v1.5.zip`
+GitHub `v1.6` du dépôt avec le zip en pièce jointe :
+`https://github.com/soaresden/ZeldaOracleCombinedFR/releases/download/v1.6/ZeldaOraclesCombined-v1.6.zip`
